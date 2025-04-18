@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - PixelSix Studio</title>
-  <meta name="description" content="Get in touch with PixelSix Studio for your web development and digital marketing needs">
+  <title>Contact PixelSix Studio - Get Digital Solutions For Your Business</title>
+  <meta name="description" content="Connect with our expert team for web development, design, and digital marketing services that drive growth and elevate your online presence">
   <link rel="stylesheet" href="styles.css">
   <!-- Icons from Lucide (https://lucide.dev/) -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -34,10 +34,18 @@
       width: 100%;
       padding: 0.75rem 1rem;
       border-radius: 0.5rem;
-      background-color: rgba(255, 255, 255, 0.8); /* Made background more opaque */
+      background-color: rgba(255, 255, 255, 0.8); /* Light mode background */
       border: 2px solid rgba(158, 179, 132, 0.3); /* Added visible green-tinted border */
       transition: all 0.3s ease;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
+      color: var(--foreground);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    /* Dark mode styles for form inputs */
+    .dark-mode .form-input {
+      background-color: rgba(30, 41, 59, 0.8); /* Dark mode background */
+      border-color: rgba(158, 179, 132, 0.3);
       color: var(--foreground);
     }
     
@@ -45,11 +53,21 @@
       color: rgba(0, 0, 0, 0.35); /* Made placeholder text more visible */
     }
     
+    .dark-mode .form-input::placeholder {
+      color: rgba(255, 255, 255, 0.35); /* Dark mode placeholder text */
+    }
+    
     .form-input:focus {
       outline: none;
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(158, 179, 132, 0.25);
       background-color: white; /* Pure white background when focused */
+      transform: scale(1.02);
+    }
+    
+    .dark-mode .form-input:focus {
+      background-color: rgba(40, 51, 69, 0.95); /* Darker background when focused in dark mode */
+      box-shadow: 0 0 0 3px rgba(158, 179, 132, 0.25);
     }
     
     .form-textarea {
@@ -97,9 +115,58 @@
     .contact-info-content a:hover {
       color: var(--primary);
     }
+    
+    /* Enhanced creative backgrounds for contact page */
+    .creative-blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.05;
+      z-index: -1;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+    
+    .floating-keyword {
+      position: absolute;
+      font-family: 'Poppins', sans-serif;
+      opacity: 0.03;
+      font-weight: 800;
+      pointer-events: none;
+      font-size: clamp(3rem, 8vw, 8rem);
+      white-space: nowrap;
+      letter-spacing: -2px;
+    }
+    
+    .keyword-gradient {
+      background: linear-gradient(to right, var(--pink), var(--blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Animated connection lines */
+    .connection-line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, var(--pink), transparent);
+      opacity: 0.1;
+      z-index: 0;
+      animation: pulse 3s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.3; }
+    }
   </style>
 </head>
 <body>
+  <!-- Creative background blobs -->
+  <div class="creative-blob" style="width:800px; height:800px; top:-300px; left:-200px; background:var(--pink);"></div>
+  <div class="creative-blob" style="width:600px; height:600px; bottom:-200px; right:-100px; background:var(--blue);"></div>
+  <div class="creative-blob" style="width:400px; height:400px; top:40%; right:10%; background:var(--pink);"></div>
+
   <div class="relative flex min-h-screen flex-col">
     <!-- Header -->
     <header class="z-50 w-full glass border-b border-white/30">
@@ -122,16 +189,15 @@
             Services
             <span class="nav-indicator"></span>
           </a>
-          <a href="portfolio.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
-            Portfolio
-            <span class="nav-indicator"></span>
-          </a>
           <a href="contact.html" class="text-sm font-medium transition-colors hover-text-primary relative group active">
             Contact
             <span class="nav-indicator"></span>
           </a>
         </nav>
         <div class="flex items-center gap-3">
+          <button id="darkModeToggle" class="theme-mode-button" aria-label="Toggle dark mode">
+            <i data-lucide="moon" class="h-5 w-5"></i>
+          </button>
           <a href="quote.html" class="hidden md-block">
             <button class="btn gradient-bg btn-hover-effect hover-opacity-90 transition-opacity rounded-full">
               Get a Quote
@@ -150,7 +216,6 @@
         <a href="index.html" class="hover-text-primary">Home</a>
         <a href="about.html" class="hover-text-primary">About</a>
         <a href="services.html" class="hover-text-primary">Services</a>
-        <a href="portfolio.html" class="hover-text-primary">Portfolio</a>
         <a href="contact.html" class="hover-text-primary">Contact</a>
         <a href="quote.html">
           <button class="w-full gradient-bg hover-opacity-90 transition-opacity rounded-full">
@@ -165,14 +230,25 @@
       <!-- Hero Section -->
       <section class="relative py-16 md-py-24 overflow-hidden">
         <div class="absolute inset-0 pattern-bg z-0"></div>
+        
+        <!-- Floating keywords -->
+        <div class="floating-keyword keyword-gradient" style="top: 30%; left: -5%; transform: rotate(-90deg);">CONNECT</div>
+        <div class="floating-keyword" style="bottom: 10%; right: 0; color: var(--pink);">REACH OUT</div>
+        
         <div class="container relative z-10">
           <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto">
+            <!-- Starburst decoration -->
+            <div class="starburst pink top-right"></div>
+            
+            <!-- Creative bubble -->
+            <div class="creative-bubble bottom-left">Let's Talk!</div>
+            
             <h1 class="text-4xl font-bold tracking-tight sm-text-5xl md-text-6xl font-heading">
               Get In <span class="gradient-text">Touch</span>
             </h1>
             <p class="text-xl text-foreground/80 mt-6 leading-relaxed">
-              Have a question about our services or want to discuss your next project? We'd love to hear from you.
-              Fill out the form below or use one of our direct contact methods.
+              Ready to transform your digital presence? Connect with our expert team to discuss your project needs, 
+              explore strategic solutions, or get answers to your questions. We're here to help your business succeed online.
             </p>
           </div>
         </div>
@@ -181,6 +257,14 @@
       <!-- Contact Section -->
       <section class="py-16 container relative">
         <div class="absolute inset-0 pattern-bg z-0"></div>
+        
+        <!-- Connection lines animated between form and info -->
+        <div id="connection-lines" class="absolute inset-0 z-0 pointer-events-none"></div>
+        
+        <!-- Floating contact keywords -->
+        <div class="floating-keyword" style="top: 15%; left: 5%; color: var(--blue); font-size: clamp(1.8rem, 4vw, 4rem);">MESSAGE</div>
+        <div class="floating-keyword" style="bottom: 10%; right: 5%; color: var(--pink); font-size: clamp(1.8rem, 4vw, 4rem);">EMAIL</div>
+        
         <div class="relative z-10">
           <div class="grid lg-grid-cols-2">
             <!-- Contact Form -->
@@ -306,6 +390,23 @@
       <!-- FAQ Section -->
       <section class="py-16 container relative mb-16">
         <div class="absolute inset-0 pattern-bg z-0"></div>
+        
+        <!-- Floating FAQ keyword -->
+        <div class="floating-keyword keyword-gradient" style="top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-5deg); font-size: clamp(4rem, 15vw, 15rem); opacity: 0.02;">FAQ</div>
+        
+        <!-- FAQ pattern background -->
+        <svg class="absolute left-0 top-20 w-full h-full opacity-[0.03] z-1" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <text x="10" y="20" class="path-animation" fill="none" stroke="var(--pink)" stroke-width="0.1" font-family="monospace" font-size="3">
+            let us help you
+          </text>
+          <text x="60" y="40" class="path-animation" fill="none" stroke="var(--blue)" stroke-width="0.1" font-family="monospace" font-size="3">
+            we're here for you
+          </text>
+          <text x="20" y="60" class="path-animation" fill="none" stroke="var(--pink)" stroke-width="0.1" font-family="monospace" font-size="3">
+            answers to your questions
+          </text>
+        </svg>
+        
         <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto z-10">
           <h2 class="text-3xl font-bold tracking-tight sm-text-4xl gradient-text font-heading mb-10 text-center">
             Frequently Asked Questions
@@ -417,6 +518,7 @@
   </div>
 
   <script src="script.js"></script>
+  <script src="decorative-elements.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Contact form submission handler
@@ -431,6 +533,66 @@
           contactForm.reset();
         });
       }
+      
+      // Create visual connections between form and contact info
+      function createConnections() {
+        const container = document.getElementById('connection-lines');
+        const form = document.getElementById('contactForm');
+        const info = document.querySelectorAll('.contact-info-item');
+        
+        if (!container || !form || !info.length) return;
+        
+        // Clear previous connections
+        container.innerHTML = '';
+        
+        const formRect = form.getBoundingClientRect();
+        const formCenter = {
+          x: formRect.left + formRect.width / 2,
+          y: formRect.top + formRect.height / 2
+        };
+        
+        info.forEach((item, index) => {
+          const itemRect = item.getBoundingClientRect();
+          const itemCenter = {
+            x: itemRect.left + itemRect.width / 2,
+            y: itemRect.top + itemRect.height / 2
+          };
+          
+          const connection = document.createElement('div');
+          connection.classList.add('connection-line');
+          
+          // Calculate position and angle
+          const length = Math.sqrt(Math.pow(itemCenter.x - formCenter.x, 2) + Math.pow(itemCenter.y - formCenter.y, 2));
+          const angle = Math.atan2(itemCenter.y - formCenter.y, itemCenter.x - formCenter.x) * 180 / Math.PI;
+          
+          connection.style.width = `${length}px`;
+          connection.style.left = `${formCenter.x}px`;
+          connection.style.top = `${formCenter.y}px`;
+          connection.style.transform = `rotate(${angle}deg)`;
+          connection.style.transformOrigin = 'left center';
+          connection.style.animationDelay = `${index * 0.5}s`;
+          
+          container.appendChild(connection);
+        });
+      }
+      
+      // Initial creation and recalculate on window resize
+      setTimeout(createConnections, 500); // Allow time for page to render
+      window.addEventListener('resize', createConnections);
+      
+      // Form field animation enhancements
+      const formFields = document.querySelectorAll('.form-input');
+      formFields.forEach(field => {
+        field.addEventListener('focus', function() {
+          this.style.borderColor = 'var(--pink)';
+        });
+        
+        field.addEventListener('blur', function() {
+          if (!this.value) {
+            this.style.borderColor = 'rgba(158, 179, 132, 0.3)';
+          }
+        });
+      });
     });
   </script>
 </body>

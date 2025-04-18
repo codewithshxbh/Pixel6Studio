@@ -1,6 +1,67 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Pre-create both moon and sun icons for faster switching
+  const moonIcon = '<i data-lucide="moon" class="h-5 w-5"></i>';
+  const sunIcon = '<i data-lucide="sun" class="h-5 w-5"></i>';
+  
   // Initialize Lucide icons
   lucide.createIcons();
+
+  // Dark mode functionality with optimized transitions
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const body = document.body;
+  
+  // IMPORTANT: Set dark mode as default
+  // Either use the saved preference or default to dark mode
+  const savedTheme = localStorage.getItem('theme');
+  
+  // Apply dark mode by default or if saved preference is dark
+  if (savedTheme !== 'light') {
+    body.classList.add('dark-mode');
+    if (darkModeToggle) updateDarkModeIcon(true);
+    localStorage.setItem('theme', 'dark');
+  }
+  
+  // Toggle dark mode when the button is clicked - with optimized transition
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', function() {
+      // Preload the opposite icon to avoid delay
+      const isDarkMode = !body.classList.contains('dark-mode');
+      
+      // First update the icon - avoiding reflow
+      updateDarkModeIcon(isDarkMode);
+      
+      // Use requestAnimationFrame for better performance
+      requestAnimationFrame(() => {
+        // Add transition-active class for brief transition
+        body.classList.add('transition-active');
+        
+        // Toggle dark mode
+        body.classList.toggle('dark-mode');
+        
+        // Store the preference
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        
+        // Remove transition class after transition completes
+        setTimeout(() => {
+          body.classList.remove('transition-active');
+        }, 100); // Slightly longer than the CSS transition time
+      });
+    });
+  }
+  
+  // Highly optimized icon updating - directly change the HTML with no recreation
+  function updateDarkModeIcon(isDarkMode) {
+    if (!darkModeToggle) return;
+    
+    // Just swap the inner HTML - this is much faster than recreating the icon
+    darkModeToggle.innerHTML = isDarkMode ? sunIcon : moonIcon;
+    
+    // If needed, manually apply Lucide to just this icon
+    const iconElement = darkModeToggle.querySelector('i');
+    if (iconElement) {
+      lucide.replace(iconElement);
+    }
+  }
 
   // Mobile menu toggle
   const menuToggle = document.getElementById('menuToggle');

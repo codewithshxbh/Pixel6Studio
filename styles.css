@@ -17,6 +17,35 @@
   --navbar-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Specific shadow for navbar */
   --default-shadow: 0 2px 10px rgba(0, 0, 0, 0.09); /* Default shadow for elements */
   --hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow for hover state */
+  
+  /* New variables for interactive elements */
+  --dot-size: 6px;
+  --dot-color: rgba(158, 179, 132, 0.4);
+  --arrow-color: rgba(158, 179, 132, 0.5);
+  --line-color: rgba(158, 179, 132, 0.2);
+  --connection-distance: 150px;
+}
+
+/* Dark mode variables */
+.dark-mode {
+  --primary: hsl(175, 84%, 40%); /* Slightly brighter primary in dark mode */
+  --secondary: hsl(215, 70%, 60%); /* Slightly brighter secondary in dark mode */
+  --foreground: hsl(210, 20%, 98%); /* Light text for dark mode */
+  --foreground-light: hsla(210, 20%, 98%, 0.8);
+  --background: hsl(220, 26%, 14%); /* Dark background */
+  --muted: hsl(217, 19%, 27%); /* Darker muted background */
+  --muted-foreground: hsl(215, 20%, 80%); /* Lighter muted text */
+  --white: hsl(0, 0%, 100%); /* Keep white as true white */
+  --border: hsl(215, 16%, 25%); /* Darker border color */
+  --navbar-glow: 0 0 18px rgba(158, 179, 132, 0.15);
+  --navbar-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  --default-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  --hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  
+  /* New variables for interactive elements in dark mode */
+  --dot-color: rgba(158, 179, 132, 0.3);
+  --arrow-color: rgba(158, 179, 132, 0.4);
+  --line-color: rgba(158, 179, 132, 0.15);
 }
 
 * {
@@ -29,10 +58,15 @@
 body {
   font-family: 'Inter', sans-serif;
   color: var(--foreground);
-  background-color: #ffffff;
+  background-color: var(--background);
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2399A98F' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   min-height: 100vh;
   line-height: 1.5;
+  /* More focused transitions only for color and background */
+  transition: background-color 0.08s ease-out, color 0.08s ease-out;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  will-change: background-color, color;
 }
 
 h1, h2, h3, h4, h5, h6, .font-heading {
@@ -357,6 +391,11 @@ img {
   /* Removing box-shadow from here so it doesn't conflict */
 }
 
+.dark-mode .glass {
+  background: rgba(30, 41, 59, 0.65);
+  border: 1px solid rgba(30, 41, 59, 0.5);
+}
+
 .glass-card {
   background: rgba(255, 255, 255, 0.9);
   /* Removing blur effect */
@@ -367,6 +406,12 @@ img {
   border-radius: 1rem;
   transition: all 0.3s ease;
   padding: 1.5rem;
+}
+
+.dark-mode .glass-card {
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(30, 41, 59, 0.5);
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
 }
 
 .glass-card:hover {
@@ -391,8 +436,9 @@ img {
 }
 
 .pattern-bg {
-  background-color: #ffffff;
+  background-color: var(--background);
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2399A98F' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  transition: background-color 0.3s ease;
 }
 
 /* Buttons */
@@ -420,6 +466,35 @@ img {
 .btn-outline {
   background: transparent;
   border: 1px solid currentColor;
+}
+
+/* Fix for transparent background buttons in dark mode */
+.dark-mode .btn-outline,
+.dark-mode .glass .btn,
+.dark-mode button.glass,
+.dark-mode .hover-bg-white\/30,
+.dark-mode .hover-bg-white\/20 {
+  color: var(--white);
+}
+
+/* Improve transitions for smoother dark mode switching */
+body, 
+header, 
+.glass, 
+.glass-card, 
+.btn,
+.theme-mode-button,
+.mobile-menu,
+footer,
+.testimonial-card,
+.contact-info-item,
+.form-input,
+.form-label,
+h1, h2, h3, h4, h5, h6, 
+p, a, span,
+.gradient-text,
+i[data-lucide] {
+  transition: all 0.15s ease-out !important;
 }
 
 .btn-hover-effect {
@@ -526,6 +601,11 @@ header {
   z-index: 50;
 }
 
+.dark-mode header {
+  border: 1px solid rgba(30, 41, 59, 0.8);
+  background: rgba(30, 41, 59, 0.75);
+}
+
 header::before {
   content: "";
   position: absolute;
@@ -536,21 +616,8 @@ header::before {
   background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
 }
 
-header .container {
-  height: 100%;
-  position: relative;
-  z-index: 2;
-  padding: 0 1rem; /* Added compact padding */
-}
-
-/* Add a subtle gradient overlay to the header */
-header::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(158, 179, 132, 0.05), rgba(255, 255, 255, 0.05));
-  pointer-events: none;
-  z-index: 1;
+.dark-mode header::before {
+  background: linear-gradient(to right, transparent, rgba(30, 41, 59, 0.8), transparent);
 }
 
 /* Adding a placeholder for the header to prevent content jump */
@@ -615,6 +682,12 @@ nav a.group.active .nav-indicator {
   -webkit-backdrop-filter: blur(var(--navbar-blur));
   border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow: var(--navbar-glow), 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.dark-mode .mobile-menu {
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(30, 41, 59, 0.8);
+  box-shadow: var(--navbar-glow), 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Add a scrolled state class for header - keep corners curved even when scrolled */
@@ -732,6 +805,11 @@ nav a.group:hover {
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-mode .testimonial-card {
+  background-color: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .testimonial-card:hover {
@@ -861,15 +939,15 @@ nav a.group:hover {
 }
 
 .text-foreground\/80 {
-  color: hsla(215, 25%, 27%, 0.8);
+  color: var(--foreground-light);
 }
 
 .text-foreground\/70 {
-  color: hsla(215, 25%, 27%, 0.7);
+  color: var(--foreground-light);
 }
 
 .text-foreground\/60 {
-  color: hsla(215, 25%, 27%, 0.6);
+  color: var(--foreground-light);
 }
 
 .text-primary {
@@ -1207,4 +1285,444 @@ header .btn {
 header .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(158, 179, 132, 0.35);
+}
+
+/* Team Member Cards Enhanced Styling */
+.team-member-card {
+  position: relative;
+  overflow: visible !important;
+  transition: all 0.4s ease;
+}
+
+.team-member-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.1rem;
+  background: linear-gradient(130deg, var(--primary), #9EB384, var(--secondary));
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.team-member-card:hover {
+  transform: translateY(-10px);
+}
+
+.team-member-card:hover::before {
+  opacity: 0.7;
+  animation: rotation 3s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.avatar-wrapper {
+  position: relative;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.avatar-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-25deg);
+  transition: all 0.6s ease;
+}
+
+.team-member-card:hover .avatar-wrapper::after {
+  left: 130%;
+}
+
+/* Interactive Background Styles */
+#particle-network {
+  opacity: 0.8;
+  filter: blur(0px);
+  transition: filter 1s ease;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat;
+  background-position: center;
+  pointer-events: none;
+}
+
+.parallax-dots {
+  background-image: radial-gradient(circle, rgba(158, 179, 132, 0.2) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: -1;
+}
+
+.parallax-arrows {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(158, 179, 132, 0.1)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>');
+  background-size: 80px 80px;
+  z-index: -2;
+  opacity: 0.3;
+}
+
+/* Animated gradient background for sections */
+.animated-gradient {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-gradient::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(158, 179, 132, 0) 0%, 
+    rgba(158, 179, 132, 0.03) 25%, 
+    rgba(158, 179, 132, 0.06) 50%, 
+    rgba(158, 179, 132, 0.03) 75%, 
+    rgba(158, 179, 132, 0) 100%);
+  animation: shine 8s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* More dynamic hover effects for all cards */
+.glass-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transform: skewX(-25deg);
+  transition: 0.8s;
+  opacity: 0;
+}
+
+.glass-card:hover::before {
+  left: 125%;
+  opacity: 1;
+}
+
+/* Interactive Background Styles */
+.dots-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.dot {
+  position: absolute;
+  background: var(--dot-color);
+  border-radius: 50%;
+  transform-origin: center center;
+  transition: transform 0.3s ease;
+}
+
+.dot.pulse {
+  animation: pulseDot 3s infinite alternate;
+}
+
+@keyframes pulseDot {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.arrow {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  z-index: -1;
+}
+
+.arrow:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='10' viewBox='0 0 20 10' fill='none' stroke='rgba(158, 179, 132, 0.5)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 5h18'%3E%3C/path%3E%3Cpath d='M15 1l4 4-4 4'%3E%3C/path%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.floating-arrow {
+  animation: floatArrow 15s linear infinite;
+}
+
+@keyframes floatArrow {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px) translateY(0);
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(calc(100vw + 100px)) translateY(calc(150px * var(--direction, 1)));
+  }
+}
+
+/* Canvas overlay for dots and lines */
+.dots-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Enhanced Interactive Background Styles */
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Directional Helpers for Arrows */
+.arrow-up {
+  transform: rotate(-90deg);
+}
+
+.arrow-down {
+  transform: rotate(90deg);
+}
+
+.arrow-left {
+  transform: rotate(180deg);
+}
+
+.arrow-right {
+  transform: rotate(0deg);
+}
+
+/* Cursor Follower Effect */
+.cursor-follower {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--dot-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 9999;
+  transition: opacity 0.3s ease, transform 0.1s ease;
+}
+
+.cursor-follower.active {
+  opacity: 0.5;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+}
+
+/* Footer */
+footer.border-t.border-white\/30.bg-white\/10 {
+  border-color: var(--border);
+  background-color: rgba(var(--background), 0.1);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Add dark mode switch */
+.theme-switch {
+  display: none;
+}
+
+/* Dark mode button */
+.theme-mode-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  color: var(--foreground);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  outline: none;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-mode-button:hover {
+  background-color: rgba(158, 179, 132, 0.1);
+  transform: translateY(-2px);
+}
+
+.theme-mode-button i {
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.theme-mode-button:hover i {
+  transform: rotate(20deg);
+}
+
+.theme-mode-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(var(--foreground-rgb, 33, 33, 33), 0.3);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.theme-mode-button:focus:not(:active)::after {
+  animation: ripple 0.5s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
+
+.dark-mode .testimonial-text,
+.dark-mode .author-name {
+  color: var(--foreground);
+}
+
+.dark-mode .author-role {
+  color: var(--foreground-light);
+}
+
+/* Fix white backgrounds in dark mode */
+.dark-mode .bg-white {
+  background-color: var(--muted);
+}
+
+.dark-mode .rounded-full.bg-white {
+  background-color: var(--muted);
+}
+
+.dark-mode .mb-6.flex.h-14.w-14.items-center.justify-center.rounded-full.bg-white {
+  background-color: var(--muted);
+}
+
+.dark-mode .mb-6.w-32.h-32.mx-auto.rounded-full.bg-white {
+  background-color: var(--muted);
+}
+
+/* Fast transitions for specific properties instead of all */
+.fast-transition-colors {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 0.08s;
+  transition-timing-function: ease-out;
+}
+
+/* Remove the previous catch-all transitions and use more targeted class */
+header,
+.glass, 
+.glass-card, 
+.btn,
+.theme-mode-button,
+.mobile-menu,
+footer,
+text-foreground, 
+.text-muted-foreground, 
+.text-foreground\/80, 
+.text-foreground\/70, 
+.text-foreground\/60,
+.theme-mode-button i {
+  transition: none !important;
+}
+
+/* Apply the fast transition only to these elements */
+body.transition-active header,
+body.transition-active .glass, 
+body.transition-active .glass-card, 
+body.transition-active .btn,
+body.transition-active .theme-mode-button,
+body.transition-active .mobile-menu,
+body.transition-active footer {
+  transition: background-color 0.08s ease-out, color 0.08s ease-out, border-color 0.08s ease-out !important;
 }
