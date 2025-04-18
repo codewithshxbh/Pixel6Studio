@@ -13,6 +13,15 @@
       
       if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         document.documentElement.classList.add('dark-mode');
+        // Add dark mode to body as well to prevent flash
+        document.body.classList.add('dark-mode');
+        // Set the background color immediately
+        document.documentElement.style.backgroundColor = 'hsl(220, 26%, 14%)';
+      } else {
+        // Ensure light mode is properly set
+        document.documentElement.classList.remove('dark-mode');
+        document.body.classList.remove('dark-mode');
+        document.documentElement.style.backgroundColor = 'hsl(0, 0%, 100%)';
       }
     })();
   </script>

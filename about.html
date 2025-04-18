@@ -3,8 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PixelSix Studio</title>
-  <meta name="description" content="Learn about the PixelSix Studio team and our journey in web development and social media management">
+  <meta name="color-scheme" content="light dark">
+  <title>PixelSix Studio - About Our Team</title>
+  <!-- Inline script to prevent flash -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark-mode');
+        // Add dark mode to body as well to prevent flash
+        document.body.classList.add('dark-mode');
+        // Set the background color immediately
+        document.documentElement.style.backgroundColor = 'hsl(220, 26%, 14%)';
+      } else {
+        // Ensure light mode is properly set
+        document.documentElement.classList.remove('dark-mode');
+        document.body.classList.remove('dark-mode');
+        document.documentElement.style.backgroundColor = 'hsl(0, 0%, 100%)';
+      }
+    })();
+  </script>
+  <meta name="description" content="Learn about our team of creative professionals at PixelSix Studio">
   <link rel="stylesheet" href="styles.css">
   <!-- Icons from Lucide (https://lucide.dev/) -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>

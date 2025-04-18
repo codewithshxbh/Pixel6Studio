@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Our Team - PixelSix Studio</title>
+  <!-- Inline script to prevent flash -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark-mode');
+        // Add dark mode to body as well to prevent flash
+        document.body.classList.add('dark-mode');
+        // Set the background color immediately
+        document.documentElement.style.backgroundColor = 'hsl(220, 26%, 14%)';
+      } else {
+        // Ensure light mode is properly set
+        document.documentElement.classList.remove('dark-mode');
+        document.body.classList.remove('dark-mode');
+        document.documentElement.style.backgroundColor = 'hsl(0, 0%, 100%)';
+      }
+    })();
+  </script>
+  <meta name="description" content="Meet the creative team behind PixelSix Studio">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Rest of your head content would go here -->
+</head>
+<body>
+  <!-- Body content would go here -->
+</body>
+</html>
