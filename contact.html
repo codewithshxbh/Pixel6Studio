@@ -26,7 +26,7 @@
     .form-label {
       display: block;
       margin-bottom: 0.5rem;
-      font-weight: 500;
+      font-weight: 600; /* Made labels bolder */
       color: var(--foreground);
     }
     
@@ -34,19 +34,27 @@
       width: 100%;
       padding: 0.75rem 1rem;
       border-radius: 0.5rem;
-      background-color: rgba(255, 255, 255, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 255, 255, 0.8); /* Made background more opaque */
+      border: 2px solid rgba(158, 179, 132, 0.3); /* Added visible green-tinted border */
       transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
+      color: var(--foreground);
+    }
+    
+    .form-input::placeholder {
+      color: rgba(0, 0, 0, 0.35); /* Made placeholder text more visible */
     }
     
     .form-input:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(158, 179, 132, 0.2);
+      box-shadow: 0 0 0 3px rgba(158, 179, 132, 0.25);
+      background-color: white; /* Pure white background when focused */
     }
     
     .form-textarea {
       min-height: 150px;
+      resize: vertical; /* Allow vertical resizing only */
     }
     
     .contact-info-item {
@@ -174,32 +182,32 @@
       <section class="py-16 container relative">
         <div class="absolute inset-0 pattern-bg z-0"></div>
         <div class="relative z-10">
-          <div class="grid gap-16 lg-grid-cols-2">
+          <div class="grid lg-grid-cols-2">
             <!-- Contact Form -->
-            <div class="glass-card p-8 md-p-10 relative overflow-hidden">
-              <h2 class="text-3xl font-bold mb-8 font-heading">Send us a message</h2>
+            <div class="glass-card p-8 md-p-10 relative overflow-hidden" style="margin-right: 3rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+              <h2 class="text-3xl font-bold mb-8 font-heading gradient-text">Send us a message</h2>
               
               <form id="contactForm" action="#" method="POST">
                 <div class="grid gap-8 sm-grid-cols-2">
                   <div class="form-group">
                     <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" id="firstName" name="firstName" class="form-input" required>
+                    <input type="text" id="firstName" name="firstName" class="form-input" required placeholder="Your first name">
                   </div>
                   
                   <div class="form-group">
                     <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" class="form-input" required>
+                    <input type="text" id="lastName" name="lastName" class="form-input" required placeholder="Your last name">
                   </div>
                 </div>
                 
                 <div class="form-group">
                   <label for="email" class="form-label">Email Address</label>
-                  <input type="email" id="email" name="email" class="form-input" required>
+                  <input type="email" id="email" name="email" class="form-input" required placeholder="example@email.com">
                 </div>
                 
                 <div class="form-group">
                   <label for="phone" class="form-label">Phone Number (Optional)</label>
-                  <input type="tel" id="phone" name="phone" class="form-input">
+                  <input type="tel" id="phone" name="phone" class="form-input" placeholder="(123) 456-7890">
                 </div>
                 
                 <div class="form-group">
@@ -215,17 +223,22 @@
                 
                 <div class="form-group">
                   <label for="message" class="form-label">Your Message</label>
-                  <textarea id="message" name="message" class="form-input form-textarea" required></textarea>
+                  <textarea id="message" name="message" class="form-input form-textarea" required placeholder="Tell us about your project or inquiry..."></textarea>
+                </div>
+                
+                <div class="flex items-center mb-6">
+                  <input type="checkbox" id="privacy" name="privacy" class="mr-2 accent-color-primary" required>
+                  <label for="privacy" class="text-sm text-foreground/70">I agree to the <a href="#" class="text-primary hover:underline">privacy policy</a> and consent to be contacted regarding my inquiry.</label>
                 </div>
                 
                 <button type="submit" class="btn gradient-bg btn-hover-effect hover-opacity-90 transition-opacity rounded-full px-8 py-3 w-full sm-w-auto">
-                  Send Message
+                  Send Message <i data-lucide="send" class="h-4 w-4 ml-2"></i>
                 </button>
               </form>
             </div>
             
             <!-- Contact Information -->
-            <div>
+            <div style="margin-left: 3rem;">
               <div class="glass-card p-8 md-p-10 relative overflow-hidden mb-12">
                 <h2 class="text-3xl font-bold mb-10 font-heading">Contact Information</h2>
                 
