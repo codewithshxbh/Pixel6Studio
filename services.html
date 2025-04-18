@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - PixelSix Studio</title>
+  <meta name="description" content="Explore our web development, social media management, and design services at PixelSix Studio">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Icons from Lucide (https://lucide.dev/) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Initial state for navbar animation - modified to show shadow */
+    header {
+      opacity: 1; /* Changed from 0 to make visible immediately */
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+<body>
+  <div class="relative flex min-h-screen flex-col">
+    <!-- Header -->
+    <header class="z-50 w-full glass border-b border-white/30">
+      <div class="container flex h-full items-center justify-between">
+        <div class="flex items-center gap-2">
+          <a href="index.html" class="flex items-center space-x-2">
+            <span class="text-xl font-bold gradient-text font-heading">PixelSix Studio</span>
+          </a>
+        </div>
+        <nav class="hidden md-flex gap-8">
+          <a href="index.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
+            Home
+            <span class="nav-indicator"></span>
+          </a>
+          <a href="about.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
+            About
+            <span class="nav-indicator"></span>
+          </a>
+          <a href="services.html" class="text-sm font-medium transition-colors hover-text-primary relative group active">
+            Services
+            <span class="nav-indicator"></span>
+          </a>
+          <a href="portfolio.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
+            Portfolio
+            <span class="nav-indicator"></span>
+          </a>
+          <a href="contact.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
+            Contact
+            <span class="nav-indicator"></span>
+          </a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="quote.html" class="hidden md-block">
+            <button class="btn gradient-bg btn-hover-effect hover-opacity-90 transition-opacity rounded-full">
+              Get a Quote
+            </button>
+          </a>
+          <button id="menuToggle" class="md-hidden p-2 glass rounded-full" aria-label="Toggle menu">
+            <i data-lucide="menu" class="h-5 w-5"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu glass">
+      <nav class="grid gap-6 text-lg font-medium pt-10">
+        <a href="index.html" class="hover-text-primary">Home</a>
+        <a href="about.html" class="hover-text-primary">About</a>
+        <a href="services.html" class="hover-text-primary">Services</a>
+        <a href="portfolio.html" class="hover-text-primary">Portfolio</a>
+        <a href="contact.html" class="hover-text-primary">Contact</a>
+        <a href="quote.html">
+          <button class="w-full gradient-bg hover-opacity-90 transition-opacity rounded-full">
+            Get a Quote
+          </button>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+      <!-- Hero Section -->
+      <section class="relative py-16 md-py-24 overflow-hidden">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="container relative z-10">
+          <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold tracking-tight sm-text-5xl md-text-6xl font-heading">
+              Our <span class="gradient-text">Services</span>
+            </h1>
+            <p class="text-xl text-foreground/80 mt-6 leading-relaxed">
+              We offer a comprehensive range of digital services designed to elevate your brand's online presence.
+              From stunning websites to engaging social media campaigns, we have the expertise to bring your vision to life.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Web Development Section -->
+      <section id="web" class="py-16 md-py-24 container relative">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto z-10">
+          <div class="mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-white">
+            <i data-lucide="code" class="h-10 w-10 text-primary"></i>
+          </div>
+          <h2 class="text-3xl font-bold tracking-tight sm-text-4xl md-text-5xl font-heading mb-6">Web Development</h2>
+          <p class="text-foreground/80 text-lg leading-relaxed">
+            Our web development services focus on creating responsive, user-friendly, and visually stunning websites
+            that not only look great but also perform exceptionally well. We take a strategic approach to every project,
+            ensuring that your website aligns with your business goals and delivers a seamless user experience.
+          </p>
+          
+          <div class="grid gap-8 sm-grid-cols-2 mt-10">
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Custom Website Development</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Tailored websites built from the ground up to meet your specific requirements and reflect your brand identity.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">E-commerce Solutions</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Robust online stores with secure payment processing, inventory management, and a seamless shopping experience.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">WordPress Development</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Custom WordPress themes and plugins that give you full control over your content with an intuitive interface.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Website Maintenance</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Regular updates, security monitoring, and technical support to ensure your website runs smoothly at all times.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">UI/UX Design</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                User-centered design approaches that create intuitive, engaging interfaces and memorable user experiences.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Website Optimization</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Performance enhancements, load time improvements, and code optimization for faster, more efficient websites.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Social Media Management Section -->
+      <section id="social" class="py-16 md-py-24 container relative">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto z-10">
+          <div class="mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-white">
+            <i data-lucide="instagram" class="h-10 w-10 text-primary"></i>
+          </div>
+          <h2 class="text-3xl font-bold tracking-tight sm-text-4xl md-text-5xl font-heading mb-6">Social Media Management</h2>
+          <p class="text-foreground/80 text-lg leading-relaxed">
+            Our social media services help you build a strong online community around your brand. We create engaging content,
+            develop comprehensive strategies, and manage your presence across platforms to increase engagement, followers, and
+            ultimately, conversions.
+          </p>
+          
+          <div class="grid gap-8 sm-grid-cols-2 mt-10">
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Strategy Development</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Customized social media strategies aligned with your business goals, target audience, and industry trends.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Content Creation</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Engaging posts, eye-catching graphics, and compelling copy that reflects your brand voice and resonates with your audience.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Community Management</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Responsive engagement with your audience through comments, messages, and interactions that build relationships.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Paid Advertising</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Targeted social media ad campaigns designed to increase visibility, drive traffic, and generate leads.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Analytics & Reporting</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Regular performance reports with insights on engagement, growth, and ROI to continuously refine your strategy.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Influencer Collaboration</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Strategic partnerships with relevant influencers to expand your reach and build credibility with their audiences.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Graphic Design Section -->
+      <section id="design" class="py-16 md-py-24 container relative">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto z-10">
+          <div class="mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-white">
+            <i data-lucide="layout" class="h-10 w-10 text-primary"></i>
+          </div>
+          <h2 class="text-3xl font-bold tracking-tight sm-text-4xl md-text-5xl font-heading mb-6">Graphic Design</h2>
+          <p class="text-foreground/80 text-lg leading-relaxed">
+            Our creative design services bring your brand to life through visually compelling graphics that communicate
+            your message effectively. From brand identities to marketing materials, we craft designs that capture attention
+            and reinforce your unique brand personality.
+          </p>
+          
+          <div class="grid gap-8 sm-grid-cols-2 mt-10">
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Brand Identity Design</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Logo design, color palettes, typography, and visual elements that create a cohesive and memorable brand identity.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Marketing Materials</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Brochures, flyers, business cards, and promotional materials that effectively communicate your message.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Social Media Graphics</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Eye-catching visuals optimized for different social platforms to enhance your content strategy.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Digital Illustrations</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Custom illustrations and graphics that give your brand a unique visual language and set you apart.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Email Marketing Design</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Attractive email templates that align with your brand and encourage higher open and click-through rates.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Packaging Design</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Product packaging that stands out on shelves and creates a memorable unboxing experience for customers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEO Section -->
+      <section id="seo" class="py-16 md-py-24 container relative">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto z-10">
+          <div class="mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-white">
+            <i data-lucide="search" class="h-10 w-10 text-primary"></i>
+          </div>
+          <h2 class="text-3xl font-bold tracking-tight sm-text-4xl md-text-5xl font-heading mb-6">SEO & Analytics</h2>
+          <p class="text-foreground/80 text-lg leading-relaxed">
+            Our SEO services help improve your visibility in search engines, driving organic traffic to your website.
+            We combine technical expertise with content optimization and analytics to develop strategies that deliver
+            tangible results and higher search rankings.
+          </p>
+          
+          <div class="grid gap-8 sm-grid-cols-2 mt-10">
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">SEO Audit</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Comprehensive analysis of your website's current SEO performance, identifying opportunities for improvement.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Keyword Research</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Strategic identification of valuable keywords that your target audience is searching for.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">On-Page Optimization</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Technical improvements to your website's structure, content, and HTML to improve search rankings.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Content Strategy</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Development of SEO-friendly content that satisfies both search engines and user intent.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Local SEO</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Optimization for local search results to help your business appear in location-based searches.
+              </p>
+            </div>
+            <div class="glass-card p-6 relative overflow-hidden">
+              <h3 class="mb-3 text-xl font-heading">Performance Tracking</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Regular monitoring and reporting of your SEO performance with actionable insights for continuous improvement.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="py-16 md-py-24 container relative">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto z-10">
+          <h2 class="text-3xl font-bold tracking-tight sm-text-4xl gradient-text font-heading mb-12 text-center">
+            Frequently Asked Questions
+          </h2>
+          
+          <div class="space-y-6">
+            <div class="glass-card p-6">
+              <h3 class="text-xl font-medium mb-3">How long does it take to complete a website?</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Typical website projects take 4-6 weeks from start to finish, depending on the complexity and scope.
+                Simple landing pages may be completed in as little as 2 weeks, while complex e-commerce sites might
+                take 8-12 weeks. We'll provide a detailed timeline during our initial consultation.
+              </p>
+            </div>
+            
+            <div class="glass-card p-6">
+              <h3 class="text-xl font-medium mb-3">Do you offer website maintenance services?</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Yes, we offer ongoing maintenance packages to keep your website secure, updated, and performing optimally.
+                These include regular backups, security monitoring, WordPress updates, and technical support when needed.
+              </p>
+            </div>
+            
+            <div class="glass-card p-6">
+              <h3 class="text-xl font-medium mb-3">How do you measure the success of social media campaigns?</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                We track key performance indicators like engagement rate, follower growth, reach, impressions, click-through 
+                rates, and conversions. We provide detailed monthly reports showing these metrics and how they translate to 
+                your business goals.
+              </p>
+            </div>
+            
+            <div class="glass-card p-6">
+              <h3 class="text-xl font-medium mb-3">Can you help with content creation?</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Absolutely! We offer copywriting, photography, and graphic design services to create compelling content
+                for your website and social media channels. We can work with existing brand guidelines or help develop
+                a new content strategy from scratch.
+              </p>
+            </div>
+            
+            <div class="glass-card p-6">
+              <h3 class="text-xl font-medium mb-3">Do you work with clients outside your local area?</h3>
+              <p class="text-foreground/70 leading-relaxed">
+                Yes, we work with clients nationwide and internationally. Our collaborative tools allow us to communicate
+                effectively regardless of location, and we're always available for video calls and remote meetings.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="py-16 md-py-24 relative overflow-hidden">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="container relative z-10">
+          <div class="glass-card p-10 max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl md-text-4xl font-bold mb-6 font-heading">Ready to Transform Your Digital Presence?</h2>
+            <p class="text-xl mb-8">
+              Start your journey with PixelSix Studio today. Let's create something extraordinary together!
+            </p>
+            <div class="flex flex-col sm-flex-row gap-4 justify-center">
+              <a href="quote.html">
+                <button class="btn btn-lg gradient-bg hover-opacity-90 transition-opacity rounded-full px-8">
+                  Get a Free Quote
+                </button>
+              </a>
+              <a href="contact.html">
+                <button class="btn btn-lg btn-outline glass hover-bg-white/30 rounded-full px-8">
+                  Contact Us
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/30 bg-white/10">
+      <div class="container py-12 md-py-16">
+        <div class="grid gap-8 md-grid-cols-2 lg-grid-cols-4">
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold gradient-text font-heading">PixelSix Studio</h3>
+            <p class="text-sm text-muted-foreground">
+              Crafting digital experiences with creativity and precision since 2023.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
+                <i data-lucide="facebook" class="h-5 w-5"></i>
+                <span class="sr-only">Facebook</span>
+              </a>
+              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
+                <i data-lucide="twitter" class="h-5 w-5"></i>
+                <span class="sr-only">Twitter</span>
+              </a>
+              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
+                <i data-lucide="instagram" class="h-5 w-5"></i>
+                <span class="sr-only">Instagram</span>
+              </a>
+              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
+                <i data-lucide="linkedin" class="h-5 w-5"></i>
+                <span class="sr-only">LinkedIn</span>
+              </a>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold font-heading">Quick Links</h3>
+            <nav class="grid gap-2 text-sm">
+              <a href="about.html" class="text-muted-foreground hover-text-primary">About Us</a>
+              <a href="services.html" class="text-muted-foreground hover-text-primary">Our Services</a>
+              <a href="team.html" class="text-muted-foreground hover-text-primary">Our Team</a>
+              <a href="blog.html" class="text-muted-foreground hover-text-primary">Blog</a>
+              <a href="contact.html" class="text-muted-foreground hover-text-primary">Contact</a>
+            </nav>
+          </div>
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold font-heading">Services</h3>
+            <nav class="grid gap-2 text-sm">
+              <a href="services.html#web" class="text-muted-foreground hover-text-primary">Web Development</a>
+              <a href="services.html#social" class="text-muted-foreground hover-text-primary">Social Media</a>
+              <a href="services.html#design" class="text-muted-foreground hover-text-primary">Graphic Design</a>
+              <a href="services.html#seo" class="text-muted-foreground hover-text-primary">SEO</a>
+            </nav>
+          </div>
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold font-heading">Contact Us</h3>
+            <div class="grid gap-2 text-sm">
+              <div class="flex items-start gap-2">
+                <i data-lucide="mail" class="h-4 w-4 mt-1 text-muted-foreground"></i>
+                <a href="mailto:hello@PixelSix.studio" class="text-muted-foreground hover-text-primary">
+                  hello@PixelSix.studio
+                </a>
+              </div>
+              <div class="flex items-start gap-2">
+                <i data-lucide="phone" class="h-4 w-4 mt-1 text-muted-foreground"></i>
+                <a href="tel:+1234567890" class="text-muted-foreground hover-text-primary">
+                  (123) 456-7890
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-white/20 text-center text-sm text-muted-foreground">
+          <p>© <span id="currentYear"></span> PixelSix Studio. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

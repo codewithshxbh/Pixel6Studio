@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelSix Studio</title>
+  <meta name="description" content="Web development and social media management by a creative team of friends">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Icons from Lucide (https://lucide.dev/) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Initial state for navbar animation - modified to show shadow */
+    header {
+      opacity: 1; /* Changed from 0 to make visible immediately */
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+<body>
+  <div class="relative flex min-h-screen flex-col">
+    <!-- Header -->
+    <header class="z-50 w-full glass border-b border-white/30">
+      <div class="container flex h-full items-center justify-between">
+        <div class="flex items-center gap-2">
+          <a href="index.html" class="flex items-center space-x-2">
+            <span class="text-xl font-bold gradient-text font-heading">PixelSix Studio</span>
+          </a>
+        </div>
+        <nav class="hidden md-flex gap-8">
+          <a href="index.html" class="text-sm font-medium transition-colors hover-text-primary relative group active">
+            Home
+            <span class="nav-indicator"></span>
+          </a>
+          <a href="about.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
+            About
+            <span class="nav-indicator"></span>
+          </a>
+          <a href="services.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
+            Services
+            <span class="nav-indicator"></span>
+          </a>
+          <a href="portfolio.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
+            Portfolio
+            <span class="nav-indicator"></span>
+          </a>
+          <a href="contact.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
+            Contact
+            <span class="nav-indicator"></span>
+          </a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="quote.html" class="hidden md-block">
+            <button class="btn gradient-bg btn-hover-effect hover-opacity-90 transition-opacity rounded-full">
+              Get a Quote
+            </button>
+          </a>
+          <button id="menuToggle" class="md-hidden p-2 glass rounded-full" aria-label="Toggle menu">
+            <i data-lucide="menu" class="h-5 w-5"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu glass">
+      <nav class="grid gap-6 text-lg font-medium pt-10">
+        <a href="index.html" class="hover-text-primary">Home</a>
+        <a href="about.html" class="hover-text-primary">About</a>
+        <a href="services.html" class="hover-text-primary">Services</a>
+        <a href="portfolio.html" class="hover-text-primary">Portfolio</a>
+        <a href="contact.html" class="hover-text-primary">Contact</a>
+        <a href="quote.html">
+          <button class="w-full gradient-bg hover-opacity-90 transition-opacity rounded-full">
+            Get a Quote
+          </button>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+      <!-- Hero Section -->
+      <section class="relative py-24 md-py-32 overflow-hidden">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="container relative z-10">
+          <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold tracking-tight sm-text-5xl md-text-6xl font-heading">
+              Creative Digital <span class="gradient-text">Solutions</span>
+            </h1>
+            <p class="text-xl text-foreground/80 mt-6 leading-relaxed">
+              We're a collective of friends turned digital crafters, specializing in web development and social media management.
+              Our passion for design and technology drives us to create stunning digital experiences that help businesses thrive online.
+            </p>
+            <div class="flex flex-col gap-4 sm-flex-row mt-8">
+              <a href="services.html">
+                <button class="btn btn-lg flex gap-2 gradient-bg btn-hover-effect hover-opacity-90 transition-opacity rounded-full px-6">
+                  Our Services <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                </button>
+              </a>
+              <a href="quote.html">
+                <button class="btn btn-lg btn-outline glass hover-bg-white/30 rounded-full">
+                  Get a Quote
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mission Section -->
+      <section class="py-16 md-py-24 container relative">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto z-10">
+          <h2 class="text-3xl font-bold tracking-tight sm-text-4xl md-text-5xl font-heading">Our Story</h2>
+          <p class="text-foreground/80 text-lg leading-relaxed mt-6">
+            PixelSix Studio began when five friends with complementary skills in design, development, and digital marketing
+            decided to turn our passion projects into a collaborative business venture. What started as weekend projects
+            helping local businesses has evolved into a full-service digital agency.
+          </p>
+          <p class="text-foreground/80 text-lg leading-relaxed mt-4">
+            We believe in combining technical expertise with creative flair, delivering solutions that are not just visually
+            striking but also strategically sound. Our friendship gives us a unique collaborative dynamic that translates into
+            seamless project execution and genuine customer relationships.
+          </p>
+          <div class="flex flex-col gap-4 sm-flex-row mt-8">
+            <a href="about.html">
+              <button class="btn flex gap-2 gradient-bg btn-hover-effect hover-opacity-90 transition-opacity rounded-full px-6">
+                About Us <i data-lucide="arrow-right" class="h-4 w-4"></i>
+              </button>
+            </a>
+            <a href="team.html">
+              <button class="btn btn-outline glass hover-bg-white/30 rounded-full">
+                Meet the Team
+              </button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Impact Counter -->
+      <section class="py-16 relative">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="container relative z-10">
+          <h2 class="text-3xl font-bold tracking-tight text-center mb-12 sm-text-4xl gradient-text font-heading">
+            Our Track Record
+          </h2>
+          <div class="impact-counter">
+            <div class="grid gap-6 sm-grid-cols-2 md-grid-cols-4">
+              <div class="glass-card text-center p-6">
+                <span class="counter" data-target="78">0</span>
+                <span class="text-xl font-bold gradient-text">+</span>
+                <h3 class="mt-2 text-lg font-medium">Websites Launched</h3>
+              </div>
+              <div class="glass-card text-center p-6">
+                <span class="counter" data-target="52">0</span>
+                <h3 class="mt-2 text-lg font-medium">Happy Clients</h3>
+              </div>
+              <div class="glass-card text-center p-6">
+                <span class="counter" data-target="120">0</span>
+                <span class="text-xl font-bold gradient-text">+</span>
+                <h3 class="mt-2 text-lg font-medium">Social Campaigns</h3>
+              </div>
+              <div class="glass-card text-center p-6">
+                <span class="counter" data-target="5">0</span>
+                <h3 class="mt-2 text-lg font-medium">Creative Friends</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section (formerly Key Initiatives) -->
+      <section class="py-16 md-py-24 container relative">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="relative z-10">
+          <h2 class="text-3xl font-bold tracking-tight text-center mb-12 sm-text-4xl gradient-text font-heading">
+            Our Services
+          </h2>
+          <div class="grid gap-8 sm-grid-cols-2 lg-grid-cols-3">
+            <div class="glass-card p-8 relative overflow-hidden">
+              <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-white">
+                <i data-lucide="code" class="h-6 w-6 text-primary"></i>
+              </div>
+              <h3 class="mb-3 text-xl font-heading">Web Development</h3>
+              <p class="min-h-100 text-foreground/70 leading-relaxed">
+                We craft responsive, user-friendly websites that blend stunning design with seamless functionality. From simple landing pages to complex e-commerce solutions, we build web experiences that convert.
+              </p>
+              <p class="min-h-100 text-foreground/70 leading-relaxed mt-4">
+                Our development approach focuses on performance optimization, SEO-friendly code, and creating intuitive user interfaces that keep visitors engaged.
+              </p>
+              <a href="services.html#web" class="btn-link group mt-4">
+                Learn more <i data-lucide="arrow-right" class="ml-1 h-4 w-4 transition-transform group-hover-translate-x-1"></i>
+              </a>
+            </div>
+            <div class="glass-card p-8 relative overflow-hidden">
+              <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-white">
+                <i data-lucide="instagram" class="h-6 w-6 text-primary"></i>
+              </div>
+              <h3 class="mb-3 text-xl font-heading">Social Media Management</h3>
+              <p class="min-h-100 text-foreground/70 leading-relaxed">
+                We handle your brand's social presence across all major platforms, creating engaging content that resonates with your target audience and builds a loyal community around your brand.
+              </p>
+              <p class="min-h-100 text-foreground/70 leading-relaxed mt-4">
+                From content calendars and post creation to community engagement and performance analytics, we ensure your social media drives real business results.
+              </p>
+              <a href="services.html#social" class="btn-link group mt-4">
+                Learn more <i data-lucide="arrow-right" class="ml-1 h-4 w-4 transition-transform group-hover-translate-x-1"></i>
+              </a>
+            </div>
+            <div class="glass-card p-8 relative overflow-hidden">
+              <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-white">
+                <i data-lucide="layout" class="h-6 w-6 text-primary"></i>
+              </div>
+              <h3 class="mb-3 text-xl font-heading">Graphic Design</h3>
+              <p class="min-h-100 text-foreground/70 leading-relaxed">
+                Our creative team produces eye-catching visuals that communicate your brand's message effectively. From logos and brand identities to social media graphics and marketing materials.
+              </p>
+              <p class="min-h-100 text-foreground/70 leading-relaxed mt-4">
+                We bring ideas to life through thoughtful design that stands out from the competition while maintaining brand consistency across all touchpoints.
+              </p>
+              <a href="services.html#design" class="btn-link group mt-4">
+                Learn more <i data-lucide="arrow-right" class="ml-1 h-4 w-4 transition-transform group-hover-translate-x-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="py-16 md-py-32 relative testimonials-section">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="container relative z-10">
+          <h2 class="text-3xl font-bold tracking-tight text-center mb-16 sm-text-4xl primary-text font-heading">
+            Client Feedback
+          </h2>
+          
+          <div class="testimonials-container pt-20">
+            <!-- First testimonial -->
+            <div class="testimonial-card">
+              <div class="quote-icon">
+                <span class="quote-mark">❝</span>
+              </div>
+              <p class="testimonial-text">
+                PixelSix transformed our outdated website into a <span class="blue-text">sleek, modern platform</span> that's dramatically increased our conversion rates. Their friendly approach made the entire process enjoyable.
+              </p>
+              <div class="author-info">
+                <h4 class="author-name">Sarah Johnson</h4>
+                <p class="author-role">Marketing Director, Bloom Boutique</p>
+              </div>
+            </div>
+            
+            <!-- Second testimonial -->
+            <div class="testimonial-card">
+              <div class="quote-icon">
+                <span class="quote-mark">❝</span>
+              </div>
+              <p class="testimonial-text">
+                Their <span class="blue-text">social media management</span> completely revitalized our online presence. Our engagement is up 200% and we're reaching exactly the audience we need.
+              </p>
+              <div class="author-info">
+                <h4 class="author-name">Michael Chen</h4>
+                <p class="author-role">Owner, Fusion Eats</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="py-16 md-py-24 relative overflow-hidden">
+        <div class="absolute inset-0 pattern-bg z-0"></div>
+        <div class="container relative z-10">
+          <div class="glass-card p-10 max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl md-text-4xl font-bold mb-6 font-heading">Ready to Elevate Your Brand?</h2>
+            <p class="text-xl mb-8">
+              Let's create something amazing together! Whether you need a website makeover or a social strategy that converts, we're here to help.
+            </p>
+            <div class="flex flex-col sm-flex-row gap-4 justify-center">
+              <a href="contact.html">
+                <button class="btn btn-lg gradient-bg hover-opacity-90 transition-opacity rounded-full px-8">
+                  Let's Talk
+                </button>
+              </a>
+              <a href="portfolio.html">
+                <button class="btn btn-lg btn-outline glass hover-bg-white/30 rounded-full px-8">
+                  See Our Work
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/30 bg-white/10">
+      <div class="container py-12 md-py-16">
+        <div class="grid gap-8 md-grid-cols-2 lg-grid-cols-4">
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold gradient-text font-heading">PixelSix Studio</h3>
+            <p class="text-sm text-muted-foreground">
+              Crafting digital experiences with creativity and precision since 2023.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
+                <i data-lucide="facebook" class="h-5 w-5"></i>
+                <span class="sr-only">Facebook</span>
+              </a>
+              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
+                <i data-lucide="twitter" class="h-5 w-5"></i>
+                <span class="sr-only">Twitter</span>
+              </a>
+              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
+                <i data-lucide="instagram" class="h-5 w-5"></i>
+                <span class="sr-only">Instagram</span>
+              </a>
+              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
+                <i data-lucide="linkedin" class="h-5 w-5"></i>
+                <span class="sr-only">LinkedIn</span>
+              </a>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold font-heading">Quick Links</h3>
+            <nav class="grid gap-2 text-sm">
+              <a href="about.html" class="text-muted-foreground hover-text-primary">About Us</a>
+              <a href="services.html" class="text-muted-foreground hover-text-primary">Our Services</a>
+              <a href="team.html" class="text-muted-foreground hover-text-primary">Our Team</a>
+              <a href="blog.html" class="text-muted-foreground hover-text-primary">Blog</a>
+              <a href="contact.html" class="text-muted-foreground hover-text-primary">Contact</a>
+            </nav>
+          </div>
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold font-heading">Services</h3>
+            <nav class="grid gap-2 text-sm">
+              <a href="services.html#web" class="text-muted-foreground hover-text-primary">Web Development</a>
+              <a href="services.html#social" class="text-muted-foreground hover-text-primary">Social Media</a>
+              <a href="services.html#design" class="text-muted-foreground hover-text-primary">Graphic Design</a>
+              <a href="services.html#seo" class="text-muted-foreground hover-text-primary">SEO</a>
+            </nav>
+          </div>
+          <div class="space-y-4">
+            <h3 class="text-lg font-bold font-heading">Contact Us</h3>
+            <div class="grid gap-2 text-sm">
+              <div class="flex items-start gap-2">
+                <i data-lucide="mail" class="h-4 w-4 mt-1 text-muted-foreground"></i>
+                <a href="mailto:hello@PixelSix.studio" class="text-muted-foreground hover-text-primary">
+                  hello@PixelSix.studio
+                </a>
+              </div>
+              <div class="flex items-start gap-2">
+                <i data-lucide="phone" class="h-4 w-4 mt-1 text-muted-foreground"></i>
+                <a href="tel:+1234567890" class="text-muted-foreground hover-text-primary">
+                  (123) 456-7890
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-white/20 text-center text-sm text-muted-foreground">
+          <p>© <span id="currentYear"></span> PixelSix Studio. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
