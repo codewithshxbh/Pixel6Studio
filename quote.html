@@ -150,14 +150,24 @@
       height: 8px;
     }
     
-    /* Fix for excessive top gap */
+    /* Fix for excessive top gap - using !important to override the global style but adding more padding */
     main.flex-1 {
-      padding-top: calc(var(--navbar-height) + var(--navbar-top-spacing));
+      padding-top: calc(var(--navbar-height) + var(--navbar-top-spacing) + 1rem) !important;
+    }
+    
+    /* Remove creative blobs that might be pushing content down */
+    .creative-blob {
+      display: none;
     }
     
     /* Adjust hero section spacing */
     section.py-6 {
       padding-top: 1.5rem;
+    }
+    
+    /* Remove any floating keywords that might cause spacing issues */
+    .floating-keyword {
+      display: none;
     }
   </style>
 </head>
