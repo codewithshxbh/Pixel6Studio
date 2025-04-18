@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <title>PixelSix Studio</title>
+  <!-- Inline script to prevent flash -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark-mode');
+      }
+    })();
+  </script>
   <meta name="description" content="Web development and social media management by a creative team of friends">
   <link rel="stylesheet" href="styles.css">
   <!-- Icons from Lucide (https://lucide.dev/) -->
@@ -162,7 +174,7 @@
                 <h3 class="mt-2 text-lg font-medium">Social Campaigns</h3>
               </div>
               <div class="glass-card text-center p-6">
-                <span class="counter" data-target="5">0</span>
+                <span class="counter" data-target="5">6</span>
                 <h3 class="mt-2 text-lg font-medium">Creative Friends</h3>
               </div>
             </div>

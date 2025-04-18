@@ -1,66 +1,62 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Pre-create both moon and sun icons for faster switching
+  // Pre-create icons
   const moonIcon = '<i data-lucide="moon" class="h-5 w-5"></i>';
   const sunIcon = '<i data-lucide="sun" class="h-5 w-5"></i>';
   
-  // Initialize Lucide icons
+  // Initialize icons
   lucide.createIcons();
 
-  // Dark mode functionality with optimized transitions
+  // Dark mode functionality
   const darkModeToggle = document.getElementById('darkModeToggle');
+  const html = document.documentElement;
   const body = document.body;
   
-  // IMPORTANT: Set dark mode as default
-  // Either use the saved preference or default to dark mode
+  // Get current mode from localStorage or default to system preference
   const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   
-  // Apply dark mode by default or if saved preference is dark
-  if (savedTheme !== 'light') {
+  // Set initial theme without transition
+  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    html.classList.add('dark-mode');
     body.classList.add('dark-mode');
-    if (darkModeToggle) updateDarkModeIcon(true);
-    localStorage.setItem('theme', 'dark');
-  }
-  
-  // Toggle dark mode when the button is clicked - with optimized transition
-  if (darkModeToggle) {
-    darkModeToggle.addEventListener('click', function() {
-      // Preload the opposite icon to avoid delay
-      const isDarkMode = !body.classList.contains('dark-mode');
-      
-      // First update the icon - avoiding reflow
-      updateDarkModeIcon(isDarkMode);
-      
-      // Use requestAnimationFrame for better performance
-      requestAnimationFrame(() => {
-        // Add transition-active class for brief transition
-        body.classList.add('transition-active');
-        
-        // Toggle dark mode
-        body.classList.toggle('dark-mode');
-        
-        // Store the preference
-        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-        
-        // Remove transition class after transition completes
-        setTimeout(() => {
-          body.classList.remove('transition-active');
-        }, 100); // Slightly longer than the CSS transition time
-      });
-    });
-  }
-  
-  // Highly optimized icon updating - directly change the HTML with no recreation
-  function updateDarkModeIcon(isDarkMode) {
-    if (!darkModeToggle) return;
-    
-    // Just swap the inner HTML - this is much faster than recreating the icon
-    darkModeToggle.innerHTML = isDarkMode ? sunIcon : moonIcon;
-    
-    // If needed, manually apply Lucide to just this icon
-    const iconElement = darkModeToggle.querySelector('i');
-    if (iconElement) {
-      lucide.replace(iconElement);
+    if (darkModeToggle) {
+      darkModeToggle.innerHTML = sunIcon;
+      lucide.createIcons();
     }
+  } else {
+    html.classList.remove('dark-mode');
+    body.classList.remove('dark-mode');
+    if (darkModeToggle) {
+      darkModeToggle.innerHTML = moonIcon;
+      lucide.createIcons();
+    }
+  }
+
+  // Toggle dark mode with transition
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', () => {
+      // Add transition class for smooth switch
+      body.classList.add('transition-active');
+      html.style.setProperty('transition', 'background-color 0.15s ease-out');
+      
+      // Toggle dark mode
+      const isDark = !html.classList.contains('dark-mode');
+      html.classList.toggle('dark-mode');
+      body.classList.toggle('dark-mode');
+      
+      // Update icon
+      darkModeToggle.innerHTML = isDark ? sunIcon : moonIcon;
+      lucide.createIcons();
+      
+      // Store preference
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      
+      // Remove transition classes after animation
+      setTimeout(() => {
+        body.classList.remove('transition-active');
+        html.style.removeProperty('transition');
+      }, 150);
+    });
   }
 
   // Mobile menu toggle
