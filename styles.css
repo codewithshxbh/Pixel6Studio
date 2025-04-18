@@ -1,7 +1,7 @@
 /* Base styles */
 :root {
-  --primary: hsl(330, 84%, 60%); /* Changed from green teal to pink */
-  --secondary: hsl(215, 70%, 52%); /* Kept blue secondary */
+  --primary: hsl(175, 84%, 32%);
+  --secondary: hsl(215, 70%, 52%);
   --foreground: hsl(215, 25%, 27%);
   --foreground-light: hsla(215, 25%, 27%, 0.8);
   --background: hsl(0, 0%, 100%);
@@ -10,19 +10,13 @@
   --white: hsl(0, 0%, 100%);
   --border: hsl(214, 32%, 91%);
   --radius: 1rem;
-  --navbar-height: 4rem; 
-  --navbar-top-spacing: 0.75rem;
-  --navbar-blur: 20px; /* Increased blur effect for more modern look */
-  --navbar-glow: none; /* Changed from pink glow to none */
-  --card-glow: none; /* Changed from pink glow to none */
-  --navbar-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Stronger shadow for navbar */
-  --default-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Enhanced default shadow */
-  --hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Enhanced shadow for hover state */
-  --card-bg-opacity: 0.85; /* Consistent background opacity for cards */
-  --card-border: rgba(255, 255, 255, 0.4); /* Consistent border for cards */
-  --card-highlight: rgba(246, 114, 182, 0.6); /* Changed from green to pink highlight */
-  --pink: #F672B6; /* New pink color */
-  --blue: #3B82F6; /* New blue color */
+  --navbar-height: 4rem; /* Reduced from 5rem to make navbar more compact */
+  --navbar-top-spacing: 0.75rem; /* Reduced spacing from top */
+  --navbar-blur: 15px; /* Increased blur effect for more modern look */
+  --navbar-glow: 0 0 18px rgba(158, 179, 132, 0.25); /* Enhanced glow effect */
+  --navbar-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Specific shadow for navbar */
+  --default-shadow: 0 2px 10px rgba(0, 0, 0, 0.09); /* Default shadow for elements */
+  --hover-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow for hover state */
 }
 
 * {
@@ -356,49 +350,39 @@ img {
 
 /* Components */
 .glass {
-  background: rgba(255, 255, 255, 0.4); /* More translucent */
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(var(--navbar-blur));
   -webkit-backdrop-filter: blur(var(--navbar-blur));
   border: 1px solid rgba(255, 255, 255, 0.5);
+  /* Removing box-shadow from here so it doesn't conflict */
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, var(--card-bg-opacity));
-  border: 1px solid var(--card-border);
-  box-shadow: var(--default-shadow); /* Removed var(--card-glow) */
+  background: rgba(255, 255, 255, 0.9);
+  /* Removing blur effect */
+  /*backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);*/
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.05);
   border-radius: 1rem;
   transition: all 0.3s ease;
   padding: 1.5rem;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Adding subtle top highlight to all cards for consistent design */
-.glass-card::before {
-  /* Removing the top highlight line */
-  content: none;
-}
-
-/* Removing highlight lines from testimonial cards as well */
-.testimonial-card::before, .glass-card::before {
-  /* Removing the top highlight line */
-  content: none;
 }
 
 .glass-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--hover-shadow); /* Removed glowy effect */
+  box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.1);
 }
 
 .gradient-text {
-  background: linear-gradient(to right, var(--pink), var(--blue));
+  background: linear-gradient(to right, var(--primary), #9EB384);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .gradient-bg {
-  background: linear-gradient(to right, var(--pink), var(--blue));
+  background: linear-gradient(to right, var(--primary), #9EB384);
   color: white;
 }
 
@@ -532,24 +516,31 @@ header {
   width: calc(100% - 2rem);
   max-width: 1300px;
   border-radius: 1rem;
-  box-shadow: var(--navbar-shadow), var(--navbar-glow) !important; /* Glowing shadow effect */
+  box-shadow: var(--navbar-shadow) !important;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
-  border: 1px solid rgba(246, 114, 182, 0.4); /* Changed from green to pink border */
-  background: rgba(255, 255, 255, 0.35); /* More translucent for glowing effect */
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(var(--navbar-blur));
   -webkit-backdrop-filter: blur(var(--navbar-blur));
   z-index: 50;
 }
 
 header::before {
-  /* Removing the pink highlight line by setting content to none */
-  content: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
 }
 
-@keyframes pulse {
-  0% { opacity: 0.6; }
-  100% { opacity: 1; }
+header .container {
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  padding: 0 1rem; /* Added compact padding */
 }
 
 /* Add a subtle gradient overlay to the header */
@@ -557,7 +548,7 @@ header::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(246, 114, 182, 0.15), rgba(59, 130, 246, 0.05)); /* Pink to blue gradient */
+  background: linear-gradient(to right, rgba(158, 179, 132, 0.05), rgba(255, 255, 255, 0.05));
   pointer-events: none;
   z-index: 1;
 }
@@ -576,11 +567,9 @@ nav {
 
 nav a.group {
   position: relative;
-  padding: 0.5rem 0.75rem; /* Added horizontal padding for better clickable area */
-  font-weight: 600; /* Bolder text for better readability */
+  padding: 0.5rem 0.25rem;
+  font-weight: 500;
   transition: all 0.3s ease;
-  color: var(--foreground); /* Explicitly setting color for better contrast */
-  border-radius: 0.5rem; /* Rounded corners for nav items */
 }
 
 /* Enhanced indicator for nav links */
@@ -588,17 +577,11 @@ nav a.group {
   position: absolute;
   left: 0;
   bottom: -2px;
-  height: 3px; /* Thicker indicator line */
+  height: 2px;
   width: 0;
-  background: linear-gradient(to right, var(--pink), var(--blue));
+  background: linear-gradient(to right, var(--primary), #9EB384);
   transition: width 0.3s ease;
   border-radius: 4px;
-}
-
-nav a.group:hover {
-  transform: translateY(-2px);
-  background-color: rgba(246, 114, 182, 0.1); /* Changed from green to pink */
-  color: var(--primary); /* Change text color on hover */
 }
 
 nav a.group:hover .nav-indicator {
@@ -608,8 +591,6 @@ nav a.group:hover .nav-indicator {
 /* Active state for current page */
 nav a.group.active {
   color: var(--primary);
-  background-color: rgba(246, 114, 182, 0.15); /* Changed from green to pink */
-  font-weight: 700; /* Bolder text for active state */
 }
 
 nav a.group.active .nav-indicator {
@@ -629,54 +610,11 @@ nav a.group.active .nav-indicator {
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
   border-radius: 0 0 1rem 1rem; /* Add rounded corners on bottom only */
-  background: rgba(255, 255, 255, 0.35); /* Match navbar translucency */
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(var(--navbar-blur));
   -webkit-backdrop-filter: blur(var(--navbar-blur));
-  border: 1px solid rgba(246, 114, 182, 0.4); /* Changed from green to pink */
-  box-shadow: var(--navbar-shadow), var(--navbar-glow);
-}
-
-/* Mobile menu links should match nav styling */
-.mobile-menu a {
-  display: block;
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.5rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.mobile-menu a:hover {
-  background-color: rgba(246, 114, 182, 0.15); /* Changed from green to pink */
-  color: var(--primary);
-  transform: translateX(5px);
-}
-
-.mobile-menu a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(to right, var(--pink), transparent);
-  transition: width 0.3s ease;
-}
-
-.mobile-menu a:hover::after {
-  width: 100%;
-}
-
-.mobile-menu a.active {
-  background-color: rgba(246, 114, 182, 0.15); /* Changed from green to pink */
-  color: var(--primary);
-  font-weight: 700;
-}
-
-.mobile-menu a.active::after {
-  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--navbar-glow), 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Add a scrolled state class for header - keep corners curved even when scrolled */
@@ -684,9 +622,8 @@ header.scrolled {
   margin-top: 0;
   width: 100%;
   border-radius: 0 0 1rem 1rem; /* Keep bottom corners curved */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35) !important; /* Even stronger shadow when scrolled */
-  background: rgba(255, 255, 255, 0.97); /* More opaque when scrolled */
-  border-bottom: 2px solid rgba(246, 114, 182, 0.5); /* Changed from green to pink */
+  box-shadow: var(--navbar-glow), 0 4px 20px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow when scrolled */
+  background: rgba(255, 255, 255, 0.8); /* Slightly more opaque when scrolled */
 }
 
 /* Adjust mobile menu when header is scrolled */
@@ -711,12 +648,11 @@ nav a.group:hover {
   position: relative;
   overflow: hidden;
   transition: all 0.4s ease;
-  box-shadow: 0 4px 12px rgba(246, 114, 182, 0.3);
 }
 
 .btn.gradient-bg:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(246, 114, 182, 0.5);
+  box-shadow: 0 4px 12px rgba(158, 179, 132, 0.3);
 }
 
 .sr-only {
@@ -789,24 +725,18 @@ nav a.group:hover {
 }
 
 .testimonial-card {
-  background: rgba(255, 255, 255, var(--card-bg-opacity));
-  border: 1px solid var(--card-border);
+  background-color: rgba(240, 242, 245, 0.9);
   border-radius: 1rem;
   padding: 2rem;
   position: relative;
   overflow: hidden;
-  box-shadow: var(--default-shadow);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.testimonial-card::before {
-  /* Removing the top highlight line */
-  content: none;
 }
 
 .testimonial-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--hover-shadow);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 .quote-icon {
@@ -851,7 +781,7 @@ nav a.group:hover {
   height: 120px;
   bottom: -60px;
   right: -60px;
-  background: linear-gradient(135deg, rgba(246, 114, 182, 0.1), rgba(59, 130, 246, 0.1)); /* Pink to blue gradient */
+  background: linear-gradient(135deg, rgba(158, 179, 132, 0.1), rgba(158, 179, 132, 0.1));
 }
 
 .circle-2 {
@@ -859,7 +789,7 @@ nav a.group:hover {
   height: 80px;
   top: -40px;
   left: -40px;
-  background: linear-gradient(135deg, rgba(246, 114, 182, 0.1), rgba(59, 130, 246, 0.1)); /* Pink to blue gradient */
+  background: linear-gradient(135deg, rgba(158, 179, 132, 0.1), rgba(158, 179, 132, 0.1));
 }
 
 .decorative-element {
@@ -881,7 +811,7 @@ nav a.group:hover {
 .inner-circle {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, var(--pink), var(--blue)); /* Pink to blue gradient */
+  background: linear-gradient(135deg, #9EB384, #99A98F);
   opacity: 0.2;
   border-radius: 50%;
 }
@@ -897,6 +827,9 @@ nav a.group:hover {
 /* Newsletter Form */
 .newsletter-form input {
   background: rgba(255, 255, 255, 0.6);
+  /* Removing blur effect */
+  /*backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);*/
   border: 1px solid rgba(255, 255, 255, 0.5);
   outline: none;
 }
@@ -1187,7 +1120,7 @@ nav a.group:hover {
 .quote-mark {
   font-size: 3rem;
   line-height: 1;
-  color: var(--pink); /* Changed from green to pink */
+  color: #9EB384; /* Changed from teal to green */
   display: inline-block;
 }
 
@@ -1199,12 +1132,12 @@ nav a.group:hover {
 }
 
 .blue-text {
-  color: var(--blue); /* Changed to blue */
+  color: #9EB384; /* Changed from blue to green */
   font-weight: 500;
 }
 
 .primary-text {
-  color: var(--pink); /* Changed from green to pink */
+  color: #9EB384; /* Changed from teal to green */
 }
 
 .author-info {
@@ -1247,12 +1180,12 @@ main.flex-1 {
 
 /* Adding default shadow to all interactive elements and containers */
 .glass-card, .btn, .testimonial-card, .newsletter-form input, .icon-element, .circle-element, header {
-  box-shadow: var(--default-shadow); /* Removed var(--card-glow) */
+  box-shadow: var(--default-shadow);
   transition: all 0.3s ease;
 }
 
 .glass-card:hover, .btn:hover, .testimonial-card:hover, .newsletter-form input:focus, .icon-element:hover, .circle-element:hover, header:hover {
-  box-shadow: var(--hover-shadow); /* Removed pink glow effect */
+  box-shadow: var(--hover-shadow);
   transform: translateY(-3px);
 }
 
@@ -1274,19 +1207,4 @@ header .btn {
 header .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(158, 179, 132, 0.35);
-}
-
-/* Cool effect for the navbar buttons */
-header .btn.gradient-bg {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s ease;
-  box-shadow: 0 4px 12px rgba(158, 179, 132, 0.4); /* Stronger button shadow */
-  font-weight: 700; /* Bolder text */
-  letter-spacing: 0.02em; /* Better letter spacing */
-}
-
-header .btn.gradient-bg:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(158, 179, 132, 0.5); /* Enhanced shadow on hover */
 }
