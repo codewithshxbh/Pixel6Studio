@@ -55,19 +55,24 @@
       width: 100%;
       padding: 0.75rem 1rem;
       border-radius: 0.5rem;
-      background-color: rgba(255, 255, 255, 0.8); /* Light mode background */
-      border: 2px solid rgba(158, 179, 132, 0.3); /* Added visible green-tinted border */
+      background-color: white;
+      border: 2px solid rgba(158, 179, 132, 0.3);
       transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Added subtle shadow */
+      font-size: 0.9375rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
       color: var(--foreground);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
-    /* Dark mode styles for form inputs */
+    /* Dark mode form input styles */
     .dark-mode .form-input {
-      background-color: rgba(30, 41, 59, 0.8); /* Dark mode background */
-      border-color: rgba(158, 179, 132, 0.3);
-      color: var(--foreground);
+      background-color: rgba(37, 36, 36, 0.8);
+      color: hsl(0, 0%, 90%);
+      border-color: hsl(220, 26%, 30%);
+    }
+    
+    .dark-mode .form-input:focus {
+      border-color: hsl(217, 91%, 60%);
+      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3);
     }
     
     .form-input::placeholder {
