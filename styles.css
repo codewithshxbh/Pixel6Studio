@@ -490,6 +490,29 @@ img {
   border: 1px solid currentColor;
 }
 
+/* Fix for transparent background buttons */
+.btn-outline,
+button.glass,
+.hover-bg-white\/30,
+.hover-bg-white\/20,
+.btn[style*="background: transparent"],
+.btn[style*="background-color: transparent"],
+.btn.transparent {
+  color: var(--foreground) !important; /* Using !important to ensure it overrides any inline styles */
+}
+
+/* Fix for transparent background buttons in dark mode */
+.dark-mode .btn-outline,
+.dark-mode .glass .btn,
+.dark-mode button.glass,
+.dark-mode .hover-bg-white\/30,
+.dark-mode .hover-bg-white\/20,
+.dark-mode .btn[style*="background: transparent"],
+.dark-mode .btn[style*="background-color: transparent"],
+.dark-mode .btn.transparent {
+  color: var(--white) !important; /* Using !important to ensure it overrides in dark mode */
+}
+
 /* Fix for transparent background buttons in dark mode */
 .dark-mode .btn-outline,
 .dark-mode .glass .btn,

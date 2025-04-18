@@ -149,6 +149,16 @@
     .timeline-item:last-child::before {
       height: 8px;
     }
+    
+    /* Fix for excessive top gap */
+    main.flex-1 {
+      padding-top: calc(var(--navbar-height) + var(--navbar-top-spacing));
+    }
+    
+    /* Adjust hero section spacing */
+    section.py-6 {
+      padding-top: 1.5rem;
+    }
   </style>
 </head>
 <body>
@@ -516,7 +526,7 @@
         
         // Update step indicators
         document.querySelector(`.step[data-step="${step+1}"]`).classList.remove('active');
-        document.querySelector(`.step[data-step="${step}"]`).classList.remove('completed');
+        document.querySelector(`.step[data-step="${step+1}"]`).classList.remove('completed');
         document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
       };
 
