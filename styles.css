@@ -1933,6 +1933,8 @@ input:checked + .slider:before {
   padding: var(--spacing-xl) 0;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(to bottom, rgba(124, 58, 237, 0.04), rgba(124, 58, 237, 0.01));
+  border-radius: var(--border-radius-lg);
 }
 
 .pricing-faq::before {
@@ -1942,8 +1944,8 @@ input:checked + .slider:before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.05), transparent 60%),
-              radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.05), transparent 60%);
+  background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.07), transparent 60%),
+              radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.07), transparent 60%);
   z-index: -1;
 }
 
@@ -1952,7 +1954,7 @@ input:checked + .slider:before {
   font-weight: 700;
   text-align: center;
   margin-bottom: var(--spacing-xl);
-  background-image: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  background-image: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -1970,8 +1972,21 @@ input:checked + .slider:before {
   transform: translateX(-50%);
   width: 50px;
   height: 3px;
-  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  background: linear-gradient(to right, var(--color-primary), var(--color-primary-light));
   border-radius: var(--border-radius-full);
+}
+
+.faq-title::before {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: rgba(124, 58, 237, 0.08);
+  border-radius: 50%;
+  z-index: -1;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .accordion {
@@ -1980,46 +1995,92 @@ input:checked + .slider:before {
 }
 
 .accordion-item {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   border-radius: var(--border-radius-md);
   background-color: white;
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   border-left: 4px solid transparent;
   transition: all var(--transition-normal);
+  position: relative;
 }
 
 .accordion-item:hover {
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .accordion-item.active {
   border-left: 4px solid var(--color-primary);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.15);
+}
+
+.accordion-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--color-primary), var(--color-primary-light));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.accordion-item.active::before {
+  opacity: 1;
 }
 
 .accordion-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25rem;
+  padding: 1.5rem;
   cursor: pointer;
   transition: background-color var(--transition-fast);
+  position: relative;
+  z-index: 2;
 }
 
 .accordion-header:hover {
-  background-color: rgba(124, 58, 237, 0.05);
+  background-color: rgba(124, 58, 237, 0.03);
 }
 
 .accordion-header h4 {
   font-weight: 600;
   font-size: var(--font-size-lg);
-  transition: color var(--transition-fast);
+  transition: color var(--transition-normal), transform var(--transition-normal);
   padding-right: 2rem;
+  margin: 0;
+  position: relative;
+}
+
+.accordion-header h4::before {
+  content: '?';
+  position: absolute;
+  left: -26px;
+  font-size: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: rgba(124, 58, 237, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.accordion-item.active .accordion-header h4::before {
+  opacity: 1;
 }
 
 .accordion-item.active .accordion-header h4 {
   color: var(--color-primary);
+  transform: translateX(10px);
 }
 
 .accordion-icon {
@@ -2033,6 +2094,30 @@ input:checked + .slider:before {
   align-items: center;
   flex-shrink: 0;
   transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.accordion-icon i {
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+.accordion-icon::after {
+  content: '-';
+  position: absolute;
+  opacity: 0;
+  transform: scale(0);
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+.accordion-item.active .accordion-icon i {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.accordion-item.active .accordion-icon::after {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .accordion-item.active .accordion-icon {
@@ -2044,20 +2129,21 @@ input:checked + .slider:before {
 .accordion-content {
   max-height: 0;
   overflow: hidden;
-  padding: 0 1.25rem;
+  padding: 0 1.5rem;
   transition: max-height var(--transition-normal), padding var(--transition-normal);
   background-color: rgba(255, 255, 255, 0.5);
   position: relative;
+  z-index: 1;
 }
 
 .accordion-content::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 1.25rem;
-  right: 1.25rem;
+  left: 1.5rem;
+  right: 1.5rem;
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--color-border), transparent);
+  background: linear-gradient(to right, var(--color-primary-light), transparent 80%);
   opacity: 0;
   transition: opacity var(--transition-normal);
 }
@@ -2067,22 +2153,38 @@ input:checked + .slider:before {
 }
 
 .accordion-item.active .accordion-content {
-  padding: 0 1.25rem 1.25rem;
+  padding: 0 1.5rem 1.5rem 2rem;
 }
 
 .accordion-content p {
   color: var(--color-text-light);
   line-height: 1.7;
   font-size: var(--font-size-md);
-  padding-top: 1rem;
+  padding-top: 1.2rem;
   position: relative;
+  margin-bottom: 0;
 }
 
-@media (max-width: 768px) {
-  .accordion-header h4 {
-    font-size: var(--font-size-md);
-    padding-right: 1rem;
+.accordion-content p::first-letter {
+  font-size: 1.3em;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+/* FAQ Animation Effect */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
   }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.accordion-item.active .accordion-content p {
+  animation: fadeInRight 0.5s ease forwards;
 }
 
 /* Pricing FAQ */
@@ -2604,7 +2706,7 @@ input:checked + .slider:before {
   
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: var(--spacing-xl);
+    gap: var (--spacing-xl);
   }
   
   .footer-bottom {
