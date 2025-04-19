@@ -133,28 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Pricing Service Tabs
-  const pricingTabs = document.querySelectorAll('.pricing-tab');
-  if(pricingTabs.length > 0) {
-    pricingTabs.forEach(tab => {
-      tab.addEventListener('click', function() {
-        // Remove active class from all tabs
-        pricingTabs.forEach(t => t.classList.remove('active'));
-        
-        // Add active class to clicked tab
-        this.classList.add('active');
-        
-        // Get service filter value
-        const service = this.getAttribute('data-service');
-        
-        // Implementation for showing/hiding specific pricing cards based on service
-        // For demonstration, we're just highlighting the active tab
-        console.log(`Selected service: ${service}`);
-        // In a real implementation, you would filter pricing cards here
-      });
-    });
-  }
-  
   // Pricing FAQ Accordion
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   if(accordionHeaders.length > 0) {
