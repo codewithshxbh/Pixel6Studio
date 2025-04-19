@@ -3,370 +3,779 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light dark">
   <title>PixelSix Studio</title>
-  <script>
-    (function() {
-      const savedTheme = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
-      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.documentElement.classList.add('dark-mode');
-        document.body.classList.add('dark-mode');
-        document.documentElement.style.backgroundColor = 'hsl(220, 26%, 14%)';
-      } else {
-        document.documentElement.classList.remove('dark-mode');
-        document.body.classList.remove('dark-mode');
-        document.documentElement.style.backgroundColor = 'hsl(0, 0%, 100%)';
-      }
-    })();
-  </script>
-  <meta name="description" content="Web development and social media management by a creative team of friends">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    header {
-      opacity: 1;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-  </style>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div class="relative flex min-h-screen flex-col">
-    <header class="z-50 w-full glass border-b border-white/30">
-      <div class="container flex h-full items-center justify-between">
-        <div class="flex items-center gap-2">
-          <a href="index.html" class="flex items-center space-x-2">
-            <span class="text-xl font-bold gradient-text font-heading">PixelSix Studio</span>
-          </a>
-        </div>
-        <nav class="hidden md-flex gap-8">
-          <a href="index.html" class="text-sm font-medium transition-colors hover-text-primary relative group active">
-            Home
-            <span class="nav-indicator"></span>
-          </a>
-          <a href="about.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
-            About
-            <span class="nav-indicator"></span>
-          </a>
-          <a href="services.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
-            Services
-            <span class="nav-indicator"></span>
-          </a>
-          <a href="contact.html" class="text-sm font-medium transition-colors hover-text-primary relative group">
-            Contact
-            <span class="nav-indicator"></span>
-          </a>
-        </nav>
-        <div class="flex items-center gap-3">
-          <button id="darkModeToggle" class="theme-mode-button" aria-label="Toggle dark mode">
-            <i data-lucide="moon" class="h-5 w-5"></i>
-          </button>
-          <a href="quote.html" class="hidden md-block">
-            <button class="btn gradient-bg btn-hover-effect hover-opacity-90 transition-opacity rounded-full">
-              Get a Quote
-            </button>
-          </a>
-          <button id="menuToggle" class="md-hidden p-2 glass rounded-full" aria-label="Toggle menu">
-            <i data-lucide="menu" class="h-5 w-5"></i>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <div id="mobileMenu" class="mobile-menu glass">
-      <nav class="grid gap-6 text-lg font-medium pt-10">
-        <a href="index.html" class="hover-text-primary active">Home</a>
-        <a href="about.html" class="hover-text-primary">About</a>
-        <a href="services.html" class="hover-text-primary">Services</a>
-        <a href="contact.html" class="hover-text-primary">Contact</a>
-        <a href="quote.html">
-          <button class="w-full gradient-bg hover-opacity-90 transition-opacity rounded-full">
-            Get a Quote
-          </button>
-        </a>
-      </nav>
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="loader">
+      <svg width="80" height="80" viewBox="0 0 24 24">
+        <path class="logo-path" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+      </svg>
+      <div class="loading-text">PixelSix Studio</div>
     </div>
+  </div>
 
-    <main class="flex-1">
-      <section class="relative py-24 md-py-32 overflow-hidden">
-        <div class="absolute inset-0 pattern-bg z-0"></div>
-        <div class="container relative z-10">
-          <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto">
-            <h1 class="text-4xl font-bold tracking-tight sm-text-5xl md-text-6xl font-heading">
-              Creative Digital <span class="gradient-text">Solutions</span>
-            </h1>
-            <p class="text-xl text-foreground/80 mt-6 leading-relaxed">
-              We're a collective of friends turned digital crafters, specializing in web development and social media management.
-              Our passion for design and technology drives us to create stunning digital experiences that help businesses thrive online.
-            </p>
-            <div class="flex flex-col gap-4 sm-flex-row mt-8">
-              <a href="services.html">
-                <button class="btn btn-lg flex gap-2 gradient-bg btn-hover-effect hover-opacity-90 transition-opacity rounded-full px-6">
-                  Our Services <i data-lucide="arrow-right" class="h-4 w-4"></i>
-                </button>
-              </a>
-              <a href="quote.html">
-                <button class="btn btn-lg btn-outline glass hover-bg-white/30 rounded-full">
-                  Get a Quote
-                </button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+  <!-- Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
 
-      <section class="py-16 md-py-24 container relative">
-        <div class="absolute inset-0 pattern-bg z-0"></div>
-        <div class="glass-card p-10 relative overflow-hidden max-w-4xl mx-auto z-10">
-          <h2 class="text-3xl font-bold tracking-tight sm-text-4xl md-text-5xl font-heading">Our Story</h2>
-          <p class="text-foreground/80 text-lg leading-relaxed mt-6">
-            PixelSix Studio began when five friends with complementary skills in design, development, and digital marketing
-            decided to turn our passion projects into a collaborative business venture. What started as weekend projects
-            helping local businesses has evolved into a full-service digital agency.
-          </p>
-          <p class="text-foreground/80 text-lg leading-relaxed mt-4">
-            We believe in combining technical expertise with creative flair, delivering solutions that are not just visually
-            striking but also strategically sound. Our friendship gives us a unique collaborative dynamic that translates into
-            seamless project execution and genuine customer relationships.
-          </p>
-          <div class="flex flex-col gap-4 sm-flex-row mt-8">
-            <a href="about.html">
-              <button class="btn flex gap-2 gradient-bg btn-hover-effect hover-opacity-90 transition-opacity rounded-full px-6">
-                About Us <i data-lucide="arrow-right" class="h-4 w-4"></i>
-              </button>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <a href="#" title="Back to top">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+          <span>PixelSix Studio</span>
+        </a>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#work" class="nav-link">Our Work</a></li>
+          <li><a href="#process" class="nav-link">Process</a></li>
+          <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+          <li><a href="#pricing" class="nav-link">Pricing</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        <button class="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <div class="mobile-menu-container">
+      <ul class="mobile-nav">
+        <li><a href="#services" class="mobile-nav-link">Services</a></li>
+        <li><a href="#work" class="mobile-nav-link">Our Work</a></li>
+        <li><a href="#process" class="mobile-nav-link">Process</a></li>
+        <li><a href="#testimonials" class="mobile-nav-link">Testimonials</a></li>
+        <li><a href="#pricing" class="mobile-nav-link">Pricing</a></li>
+        <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+      </ul>
+      <div class="mobile-social">
+        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-shape-1"></div>
+      <div class="hero-shape-2"></div>
+      <div class="hero-shape-3"></div>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="badge">2+ Years of Digital Excellence</div>
+          <h1 class="hero-title">Transforming <span class="gradient-text">Ideas</span> into Digital <span class="gradient-text">Masterpieces</span></h1>
+          <p class="hero-description">We craft stunning websites and captivating social media content that elevate your brand and drive results.</p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary btn-lg">
+              Start Your Project
+              <i class="fas fa-chevron-right"></i>
             </a>
-            <a href="team.html">
-              <button class="btn btn-outline glass hover-bg-white/30 rounded-full">
-                Meet the Team
-              </button>
-            </a>
+            <a href="#work" class="btn btn-outline btn-lg">View Our Portfolio</a>
           </div>
-        </div>
-      </section>
-
-      <section class="py-16 relative">
-        <div class="absolute inset-0 pattern-bg z-0"></div>
-        <div class="container relative z-10">
-          <h2 class="text-3xl font-bold tracking-tight text-center mb-12 sm-text-4xl gradient-text font-heading">
-            Our Track Record
-          </h2>
-          <div class="impact-counter">
-            <div class="grid gap-6 sm-grid-cols-2 md-grid-cols-4">
-              <div class="glass-card text-center p-6">
-                <span class="counter" data-target="78">0</span>
-                <span class="text-xl font-bold gradient-text">+</span>
-                <h3 class="mt-2 text-lg font-medium">Websites Launched</h3>
-              </div>
-              <div class="glass-card text-center p-6">
-                <span class="counter" data-target="52">0</span>
-                <h3 class="mt-2 text-lg font-medium">Happy Clients</h3>
-              </div>
-              <div class="glass-card text-center p-6">
-                <span class="counter" data-target="120">0</span>
-                <span class="text-xl font-bold gradient-text">+</span>
-                <h3 class="mt-2 text-lg font-medium">Social Campaigns</h3>
-              </div>
-              <div class="glass-card text-center p-6">
-                <span class="counter" data-target="5">6</span>
-                <h3 class="mt-2 text-lg font-medium">Creative Friends</h3>
-              </div>
+          <div class="hero-clients">
+            <div class="client-avatars">
+              <div class="client-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg')"></div>
+              <div class="client-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg')"></div>
+              <div class="client-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/68.jpg')"></div>
+              <div class="client-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/75.jpg')"></div>
+            </div>
+            <div class="client-text">
+              <span>10+</span> satisfied clients worldwide
             </div>
           </div>
         </div>
-      </section>
-
-      <section class="py-16 md-py-24 container relative">
-        <div class="absolute inset-0 pattern-bg z-0"></div>
-        <div class="relative z-10">
-          <h2 class="text-3xl font-bold tracking-tight text-center mb-12 sm-text-4xl gradient-text font-heading">
-            Our Services
-          </h2>
-          <div class="grid gap-8 sm-grid-cols-2 lg-grid-cols-3">
-            <div class="glass-card p-8 relative overflow-hidden">
-              <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-white">
-                <i data-lucide="code" class="h-6 w-6 text-primary"></i>
-              </div>
-              <h3 class="mb-3 text-xl font-heading">Web Development</h3>
-              <p class="min-h-100 text-foreground/70 leading-relaxed">
-                We craft responsive, user-friendly websites that blend stunning design with seamless functionality. From simple landing pages to complex e-commerce solutions, we build web experiences that convert.
-              </p>
-              <p class="min-h-100 text-foreground/70 leading-relaxed mt-4">
-                Our development approach focuses on performance optimization, SEO-friendly code, and creating intuitive user interfaces that keep visitors engaged.
-              </p>
-              <a href="services.html#web" class="btn-link group mt-4">
-                Learn more <i data-lucide="arrow-right" class="ml-1 h-4 w-4 transition-transform group-hover-translate-x-1"></i>
-              </a>
-            </div>
-            <div class="glass-card p-8 relative overflow-hidden">
-              <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-white">
-                <i data-lucide="instagram" class="h-6 w-6 text-primary"></i>
-              </div>
-              <h3 class="mb-3 text-xl font-heading">Social Media Management</h3>
-              <p class="min-h-100 text-foreground/70 leading-relaxed">
-                We handle your brand's social presence across all major platforms, creating engaging content that resonates with your target audience and builds a loyal community around your brand.
-              </p>
-              <p class="min-h-100 text-foreground/70 leading-relaxed mt-4">
-                From content calendars and post creation to community engagement and performance analytics, we ensure your social media drives real business results.
-              </p>
-              <a href="services.html#social" class="btn-link group mt-4">
-                Learn more <i data-lucide="arrow-right" class="ml-1 h-4 w-4 transition-transform group-hover-translate-x-1"></i>
-              </a>
-            </div>
-            <div class="glass-card p-8 relative overflow-hidden">
-              <div class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-white">
-                <i data-lucide="layout" class="h-6 w-6 text-primary"></i>
-              </div>
-              <h3 class="mb-3 text-xl font-heading">Graphic Design</h3>
-              <p class="min-h-100 text-foreground/70 leading-relaxed">
-                Our creative team produces eye-catching visuals that communicate your brand's message effectively. From logos and brand identities to social media graphics and marketing materials.
-              </p>
-              <p class="min-h-100 text-foreground/70 leading-relaxed mt-4">
-                We bring ideas to life through thoughtful design that stands out from the competition while maintaining brand consistency across all touchpoints.
-              </p>
-              <a href="services.html#design" class="btn-link group mt-4">
-                Learn more <i data-lucide="arrow-right" class="ml-1 h-4 w-4 transition-transform group-hover-translate-x-1"></i>
-              </a>
-            </div>
+        <div class="hero-image">
+          <div class="showcase-image">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Website showcase">
           </div>
-        </div>
-      </section>
-
-      <section class="py-16 md-py-32 relative testimonials-section">
-        <div class="absolute inset-0 pattern-bg z-0"></div>
-        <div class="container relative z-10">
-          <h2 class="text-3xl font-bold tracking-tight text-center mb-16 sm-text-4xl primary-text font-heading">
-            Client Feedback
-          </h2>
-          
-          <div class="testimonials-container pt-20">
-            <div class="testimonial-card">
-              <div class="quote-icon">
-                <span class="quote-mark">❝</span>
-              </div>
-              <p class="testimonial-text">
-                PixelSix transformed our outdated website into a <span class="blue-text">sleek, modern platform</span> that's dramatically increased our conversion rates. Their friendly approach made the entire process enjoyable.
-              </p>
-              <div class="author-info">
-                <h4 class="author-name">Sarah Johnson</h4>
-                <p class="author-role">Marketing Director, Bloom Boutique</p>
-              </div>
+          <div class="floating-card floating-card-1">
+            <div class="floating-card-icon">
+              <i class="fas fa-star"></i>
             </div>
-            
-            <div class="testimonial-card">
-              <div class="quote-icon">
-                <span class="quote-mark">❝</span>
-              </div>
-              <p class="testimonial-text">
-                Their <span class="blue-text">social media management</span> completely revitalized our online presence. Our engagement is up 200% and we're reaching exactly the audience we need.
-              </p>
-              <div class="author-info">
-                <h4 class="author-name">Michael Chen</h4>
-                <p class="author-role">Owner, Fusion Eats</p>
+            <div class="floating-card-content">
+              <div class="floating-card-title">Client Satisfaction</div>
+              <div class="floating-card-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="py-16 md-py-24 relative overflow-hidden">
-        <div class="absolute inset-0 pattern-bg z-0"></div>
-        <div class="container relative z-10">
-          <div class="glass-card p-10 max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl md-text-4xl font-bold mb-6 font-heading">Ready to Elevate Your Brand?</h2>
-            <p class="text-xl mb-8">
-              Let's create something amazing together! Whether you need a website makeover or a social strategy that converts, we're here to help.
-            </p>
-            <div class="flex flex-col sm-flex-row gap-4 justify-center">
-              <a href="contact.html">
-                <button class="btn btn-lg gradient-bg hover-opacity-90 transition-opacity rounded-full px-8">
-                  Let's Talk
-                </button>
-              </a>
-              <a href="portfolio.html">
-                <button class="btn btn-lg btn-outline glass hover-bg-white/30 rounded-full px-8">
-                  See Our Work
-                </button>
-              </a>
+          <div class="floating-card floating-card-2">
+            <div class="floating-card-icon">
+              <i class="fab fa-instagram"></i>
+            </div>
+            <div class="floating-card-content">
+              <div class="floating-card-title">Social Media</div>
+              <div class="floating-card-subtitle">Engagement experts</div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="border-t border-white/30 bg-white/10">
-      <div class="container py-12 md-py-16">
-        <div class="grid gap-8 md-grid-cols-2 lg-grid-cols-4">
-          <div class="space-y-4">
-            <h3 class="text-lg font-bold gradient-text font-heading">PixelSix Studio</h3>
-            <p class="text-sm text-muted-foreground">
-              Crafting digital experiences with creativity and precision since 2023.
-            </p>
-            <div class="flex space-x-4">
-              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
-                <i data-lucide="facebook" class="h-5 w-5"></i>
-                <span class="sr-only">Facebook</span>
-              </a>
-              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
-                <i data-lucide="twitter" class="h-5 w-5"></i>
-                <span class="sr-only">Twitter</span>
-              </a>
-              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
-                <i data-lucide="instagram" class="h-5 w-5"></i>
-                <span class="sr-only">Instagram</span>
-              </a>
-              <a href="#" class="text-muted-foreground hover-text-primary transition-colors">
-                <i data-lucide="linkedin" class="h-5 w-5"></i>
-                <span class="sr-only">LinkedIn</span>
-              </a>
-            </div>
-          </div>
-          <div class="space-y-4">
-            <h3 class="text-lg font-bold font-heading">Quick Links</h3>
-            <nav class="grid gap-2 text-sm">
-              <a href="about.html" class="text-muted-foreground hover-text-primary">About Us</a>
-              <a href="services.html" class="text-muted-foreground hover-text-primary">Our Services</a>
-              <a href="team.html" class="text-muted-foreground hover-text-primary">Our Team</a>
-              <a href="blog.html" class="text-muted-foreground hover-text-primary">Blog</a>
-              <a href="contact.html" class="text-muted-foreground hover-text-primary">Contact</a>
-            </nav>
-          </div>
-          <div class="space-y-4">
-            <h3 class="text-lg font-bold font-heading">Services</h3>
-            <nav class="grid gap-2 text-sm">
-              <a href="services.html#web" class="text-muted-foreground hover-text-primary">Web Development</a>
-              <a href="services.html#social" class="text-muted-foreground hover-text-primary">Social Media</a>
-              <a href="services.html#design" class="text-muted-foreground hover-text-primary">Graphic Design</a>
-              <a href="services.html#seo" class="text-muted-foreground hover-text-primary">SEO</a>
-            </nav>
-          </div>
-          <div class="space-y-4">
-            <h3 class="text-lg font-bold font-heading">Contact Us</h3>
-            <div class="grid gap-2 text-sm">
-              <div class="flex items-start gap-2">
-                <i data-lucide="mail" class="h-4 w-4 mt-1 text-muted-foreground"></i>
-                <a href="mailto:hello@PixelSix.studio" class="text-muted-foreground hover-text-primary">
-                  hello@PixelSix.studio
-                </a>
-              </div>
-              <div class="flex items-start gap-2">
-                <i data-lucide="phone" class="h-4 w-4 mt-1 text-muted-foreground"></i>
-                <a href="tel:+1234567890" class="text-muted-foreground hover-text-primary">
-                  (123) 456-7890
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="mt-12 pt-8 border-t border-white/20 text-center text-sm text-muted-foreground">
-          <p>© <span id="currentYear"></span> PixelSix Studio. All rights reserved.</p>
         </div>
       </div>
-    </footer>
-  </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="mouse">
+        <div class="wheel"></div>
+      </div>
+      <div class="scroll-text">Scroll to explore</div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Premium Services</h2>
+        <p class="section-description">Comprehensive digital solutions tailored to elevate your brand presence and drive business growth.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-icon">
+            <i class="fas fa-desktop"></i>
+          </div>
+          <h3 class="service-title">Website Development</h3>
+          <p class="service-description">Custom-designed, responsive websites that captivate visitors and drive conversions.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-chevron-right"></i> Responsive Design</li>
+            <li><i class="fas fa-chevron-right"></i> E-commerce Solutions</li>
+            <li><i class="fas fa-chevron-right"></i> SEO Optimization</li>
+          </ul>
+          <div class="service-hover">
+            <a href="#contact" class="btn btn-sm">Get Started</a>
+          </div>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-icon">
+            <i class="fab fa-instagram"></i>
+          </div>
+          <h3 class="service-title">Social Media Content</h3>
+          <p class="service-description">Eye-catching posts and campaigns that boost engagement and grow your audience.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-chevron-right"></i> Content Creation</li>
+            <li><i class="fas fa-chevron-right"></i> Campaign Management</li>
+            <li><i class="fas fa-chevron-right"></i> Analytics & Reporting</li>
+          </ul>
+          <div class="service-hover">
+            <a href="#contact" class="btn btn-sm">Get Started</a>
+          </div>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3 class="service-title">Brand Identity</h3>
+          <p class="service-description">Cohesive visual identities that communicate your brand's unique value proposition.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-chevron-right"></i> Logo Design</li>
+            <li><i class="fas fa-chevron-right"></i> Brand Guidelines</li>
+            <li><i class="fas fa-chevron-right"></i> Visual Assets</li>
+          </ul>
+          <div class="service-hover">
+            <a href="#contact" class="btn btn-sm">Get Started</a>
+          </div>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="service-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3 class="service-title">Web Applications</h3>
+          <p class="service-description">Custom web applications that streamline operations and enhance user experience.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-chevron-right"></i> Custom Development</li>
+            <li><i class="fas fa-chevron-right"></i> User Authentication</li>
+            <li><i class="fas fa-chevron-right"></i> API Integration</li>
+          </ul>
+          <div class="service-hover">
+            <a href="#contact" class="btn btn-sm">Get Started</a>
+          </div>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="service-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3 class="service-title">Mobile Optimization</h3>
+          <p class="service-description">Mobile-first designs that ensure seamless experiences across all devices.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-chevron-right"></i> Responsive Frameworks</li>
+            <li><i class="fas fa-chevron-right"></i> Performance Optimization</li>
+            <li><i class="fas fa-chevron-right"></i> Touch-friendly Interfaces</li>
+          </ul>
+          <div class="service-hover">
+            <a href="#contact" class="btn btn-sm">Get Started</a>
+          </div>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+          <div class="service-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3 class="service-title">Digital Marketing</h3>
+          <p class="service-description">Strategic campaigns that increase visibility and drive qualified traffic.</p>
+          <ul class="service-features">
+            <li><i class="fas fa-chevron-right"></i> SEO & SEM</li>
+            <li><i class="fas fa-chevron-right"></i> Content Marketing</li>
+            <li><i class="fas fa-chevron-right"></i> Email Campaigns</li>
+          </ul>
+          <div class="service-hover">
+            <a href="#contact" class="btn btn-sm">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Section -->
+  <section id="work" class="work">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Featured Work</h2>
+        <p class="section-description">Browse our portfolio of successful projects that have helped businesses achieve their digital goals.</p>
+      </div>
+      <div class="work-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web Development</button>
+        <button class="filter-btn" data-filter="social">Social Media</button>
+        <button class="filter-btn" data-filter="brand">Branding</button>
+        <button class="filter-btn" data-filter="app">Applications</button>
+      </div>
+      <div class="work-grid">
+        <div class="work-item" data-category="web">
+          <div class="work-image">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="E-commerce Redesign">
+            <div class="work-overlay">
+              <div class="work-category">Web Development</div>
+              <h3 class="work-title">E-commerce Redesign</h3>
+              <a href="#" class="btn btn-sm btn-light">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="work-item" data-category="social">
+          <div class="work-image">
+            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Social Media Campaign">
+            <div class="work-overlay">
+              <div class="work-category">Content Creation</div>
+              <h3 class="work-title">Social Media Campaign</h3>
+              <a href="#" class="btn btn-sm btn-light">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="work-item" data-category="brand">
+          <div class="work-image">
+            <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Brand Identity">
+            <div class="work-overlay">
+              <div class="work-category">Design</div>
+              <h3 class="work-title">Brand Identity</h3>
+              <a href="#" class="btn btn-sm btn-light">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="work-item" data-category="app">
+          <div class="work-image">
+            <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Mobile App UI">
+            <div class="work-overlay">
+              <div class="work-category">UI/UX Design</div>
+              <h3 class="work-title">Mobile App UI</h3>
+              <a href="#" class="btn btn-sm btn-light">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="work-item" data-category="web">
+          <div class="work-image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Corporate Website">
+            <div class="work-overlay">
+              <div class="work-category">Web Development</div>
+              <h3 class="work-title">Corporate Website</h3>
+              <a href="#" class="btn btn-sm btn-light">View Project</a>
+            </div>
+          </div>
+        </div>
+        <div class="work-item" data-category="social">
+          <div class="work-image">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Product Launch">
+            <div class="work-overlay">
+              <div class="work-category">Marketing</div>
+              <h3 class="work-title">Product Launch</h3>
+              <a href="#" class="btn btn-sm btn-light">View Project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="work-more">
+        <a href="#" class="btn btn-outline">View All Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section id="process" class="process">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Proven Process</h2>
+        <p class="section-description">A streamlined approach refined over 2 years to deliver exceptional results for every client.</p>
+      </div>
+      <div class="process-timeline">
+        <div class="timeline-item" data-aos="fade-right">
+          <div class="timeline-number">01</div>
+          <div class="timeline-content">
+            <div class="timeline-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3 class="timeline-title">Discovery</h3>
+            <p class="timeline-description">We begin by understanding your business goals, target audience, and project requirements.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-aos="fade-left">
+          <div class="timeline-number">02</div>
+          <div class="timeline-content">
+            <div class="timeline-icon">
+              <i class="fas fa-sitemap"></i>
+            </div>
+            <h3 class="timeline-title">Strategy</h3>
+            <p class="timeline-description">Our team develops a comprehensive plan tailored to your specific needs and objectives.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-aos="fade-right">
+          <div class="timeline-number">03</div>
+          <div class="timeline-content">
+            <div class="timeline-icon">
+              <i class="fas fa-palette"></i>
+            </div>
+            <h3 class="timeline-title">Design</h3>
+            <p class="timeline-description">We create visually stunning concepts that align with your brand identity and user expectations.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-aos="fade-left">
+          <div class="timeline-number">04</div>
+          <div class="timeline-content">
+            <div class="timeline-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3 class="timeline-title">Development</h3>
+            <p class="timeline-description">Our developers bring the designs to life with clean, efficient, and scalable code.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-aos="fade-right">
+          <div class="timeline-number">05</div>
+          <div class="timeline-content">
+            <div class="timeline-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <h3 class="timeline-title">Launch & Support</h3>
+            <p class="timeline-description">We ensure a smooth deployment and provide ongoing support to keep everything running perfectly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="process-bg">
+      <div class="process-shape-1"></div>
+      <div class="process-shape-2"></div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-number" data-count="10">0</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-number" data-count="15">0</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+          <div class="stat-number" data-count="2">0</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+          <div class="stat-number" data-count="25">0</div>
+          <div class="stat-label">Orders</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <p class="section-description">Don't just take our word for it. Here's what our clients have to say about working with us.</p>
+      </div>
+      <div class="testimonial-slider">
+        <div class="testimonial-track">
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-quote">
+                <i class="fas fa-quote-left"></i>
+              </div>
+              <p class="testimonial-text">PixelSixStudio transformed our online presence completely. Their attention to detail and creative approach exceeded our expectations.</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://xsgames.co/randomusers/assets/avatars/male/71.jpg')"></div>
+                <div class="testimonial-info">
+                  <h4 class="testimonial-name">Satyam Mishra</h4>
+                  <div class="testimonial-position">TechStart Inc.</div>
+                </div>
+              </div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-quote">
+                <i class="fas fa-quote-left"></i>
+              </div>
+              <p class="testimonial-text">The social media campaign they created doubled our engagement and significantly increased our conversion rates. Truly impressive work!</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://xsgames.co/randomusers/assets/avatars/female/35.jpg')"></div>
+                <div class="testimonial-info">
+                  <h4 class="testimonial-name">Riddhi Singh</h4>
+                  <div class="testimonial-position">Global Retail</div>
+                </div>
+              </div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-quote">
+                <i class="fas fa-quote-left"></i>
+              </div>
+              <p class="testimonial-text">Working with PixelSixStudio was seamless from start to finish. They understood our vision and brought it to life beautifully.</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://xsgames.co/randomusers/assets/avatars/male/75.jpg')"></div>
+                <div class="testimonial-info">
+                  <h4 class="testimonial-name">Pankaj Ahuja</h4>
+                  <div class="testimonial-position">Wellness Collective</div>
+                </div>
+              </div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-quote">
+                <i class="fas fa-quote-left"></i>
+              </div>
+              <p class="testimonial-text">Their expertise in both web development and social media strategy gave us a cohesive digital presence that has transformed our business.</p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar" style="background-image: url('https://xsgames.co/randomusers/assets/avatars/female/21.jpg')"></div>
+                <div class="testimonial-info">
+                  <h4 class="testimonial-name">Kirti Upadhyay</h4>
+                  <div class="testimonial-position">Innovate Solutions</div>
+                </div>
+              </div>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-controls">
+          <button class="testimonial-prev"><i class="fas fa-chevron-left"></i></button>
+          <div class="testimonial-dots"></div>
+          <button class="testimonial-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Transparent Pricing</h2>
+        <p class="section-description">Flexible packages designed to meet your specific needs and budget.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="pricing-header">
+            <h3 class="pricing-title">Starter</h3>
+            <div class="pricing-price">
+              <span class="currency">₹</span>
+              <span class="amount">5000</span>
+            </div>
+            <p class="pricing-description">Perfect for small businesses just getting started.</p>
+          </div>
+          <div class="pricing-features">
+            <ul>
+              <li><i class="fas fa-check"></i> Responsive Website (5 pages)</li>
+              <li><i class="fas fa-check"></i> Basic SEO Setup</li>
+              <li><i class="fas fa-check"></i> Social Media Profile Setup</li>
+              <li><i class="fas fa-check"></i> 1 Month of Support</li>
+            </ul>
+          </div>
+          <div class="pricing-action">
+            <a href="#contact" class="btn btn-outline">Get Started</a>
+          </div>
+        </div>
+        <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="200">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-header">
+            <h3 class="pricing-title">Professional</h3>
+            <div class="pricing-price">
+              <span class="currency">₹</span>
+              <span class="amount">25000</span>
+            </div>
+            <p class="pricing-description">Comprehensive solution for growing businesses.</p>
+          </div>
+          <div class="pricing-features">
+            <ul>
+              <li><i class="fas fa-check"></i> Custom Website (up to 10 pages)</li>
+              <li><i class="fas fa-check"></i> Advanced SEO Implementation</li>
+              <li><i class="fas fa-check"></i> Social Media Strategy</li>
+              <li><i class="fas fa-check"></i> Content Creation (5 posts)</li>
+              <li><i class="fas fa-check"></i> 3 Months of Support</li>
+              <li><i class="fas fa-check"></i> Analytics Dashboard</li>
+            </ul>
+          </div>
+          <div class="pricing-action">
+            <a href="#contact" class="btn btn-primary">Get Started</a>
+          </div>
+        </div>
+        <div class="pricing-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="pricing-header">
+            <h3 class="pricing-title">Enterprise</h3>
+            <div class="pricing-price">
+              <span class="amount">Custom</span>
+            </div>
+            <p class="pricing-description">Tailored solutions for established organizations.</p>
+          </div>
+          <div class="pricing-features">
+            <ul>
+              <li><i class="fas fa-check"></i> Full-scale Web Application</li>
+              <li><i class="fas fa-check"></i> Comprehensive Digital Strategy</li>
+              <li><i class="fas fa-check"></i> Ongoing Content Creation</li>
+              <li><i class="fas fa-check"></i> Dedicated Account Manager</li>
+              <li><i class="fas fa-check"></i> Priority Support</li>
+              <li><i class="fas fa-check"></i> Quarterly Strategy Reviews</li>
+            </ul>
+          </div>
+          <div class="pricing-action">
+            <a href="#contact" class="btn btn-outline">Get Started</a>
+          </div>
+        </div>
+      </div>
+      <div class="pricing-note">
+        <p>Need a custom solution? <a href="#contact">Contact us</a> for a personalized quote.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Transform Your Digital Presence?</h2>
+        <p class="cta-description">Join hundreds of satisfied clients who have elevated their brands with our expert services.</p>
+        <div class="cta-buttons">
+          <a href="#contact" class="btn btn-primary btn-lg">Start Your Project</a>
+          <a href="#work" class="btn btn-light btn-lg">Explore Our Work</a>
+        </div>
+      </div>
+    </div>
+    <div class="cta-bg">
+      <div class="cta-shape"></div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2 class="contact-title">Let's Create Something Amazing Together</h2>
+          <p class="contact-description">Ready to elevate your digital presence? Fill out the form and our team will get back to you within 24 hours.</p>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="contact-method-content">
+                <h3>Email Us</h3>
+                <p>chakshubh7@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div class="contact-method-content">
+                <h3>Call Us</h3>
+                <p>+91 63931 72708</p>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="contact-method-content">
+                <h3>Visit Us</h3>
+                <p>Greater Noida, Uttar Pradesh, India</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-social">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="contact-form-container">
+          <form class="contact-form" id="contactForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your email" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Project inquiry" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+            </div>
+            <div class="form-group">
+              <label>Services Needed</label>
+              <div class="checkbox-grid">
+                <div class="checkbox-item">
+                  <input type="checkbox" id="service-1" name="services[]" value="Website Development">
+                  <label for="service-1">Website Development</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="service-2" name="services[]" value="Social Media Content">
+                  <label for="service-2">Social Media Content</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="service-3" name="services[]" value="Brand Identity">
+                  <label for="service-3">Brand Identity</label>
+                </div>
+                <div class="checkbox-item">
+                  <input type="checkbox" id="service-4" name="services[]" value="Digital Marketing">
+                  <label for="service-4">Digital Marketing</label>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-info">
+          <div class="footer-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span>PixelSixStudio</span>
+          </div>
+          <p class="footer-description">Transforming ideas into digital masterpieces since 1993. Your vision, our expertise.</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h3 class="footer-title">Services</h3>
+          <ul>
+            <li><a href="#services">Website Development</a></li>
+            <li><a href="#services">Social Media Content</a></li>
+            <li><a href="#services">Brand Identity</a></li>
+            <li><a href="#services">Web Applications</a></li>
+            <li><a href="#services">Mobile Optimization</a></li>
+            <li><a href="#services">Digital Marketing</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3 class="footer-title">Company</h3>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#work">Our Work</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3 class="footer-title">Legal</h3>
+          <ul>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+            <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">© <span id="currentYear"></span> PixelSixStudio. All rights reserved.</p>
+        <p class="footer-credit">Designed with ♥ by PixelSixStudio</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top">
+    <i class="fas fa-chevron-up"></i>
+  </a>
 
   <script src="script.js"></script>
 </body>
