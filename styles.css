@@ -1171,6 +1171,8 @@ body:hover .cursor, body:hover .cursor-follower {
 .testimonial-slide {
   min-width: 100%;
   padding: 0 var(--spacing-md);
+  height: 100%;
+  display: flex;
 }
 
 .testimonial-card {
@@ -1179,6 +1181,10 @@ body:hover .cursor, body:hover .cursor-follower {
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-md);
   position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px; /* Add minimum height for consistency */
 }
 
 .testimonial-quote {
@@ -1201,6 +1207,12 @@ body:hover .cursor, body:hover .cursor-follower {
   font-style: italic;
   color: var(--color-text-light);
   margin-bottom: var(--spacing-xl);
+  flex: 1;
+  min-height: 80px; /* Ensure text has a minimum height */
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Limit to approximately 4 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .testimonial-author {
@@ -1208,6 +1220,7 @@ body:hover .cursor, body:hover .cursor-follower {
   align-items: center;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-md);
+  margin-top: auto;
 }
 
 .testimonial-avatar {
@@ -1217,6 +1230,7 @@ body:hover .cursor, body:hover .cursor-follower {
   background-size: cover;
   background-position: center;
   border: 3px solid var(--color-primary-light);
+  flex-shrink: 0;
 }
 
 .testimonial-name {
@@ -2098,6 +2112,14 @@ body:hover .cursor, body:hover .cursor-follower {
   .checkbox-grid {
     grid-template-columns: 1fr;
   }
+
+  .testimonial-card {
+    min-height: 350px; /* Slightly increase minimum height on tablets */
+  }
+  
+  .testimonial-text {
+    min-height: 100px; /* Increase text area minimum height on tablets */
+  }
 }
 
 @media (max-width: 576px) {
@@ -2134,6 +2156,15 @@ body:hover .cursor, body:hover .cursor-follower {
     right: 20px;
     width: 40px;
     height: 40px;
+  }
+
+  .testimonial-card {
+    min-height: 380px; /* Further increase on mobile */
+  }
+  
+  .testimonial-text {
+    min-height: 120px; /* Further increase text area on mobile */
+    -webkit-line-clamp: 5; /* Allow more lines on mobile */
   }
 }
 
