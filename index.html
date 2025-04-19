@@ -268,7 +268,7 @@
             <img src="images/website/1.png" alt="Website Project 1">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Modern Business Website</h3>
+              <h3 class="work-title">Tech Agency</h3>
             </div>
           </div>
         </div>
@@ -277,7 +277,7 @@
             <img src="images/website/2.jpeg" alt="Website Project 2">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Fashion E-commerce Store</h3>
+              <h3 class="work-title">Startup Landing Page</h3>
             </div>
           </div>
         </div>
@@ -286,7 +286,7 @@
             <img src="images/website/3.png" alt="Website Project 3">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Creative Portfolio Showcase</h3>
+              <h3 class="work-title">UI/UX Business Company</h3>
             </div>
           </div>
         </div>
@@ -295,7 +295,7 @@
             <img src="images/website/4.png" alt="Website Project 4">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Analytics Dashboard</h3>
+              <h3 class="work-title">Furniture Website</h3>
             </div>
           </div>
         </div>
@@ -304,7 +304,7 @@
             <img src="images/website/5.png" alt="Website Project 5">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Mobile App Landing Page</h3>
+              <h3 class="work-title">Sports E-commerce</h3>
             </div>
           </div>
         </div>
@@ -313,7 +313,7 @@
             <img src="images/website/6.png" alt="Website Project 6">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Product Showcase</h3>
+              <h3 class="work-title">Modern Dashboard</h3>
             </div>
           </div>
         </div>
@@ -322,7 +322,7 @@
             <img src="images/social/Project_1@3x.png" alt="Social Media Project 1">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
-              <h3 class="work-title">Brand Identity Campaign</h3>
+              <h3 class="work-title">Welcome Post</h3>
             </div>
           </div>
         </div>
@@ -331,7 +331,7 @@
             <img src="images/social/Project_2@3x.png" alt="Social Media Project 2">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
-              <h3 class="work-title">Product Showcase Series</h3>
+              <h3 class="work-title">Introduction Post</h3>
             </div>
           </div>
         </div>
@@ -340,7 +340,7 @@
             <img src="images/social/project_3@3x.png" alt="Social Media Project 3">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
-              <h3 class="work-title">Customer Testimonials</h3>
+              <h3 class="work-title">Advertisement Post</h3>
             </div>
           </div>
         </div>
@@ -349,7 +349,7 @@
             <img src="images/social/project_4@3x.png" alt="Social Media Project 4">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
-              <h3 class="work-title">Holiday Special Promotion</h3>
+              <h3 class="work-title">Congratulations Post</h3>
             </div>
           </div>
         </div>
@@ -358,7 +358,7 @@
             <img src="images/social/project_5@3x.png" alt="Social Media Project 5">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
-              <h3 class="work-title">Event Highlights</h3>
+              <h3 class="work-title">Event Advertisement Post</h3>
             </div>
           </div>
         </div>
@@ -367,7 +367,7 @@
             <img src="images/social/Project_6@3x.png" alt="Social Media Project 6">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
-              <h3 class="work-title">Lifestyle Content Series</h3>
+              <h3 class="work-title">Congratulations Post</h3>
             </div>
           </div>
         </div>
@@ -735,13 +735,38 @@
         <h2 class="section-title">Transparent Pricing</h2>
         <p class="section-description">Flexible packages designed to meet your specific needs and budget.</p>
       </div>
+
+      <!-- Pricing Toggle -->
+      <div class="pricing-toggle">
+        <span class="pricing-toggle-text">Monthly</span>
+        <label class="switch">
+          <input type="checkbox" id="pricingToggle">
+          <span class="slider round"></span>
+        </label>
+        <span class="pricing-toggle-text">Annual <span class="pricing-discount">Save 20%</span></span>
+      </div>
+
+      <!-- Pricing Tabs -->
+      <div class="pricing-tabs">
+        <button class="pricing-tab active" data-service="all">All Services</button>
+        <button class="pricing-tab" data-service="web">Web Development</button>
+        <button class="pricing-tab" data-service="social">Social Media</button>
+        <button class="pricing-tab" data-service="branding">Brand Identity</button>
+      </div>
+      
       <div class="pricing-grid">
         <div class="pricing-card" data-aos="fade-up" data-aos-delay="100">
           <div class="pricing-header">
             <h3 class="pricing-title">Starter</h3>
-            <div class="pricing-price">
+            <div class="pricing-price monthly">
               <span class="currency">₹</span>
               <span class="amount">5000</span>
+              <span class="period">/mo</span>
+            </div>
+            <div class="pricing-price annual" style="display: none;">
+              <span class="currency">₹</span>
+              <span class="amount">48000</span>
+              <span class="period">/yr</span>
             </div>
             <p class="pricing-description">Perfect for small businesses just getting started.</p>
           </div>
@@ -751,6 +776,8 @@
               <li><i class="fas fa-check"></i> Basic SEO Setup</li>
               <li><i class="fas fa-check"></i> Social Media Profile Setup</li>
               <li><i class="fas fa-check"></i> 1 Month of Support</li>
+              <li><i class="fas fa-check"></i> Content Management System</li>
+              <li class="feature-disabled"><i class="fas fa-times"></i> E-commerce Functionality</li>
             </ul>
           </div>
           <div class="pricing-action">
@@ -761,9 +788,15 @@
           <div class="pricing-badge">Most Popular</div>
           <div class="pricing-header">
             <h3 class="pricing-title">Professional</h3>
-            <div class="pricing-price">
+            <div class="pricing-price monthly">
               <span class="currency">₹</span>
               <span class="amount">25000</span>
+              <span class="period">/mo</span>
+            </div>
+            <div class="pricing-price annual" style="display: none;">
+              <span class="currency">₹</span>
+              <span class="amount">240000</span>
+              <span class="period">/yr</span>
             </div>
             <p class="pricing-description">Comprehensive solution for growing businesses.</p>
           </div>
@@ -775,6 +808,7 @@
               <li><i class="fas fa-check"></i> Content Creation (5 posts)</li>
               <li><i class="fas fa-check"></i> 3 Months of Support</li>
               <li><i class="fas fa-check"></i> Analytics Dashboard</li>
+              <li><i class="fas fa-check"></i> Basic E-commerce (up to 25 products)</li>
             </ul>
           </div>
           <div class="pricing-action">
@@ -797,6 +831,8 @@
               <li><i class="fas fa-check"></i> Dedicated Account Manager</li>
               <li><i class="fas fa-check"></i> Priority Support</li>
               <li><i class="fas fa-check"></i> Quarterly Strategy Reviews</li>
+              <li><i class="fas fa-check"></i> Advanced E-commerce Solutions</li>
+              <li><i class="fas fa-check"></i> Custom Integrations</li>
             </ul>
           </div>
           <div class="pricing-action">
@@ -804,6 +840,117 @@
           </div>
         </div>
       </div>
+
+      <!-- Package Comparison Table -->
+      <div class="pricing-comparison">
+        <h3 class="comparison-title">Package Comparison</h3>
+        <div class="comparison-table-wrapper">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Starter</th>
+                <th>Professional</th>
+                <th>Enterprise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Web Pages</td>
+                <td>Up to 5</td>
+                <td>Up to 10</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <td>SEO Optimization</td>
+                <td>Basic</td>
+                <td>Advanced</td>
+                <td>Premium</td>
+              </tr>
+              <tr>
+                <td>Responsive Design</td>
+                <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-check"></i></td>
+              </tr>
+              <tr>
+                <td>Social Media Setup</td>
+                <td>Profile Setup Only</td>
+                <td>Strategy + 5 Posts</td>
+                <td>Full Management</td>
+              </tr>
+              <tr>
+                <td>Support Period</td>
+                <td>1 Month</td>
+                <td>3 Months</td>
+                <td>12 Months</td>
+              </tr>
+              <tr>
+                <td>E-commerce</td>
+                <td><i class="fas fa-times"></i></td>
+                <td>Basic (25 products)</td>
+                <td>Advanced (Unlimited)</td>
+              </tr>
+              <tr>
+                <td>Revisions</td>
+                <td>2</td>
+                <td>5</td>
+                <td>Unlimited</td>
+              </tr>
+              <tr>
+                <td>Dedicated Manager</td>
+                <td><i class="fas fa-times"></i></td>
+                <td><i class="fas fa-times"></i></td>
+                <td><i class="fas fa-check"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pricing FAQ -->
+      <div class="pricing-faq">
+        <h3 class="faq-title">Frequently Asked Questions</h3>
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h4>What's included in the website packages?</h4>
+              <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="accordion-content">
+              <p>All our website packages include responsive design, basic SEO optimization, contact forms, Google Analytics integration, and cross-browser compatibility. The Professional and Enterprise packages include additional features like e-commerce functionality, more pages, and extended support.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h4>Do you offer custom solutions beyond these packages?</h4>
+              <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="accordion-content">
+              <p>Absolutely! Our Enterprise package is fully customizable to meet your specific business requirements. We'll work closely with you to understand your needs and create a tailored solution that aligns with your goals and budget.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h4>What are the payment terms?</h4>
+              <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="accordion-content">
+              <p>We typically require a 50% upfront payment to begin work, with the remaining balance due upon completion. For our Enterprise clients, we offer flexible payment schedules. All payments can be made via bank transfer, credit card, or digital payment methods.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <h4>How long does it take to complete a project?</h4>
+              <span class="accordion-icon"><i class="fas fa-plus"></i></span>
+            </div>
+            <div class="accordion-content">
+              <p>The timeline varies depending on the package and project complexity. A Starter package website typically takes 2-3 weeks, Professional packages 4-6 weeks, and Enterprise solutions 8-12 weeks or more. We'll provide a detailed timeline during our initial consultation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="pricing-note">
         <p>Need a custom solution? <a href="#contact">Contact us</a> for a personalized quote.</p>
       </div>
@@ -929,7 +1076,7 @@
             </svg>
             <span>PixelSixStudio</span>
           </div>
-          <p class="footer-description">Transforming ideas into digital masterpieces since 1993. Your vision, our expertise.</p>
+          <p class="footer-description">Transforming ideas into digital masterpieces since 2025. Your vision, our expertise.</p>
           <div class="footer-social">
             <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>

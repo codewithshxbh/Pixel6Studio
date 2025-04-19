@@ -114,6 +114,75 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // Pricing Toggle (Monthly/Annual)
+  const pricingToggle = document.getElementById('pricingToggle');
+  if(pricingToggle) {
+    pricingToggle.addEventListener('change', function() {
+      const monthlyPrices = document.querySelectorAll('.pricing-price.monthly');
+      const annualPrices = document.querySelectorAll('.pricing-price.annual');
+      
+      if(this.checked) {
+        // Show annual prices
+        monthlyPrices.forEach(price => price.style.display = 'none');
+        annualPrices.forEach(price => price.style.display = 'block');
+      } else {
+        // Show monthly prices
+        annualPrices.forEach(price => price.style.display = 'none');
+        monthlyPrices.forEach(price => price.style.display = 'block');
+      }
+    });
+  }
+  
+  // Pricing Service Tabs
+  const pricingTabs = document.querySelectorAll('.pricing-tab');
+  if(pricingTabs.length > 0) {
+    pricingTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        // Remove active class from all tabs
+        pricingTabs.forEach(t => t.classList.remove('active'));
+        
+        // Add active class to clicked tab
+        this.classList.add('active');
+        
+        // Get service filter value
+        const service = this.getAttribute('data-service');
+        
+        // Implementation for showing/hiding specific pricing cards based on service
+        // For demonstration, we're just highlighting the active tab
+        console.log(`Selected service: ${service}`);
+        // In a real implementation, you would filter pricing cards here
+      });
+    });
+  }
+  
+  // Pricing FAQ Accordion
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  if(accordionHeaders.length > 0) {
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', function() {
+        const accordionItem = this.parentElement;
+        const accordionContent = this.nextElementSibling;
+        const accordionIcon = this.querySelector('.accordion-icon i');
+        
+        // Toggle active class
+        accordionItem.classList.toggle('active');
+        
+        // Toggle icon
+        if(accordionIcon) {
+          if(accordionItem.classList.contains('active')) {
+            accordionIcon.classList.remove('fa-plus');
+            accordionIcon.classList.add('fa-minus');
+            accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+          } else {
+            accordionIcon.classList.remove('fa-minus');
+            accordionIcon.classList.add('fa-plus');
+            accordionContent.style.maxHeight = '0';
+          }
+        }
+      });
+    });
+  }
+
   // Testimonial slider
   const testimonialTrack = document.querySelector('.testimonial-track');
   const testimonialSlides = document.querySelectorAll('.testimonial-slide');
@@ -382,4 +451,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   `;
   document.head.appendChild(style);
+
+  // Initialize first FAQ item as open
+  if(document.querySelector('.accordion-item')) {
+    const firstAccordionItem = document.querySelector('.accordion-item');
+    const firstAccordionContent = firstAccordionItem.querySelector('.accordion-content');
+    const firstAccordionIcon = firstAccordionItem.querySelector('.accordion-icon i');
+    
+    firstAccordionItem.classList.add('active');
+    firstAccordionIcon.classList.remove('fa-plus');
+    firstAccordionIcon.classList.add('fa-minus');
+    firstAccordionContent.style.maxHeight = firstAccordionContent.scrollHeight + 'px';
+  }
+  
+  // Initialize pricing comparison table highlighting
+  const comparisonTable = document.querySelector('.comparison-table');
+  if(comparisonTable) {
+    const tableRows = comparisonTable.querySelectorAll('tbody tr');
+    
+    tableRows.forEach(row => {
+      row.addEventListener('mouseenter', function() {
+        this.classList.add('highlight');
+      });
+      
+      row.addEventListener('mouseleave', function() {
+        this.classList.remove('highlight');
+      });
+    });
+  }
 });
