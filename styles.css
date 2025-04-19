@@ -281,6 +281,13 @@ body:hover .cursor, body:hover .cursor-follower {
   border-color: var(--color-primary-light);
 }
 
+/* Disable custom cursor on mobile devices */
+@media (max-width: 768px), (pointer: coarse) {
+  .cursor, .cursor-follower {
+    display: none;
+  }
+}
+
 /* ===== BUTTONS ===== */
 .btn {
   display: inline-flex;
@@ -400,8 +407,15 @@ body:hover .cursor, body:hover .cursor-follower {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  width: 20px; /* Added explicit width */
-  height: 20px; /* Added explicit height */
+  width: 24px; 
+  height: 24px; 
+  position: relative;
+  top: 5px; /* Adjust vertical alignment */
+}
+
+.logo span {
+  position: relative;
+  top: 1px; /* Fine-tune text alignment */
 }
 
 .nav ul {
