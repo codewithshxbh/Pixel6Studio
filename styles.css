@@ -111,6 +111,28 @@ button {
   cursor: pointer;
 }
 
+/* Transparent scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* Adjust the width of the scrollbar */
+  height: 8px; /* Adjust the height for horizontal scrollbars */
+  background: transparent; /* Transparent background */
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent; /* Transparent thumb by default */
+  border-radius: 4px; /* Rounded corners for the thumb */
+  transition: background 0.3s ease; /* Smooth transition for hover effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.98); /* Visible thumb on hover with semi-transparent color */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent track */
+}
+
+
 /* ===== UTILITIES ===== */
 .container {
   width: 100%;
