@@ -1,53 +1,60 @@
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-  // Preloader
+  // Preloader - reduced from 2000ms to 1000ms
   setTimeout(function() {
     const preloader = document.querySelector('.preloader');
     preloader.classList.add('hide');
     setTimeout(() => {
       preloader.style.display = 'none';
     }, 300);
-  }, 2000);
+  }, 1000);
 
   // Initialize EmailJS
-  emailjs.init("lh3Xhad9UeKgpBozB"); // Replace with your EmailJS user ID
+  if (window.emailjs) {
+    emailjs.init("lh3Xhad9UeKgpBozB");
+  }
 
-  // Custom cursor
-  const cursor = document.querySelector('.cursor');
-  const cursorFollower = document.querySelector('.cursor-follower');
-  
-  document.addEventListener('mousemove', function(e) {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+  // Custom cursor - only initialize on non-touch devices
+  if (window.matchMedia('(pointer: fine)').matches) {
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
     
-    setTimeout(function() {
-      cursorFollower.style.left = e.clientX + 'px';
-      cursorFollower.style.top = e.clientY + 'px';
-    }, 100);
-  });
-  
-  document.addEventListener('mousedown', function() {
-    cursor.classList.add('active');
-    cursorFollower.classList.add('active');
-  });
-  
-  document.addEventListener('mouseup', function() {
-    cursor.classList.remove('active');
-    cursorFollower.classList.remove('active');
-  });
-  
-  // Add active class to links and buttons for cursor effect
-  const links = document.querySelectorAll('a, button');
-  links.forEach(link => {
-    link.addEventListener('mouseenter', () => {
+    // Use passive event listeners for better scroll performance
+    document.addEventListener('mousemove', function(e) {
+      requestAnimationFrame(function() {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        setTimeout(function() {
+          cursorFollower.style.left = e.clientX + 'px';
+          cursorFollower.style.top = e.clientY + 'px';
+        }, 100);
+      });
+    }, { passive: true });
+    
+    document.addEventListener('mousedown', function() {
       cursor.classList.add('active');
       cursorFollower.classList.add('active');
-    });
-    link.addEventListener('mouseleave', () => {
+    }, { passive: true });
+    
+    document.addEventListener('mouseup', function() {
       cursor.classList.remove('active');
       cursorFollower.classList.remove('active');
+    }, { passive: true });
+    
+    // Add active class to links and buttons for cursor effect
+    const links = document.querySelectorAll('a, button');
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        cursor.classList.add('active');
+        cursorFollower.classList.add('active');
+      }, { passive: true });
+      link.addEventListener('mouseleave', () => {
+        cursor.classList.remove('active');
+        cursorFollower.classList.remove('active');
+      }, { passive: true });
     });
-  });
+  }
 
   // Mobile menu toggle
   const menuToggle = document.querySelector('.menu-toggle');
@@ -69,16 +76,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Header scroll effect
+  // Header scroll effect with throttling for better performance
   const header = document.querySelector('.header');
+  let lastScrollTop = 0;
+  let ticking = false;
   
   window.addEventListener('scroll', function() {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
+    const scrollTop = window.scrollY;
+    
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        if (scrollTop > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        lastScrollTop = scrollTop;
+        ticking = false;
+      });
+      
+      ticking = true;
     }
-  });
+  }, { passive: true });
 
   // Portfolio filter
   const filterButtons = document.querySelectorAll('.filter-btn');
@@ -102,108 +121,51 @@ document.addEventListener('DOMContentLoaded', function() {
           setTimeout(() => {
             item.style.opacity = '1';
             item.style.transform = 'scale(1)';
-          }, 100);
+          }, 50); // Reduced from 100ms to 50ms for faster response
         } else {
           item.style.opacity = '0';
           item.style.transform = 'scale(0.8)';
           setTimeout(() => {
             item.style.display = 'none';
-          }, 300);
+          }, 250); // Reduced from 300ms to 250ms for faster response
         }
       });
     });
   });
 
-  // Pricing Toggle (Monthly/Annual)
+  // Pricing Toggle (Monthly/Annual) - Use function to reduce repetition
   const pricingToggle = document.getElementById('pricingToggle');
   if(pricingToggle) {
     const monthlyText = document.querySelector('.pricing-toggle-text:first-child');
     const annualText = document.querySelector('.pricing-toggle-text:last-child');
+    const monthlyPrices = document.querySelectorAll('.pricing-price.monthly');
+    const annualPrices = document.querySelectorAll('.pricing-price.annual');
+    const monthlyFeatures = document.querySelectorAll('.pricing-features.monthly');
+    const annualFeatures = document.querySelectorAll('.pricing-features.annual');
     
     // Set initial active state
     monthlyText.classList.add('active');
     
+    function updatePricingDisplay(isAnnual) {
+      // Handle pricing display
+      monthlyPrices.forEach(price => price.style.display = isAnnual ? 'none' : 'flex');
+      annualPrices.forEach(price => price.style.display = isAnnual ? 'flex' : 'none');
+      
+      // Handle features display
+      monthlyFeatures.forEach(features => features.style.display = isAnnual ? 'none' : 'block');
+      annualFeatures.forEach(features => features.style.display = isAnnual ? 'block' : 'none');
+      
+      // Update toggle text active state
+      monthlyText.classList.toggle('active', !isAnnual);
+      annualText.classList.toggle('active', isAnnual);
+    }
+    
     pricingToggle.addEventListener('change', function() {
-      const monthlyPrices = document.querySelectorAll('.pricing-price.monthly');
-      const annualPrices = document.querySelectorAll('.pricing-price.annual');
-      const monthlyFeatures = document.querySelectorAll('.pricing-features.monthly');
-      const annualFeatures = document.querySelectorAll('.pricing-features.annual');
-      
-      // For comparison table columns
-      const starterMonthlyCol = document.querySelectorAll('.comparison-table tr th:nth-child(2), .comparison-table tr td:nth-child(2)');
-      const starterAnnualCol = document.querySelectorAll('.comparison-table tr th:nth-child(3), .comparison-table tr td:nth-child(3)');
-      const proMonthlyCol = document.querySelectorAll('.comparison-table tr th:nth-child(4), .comparison-table tr td:nth-child(4)');
-      const proAnnualCol = document.querySelectorAll('.comparison-table tr th:nth-child(5), .comparison-table tr td:nth-child(5)');
-      
-      if(this.checked) {
-        // Show annual prices and features
-        monthlyPrices.forEach(price => price.style.display = 'none');
-        annualPrices.forEach(price => price.style.display = 'flex');
-        
-        monthlyFeatures.forEach(features => features.style.display = 'none');
-        annualFeatures.forEach(features => features.style.display = 'block');
-        
-        // Update toggle text active state
-        monthlyText.classList.remove('active');
-        annualText.classList.add('active');
-        
-        // Highlight annual columns in table and fade monthly columns
-        starterMonthlyCol.forEach(cell => {
-          cell.style.opacity = '0.5';
-          cell.style.color = '#999';
-        });
-        proMonthlyCol.forEach(cell => {
-          cell.style.opacity = '0.5';
-          cell.style.color = '#999';
-        });
-        
-        starterAnnualCol.forEach(cell => {
-          cell.style.opacity = '1';
-          cell.style.color = '';
-          cell.style.fontWeight = 'bold';
-        });
-        proAnnualCol.forEach(cell => {
-          cell.style.opacity = '1';
-          cell.style.color = '';
-          cell.style.fontWeight = 'bold';
-        });
-      } else {
-        // Show monthly prices and features
-        annualPrices.forEach(price => price.style.display = 'none');
-        monthlyPrices.forEach(price => price.style.display = 'flex');
-        
-        annualFeatures.forEach(features => features.style.display = 'none');
-        monthlyFeatures.forEach(features => features.style.display = 'block');
-        
-        // Update toggle text active state
-        annualText.classList.remove('active');
-        monthlyText.classList.add('active');
-        
-        // Highlight monthly columns in table and fade annual columns
-        starterAnnualCol.forEach(cell => {
-          cell.style.opacity = '0.5';
-          cell.style.color = '#999';
-        });
-        proAnnualCol.forEach(cell => {
-          cell.style.opacity = '0.5';
-          cell.style.color = '#999';
-        });
-        
-        starterMonthlyCol.forEach(cell => {
-          cell.style.opacity = '1';
-          cell.style.color = '';
-          cell.style.fontWeight = 'bold';
-        });
-        proMonthlyCol.forEach(cell => {
-          cell.style.opacity = '1';
-          cell.style.color = '';
-          cell.style.fontWeight = 'bold';
-        });
-      }
+      updatePricingDisplay(this.checked);
     });
   }
   
-  // Pricing FAQ Accordion
+  // Pricing FAQ Accordion with optimized event handling
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   if(accordionHeaders.length > 0) {
     accordionHeaders.forEach(header => {
@@ -211,19 +173,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const accordionItem = this.parentElement;
         const accordionContent = this.nextElementSibling;
         const accordionIcon = this.querySelector('.accordion-icon i');
+        const isActive = accordionItem.classList.contains('active');
         
         // Toggle active class
         accordionItem.classList.toggle('active');
         
-        // Toggle icon
+        // Toggle icon and content height
         if(accordionIcon) {
-          if(accordionItem.classList.contains('active')) {
-            accordionIcon.classList.remove('fa-plus');
-            accordionIcon.classList.add('fa-minus');
+          if(!isActive) {
+            accordionIcon.classList.replace('fa-plus', 'fa-minus');
             accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
           } else {
-            accordionIcon.classList.remove('fa-minus');
-            accordionIcon.classList.add('fa-plus');
+            accordionIcon.classList.replace('fa-minus', 'fa-plus');
             accordionContent.style.maxHeight = '0';
           }
         }
@@ -231,73 +192,75 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Testimonial slider
+  // Testimonial slider with improved performance
   const testimonialTrack = document.querySelector('.testimonial-track');
   const testimonialSlides = document.querySelectorAll('.testimonial-slide');
-  const prevButton = document.querySelector('.testimonial-prev');
-  const nextButton = document.querySelector('.testimonial-next');
-  const dotsContainer = document.querySelector('.testimonial-dots');
-  
-  let currentIndex = 0;
-  const slideWidth = 100; // 100%
-  
-  // Create dots
-  testimonialSlides.forEach((_, index) => {
-    const dot = document.createElement('div');
-    dot.classList.add('testimonial-dot');
-    if (index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToSlide(index));
-    dotsContainer.appendChild(dot);
-  });
-  
-  const dots = document.querySelectorAll('.testimonial-dot');
-  
-  // Go to specific slide
-  function goToSlide(index) {
-    currentIndex = index;
-    testimonialTrack.style.transform = `translateX(-${slideWidth * currentIndex}%)`;
+  if(testimonialTrack && testimonialSlides.length > 0) {
+    const prevButton = document.querySelector('.testimonial-prev');
+    const nextButton = document.querySelector('.testimonial-next');
+    const dotsContainer = document.querySelector('.testimonial-dots');
     
-    // Update dots
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentIndex);
+    let currentIndex = 0;
+    const slideWidth = 100; // 100%
+    
+    // Create dots
+    testimonialSlides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('testimonial-dot');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+    
+    const dots = document.querySelectorAll('.testimonial-dot');
+    
+    // Go to specific slide using hardware-accelerated transforms
+    function goToSlide(index) {
+      currentIndex = index;
+      testimonialTrack.style.transform = `translateX(-${slideWidth * currentIndex}%)`;
+      
+      // Update dots
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    }
+    
+    // Next slide
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % testimonialSlides.length;
+      goToSlide(currentIndex);
+    }
+    
+    // Previous slide
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + testimonialSlides.length) % testimonialSlides.length;
+      goToSlide(currentIndex);
+    }
+    
+    // Event listeners for buttons
+    nextButton.addEventListener('click', nextSlide);
+    prevButton.addEventListener('click', prevSlide);
+    
+    // Auto slide
+    let slideInterval = setInterval(nextSlide, 5000);
+    
+    // Pause on hover - use event delegation for better performance
+    testimonialTrack.addEventListener('mouseenter', () => {
+      clearInterval(slideInterval);
+    });
+    
+    testimonialTrack.addEventListener('mouseleave', () => {
+      slideInterval = setInterval(nextSlide, 5000);
     });
   }
-  
-  // Next slide
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % testimonialSlides.length;
-    goToSlide(currentIndex);
-  }
-  
-  // Previous slide
-  function prevSlide() {
-    currentIndex = (currentIndex - 1 + testimonialSlides.length) % testimonialSlides.length;
-    goToSlide(currentIndex);
-  }
-  
-  // Event listeners for buttons
-  nextButton.addEventListener('click', nextSlide);
-  prevButton.addEventListener('click', prevSlide);
-  
-  // Auto slide
-  let slideInterval = setInterval(nextSlide, 5000);
-  
-  // Pause on hover
-  testimonialTrack.addEventListener('mouseenter', () => {
-    clearInterval(slideInterval);
-  });
-  
-  testimonialTrack.addEventListener('mouseleave', () => {
-    slideInterval = setInterval(nextSlide, 5000);
-  });
 
-  // Animate stats counter
+  // Animate stats counter with IntersectionObserver
   const statNumbers = document.querySelectorAll('.stat-number');
   
   function animateCounter(el) {
     const target = parseInt(el.getAttribute('data-count'));
-    const duration = 2000; // 2 seconds
-    const step = target / duration * 10; // Update every 10ms
+    const duration = 1500; // Reduced from 2000ms to 1500ms
+    const step = target / duration * 10;
     let current = 0;
     
     const timer = setInterval(() => {
@@ -327,16 +290,24 @@ document.addEventListener('DOMContentLoaded', function() {
     statsObserver.observe(statsSection);
   }
 
-  // Back to top button
+  // Back to top button with throttled scroll event
   const backToTopButton = document.querySelector('.back-to-top');
+  let lastScrollPosition = 0;
+  let scrollTicking = false;
   
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-      backToTopButton.classList.add('active');
-    } else {
-      backToTopButton.classList.remove('active');
+    if (!scrollTicking) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 500) {
+          backToTopButton.classList.add('active');
+        } else {
+          backToTopButton.classList.remove('active');
+        }
+        scrollTicking = false;
+      });
+      scrollTicking = true;
     }
-  });
+  }, { passive: true });
   
   backToTopButton.addEventListener('click', (e) => {
     e.preventDefault();
@@ -346,13 +317,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Smooth scroll for anchor links
+  // Optimized smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-      if (this.getAttribute('href') !== '#') {
+      const targetId = this.getAttribute('href');
+      if (targetId !== '#') {
         e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
         
         if (targetElement) {
@@ -368,12 +338,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Form validation
+  // Form validation with better error handling
   const contactForm = document.getElementById('contactForm');
   
   if (contactForm) {
+    const showFormError = (field, message) => {
+      field.classList.add('error');
+      const errorElement = document.createElement('div');
+      errorElement.className = 'form-error';
+      errorElement.textContent = message;
+      field.parentNode.appendChild(errorElement);
+    };
+    
+    const clearFormErrors = () => {
+      document.querySelectorAll('.form-error').forEach(error => error.remove());
+      document.querySelectorAll('.error').forEach(field => field.classList.remove('error'));
+    };
+    
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      clearFormErrors();
       
       // Simple validation
       let isValid = true;
@@ -382,17 +366,22 @@ document.addEventListener('DOMContentLoaded', function() {
       requiredFields.forEach(field => {
         if (!field.value.trim()) {
           isValid = false;
-          field.classList.add('error');
-        } else {
-          field.classList.remove('error');
+          showFormError(field, 'This field is required');
         }
       });
       
-      if (isValid) {
+      // Email validation
+      const emailField = document.getElementById('email');
+      if (emailField && emailField.value.trim() && !emailField.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        isValid = false;
+        showFormError(emailField, 'Please enter a valid email address');
+      }
+      
+      if (isValid && window.emailjs) {
         // Show loading state
         const submitButton = contactForm.querySelector('button[type="submit"]');
         const originalButtonText = submitButton.textContent;
-        submitButton.textContent = 'Sending...';
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         submitButton.disabled = true;
         
         // Get form data
@@ -417,7 +406,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         // Send email using EmailJS
-        emailjs.send('service_awajrqb', 'template_l85nw75', templateParams) // Replace with your service and template IDs
+        emailjs.send('service_awajrqb', 'template_l85nw75', templateParams)
           .then(function(response) {
             console.log('Email sent successfully:', response);
             
@@ -425,21 +414,37 @@ document.addEventListener('DOMContentLoaded', function() {
             contactForm.reset();
             
             // Show success message
-            alert('Thank you for your message! We will get back to you soon.');
+            const successMsg = document.createElement('div');
+            successMsg.className = 'success-message';
+            successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Thank you for your message! We will get back to you soon.';
+            contactForm.prepend(successMsg);
             
             // Reset button
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
+            
+            // Remove success message after 5 seconds
+            setTimeout(() => {
+              successMsg.remove();
+            }, 5000);
           })
           .catch(function(error) {
             console.error('Email sending failed:', error);
             
             // Show error message
-            alert('Sorry, there was a problem sending your message. Please try again or contact us directly via email.');
+            const errorMsg = document.createElement('div');
+            errorMsg.className = 'error-message';
+            errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Sorry, there was a problem sending your message. Please try again or contact us directly via email.';
+            contactForm.prepend(errorMsg);
             
             // Reset button
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
+            
+            // Remove error message after 5 seconds
+            setTimeout(() => {
+              errorMsg.remove();
+            }, 5000);
           });
       }
     });
@@ -448,10 +453,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set current year in footer
   document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-  // AOS-like scroll animations
+  // Optimized AOS-like scroll animations using IntersectionObserver
   const animatedElements = document.querySelectorAll('[data-aos]');
   
-  const scrollObserver = new IntersectionObserver((entries) => {
+  const scrollAnimationObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const el = entry.target;
@@ -461,70 +466,75 @@ document.addEventListener('DOMContentLoaded', function() {
           el.classList.add('aos-animate');
         }, delay);
         
-        scrollObserver.unobserve(el);
+        // Unobserve after animation to improve performance
+        scrollAnimationObserver.unobserve(el);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.1, rootMargin: '0px 0px -10% 0px' });
   
   animatedElements.forEach(el => {
     el.classList.add('aos-init');
-    scrollObserver.observe(el);
+    scrollAnimationObserver.observe(el);
   });
 
-  // Add CSS for AOS animations
-  const style = document.createElement('style');
-  style.textContent = `
-    [data-aos] {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    
-    [data-aos].aos-animate {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    [data-aos="fade-right"] {
-      transform: translateX(-30px);
-    }
-    
-    [data-aos="fade-left"] {
-      transform: translateX(30px);
-    }
-    
-    [data-aos="fade-right"].aos-animate,
-    [data-aos="fade-left"].aos-animate {
-      transform: translateX(0);
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Initialize first FAQ item as open
-  if(document.querySelector('.accordion-item')) {
-    const firstAccordionItem = document.querySelector('.accordion-item');
-    const firstAccordionContent = firstAccordionItem.querySelector('.accordion-content');
-    const firstAccordionIcon = firstAccordionItem.querySelector('.accordion-icon i');
-    
-    firstAccordionItem.classList.add('active');
-    firstAccordionIcon.classList.remove('fa-plus');
-    firstAccordionIcon.classList.add('fa-minus');
-    firstAccordionContent.style.maxHeight = firstAccordionContent.scrollHeight + 'px';
-  }
-  
-  // Initialize pricing comparison table highlighting
-  const comparisonTable = document.querySelector('.comparison-table');
-  if(comparisonTable) {
-    const tableRows = comparisonTable.querySelectorAll('tbody tr');
-    
-    tableRows.forEach(row => {
-      row.addEventListener('mouseenter', function() {
-        this.classList.add('highlight');
-      });
+  // Add CSS for AOS animations using a single style element
+  if (!document.getElementById('aos-styles')) {
+    const style = document.createElement('style');
+    style.id = 'aos-styles';
+    style.textContent = `
+      [data-aos] {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+        will-change: opacity, transform;
+      }
       
-      row.addEventListener('mouseleave', function() {
-        this.classList.remove('highlight');
-      });
+      [data-aos].aos-animate {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      [data-aos="fade-right"] {
+        transform: translateX(-30px);
+      }
+      
+      [data-aos="fade-left"] {
+        transform: translateX(30px);
+      }
+      
+      [data-aos="fade-right"].aos-animate,
+      [data-aos="fade-left"].aos-animate {
+        transform: translateX(0);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Initialize first FAQ item as open - do this after a slight delay to ensure layout is stable
+  setTimeout(() => {
+    if(document.querySelector('.accordion-item')) {
+      const firstAccordionItem = document.querySelector('.accordion-item');
+      const firstAccordionContent = firstAccordionItem.querySelector('.accordion-content');
+      const firstAccordionIcon = firstAccordionItem.querySelector('.accordion-icon i');
+      
+      firstAccordionItem.classList.add('active');
+      if (firstAccordionIcon) {
+        firstAccordionIcon.classList.replace('fa-plus', 'fa-minus');
+      }
+      if (firstAccordionContent) {
+        firstAccordionContent.style.maxHeight = firstAccordionContent.scrollHeight + 'px';
+      }
+    }
+  }, 100);
+  
+  // Lazy load images that don't already have the loading="lazy" attribute
+  if ('loading' in HTMLImageElement.prototype) {
+    const images = document.querySelectorAll('img:not([loading])');
+    images.forEach(img => {
+      img.loading = 'lazy';
     });
+  } else {
+    // Fallback for browsers that don't support native lazy loading
+    // Load a lazy loading library dynamically if needed
   }
 });

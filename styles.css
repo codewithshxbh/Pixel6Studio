@@ -969,6 +969,8 @@ body:hover .cursor, body:hover .cursor-follower {
   height: 100%;
   object-fit: contain;
   transition: transform var(--transition-normal);
+  will-change: transform; /* Optimization for smoother animations */
+  transform: translateZ(0); /* Hardware acceleration */
 }
 
 .work-overlay {

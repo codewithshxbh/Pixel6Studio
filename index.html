@@ -7,7 +7,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 </head>
 <body>
   <!-- Preloader -->
@@ -265,7 +265,7 @@
       <div class="work-grid">
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/1.png" alt="Website Project 1">
+            <img src="images/website/1.png" alt="Website Project 1" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">Tech Agency</h3>
@@ -274,7 +274,7 @@
         </div>
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/2.jpeg" alt="Website Project 2">
+            <img src="images/website/2.jpeg" alt="Website Project 2" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">Startup Landing Page</h3>
@@ -283,7 +283,7 @@
         </div>
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/3.png" alt="Website Project 3">
+            <img src="images/website/3.png" alt="Website Project 3" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">UI/UX Business Company</h3>
@@ -292,7 +292,7 @@
         </div>
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/4.png" alt="Website Project 4">
+            <img src="images/website/4.png" alt="Website Project 4" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">Furniture Website</h3>
@@ -301,7 +301,7 @@
         </div>
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/5.png" alt="Website Project 5">
+            <img src="images/website/5.png" alt="Website Project 5" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">Sports E-commerce</h3>
@@ -310,7 +310,7 @@
         </div>
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/6.png" alt="Website Project 6">
+            <img src="images/website/6.png" alt="Website Project 6" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">Modern Dashboard</h3>
@@ -319,7 +319,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/Project_1@3x.png" alt="Social Media Project 1">
+            <img src="images/social/Project_1@3x.png" alt="Social Media Project 1" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Welcome Post</h3>
@@ -328,7 +328,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/Project_2@3x.png" alt="Social Media Project 2">
+            <img src="images/social/Project_2@3x.png" alt="Social Media Project 2" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Introduction Post</h3>
@@ -337,7 +337,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/project_3@3x.png" alt="Social Media Project 3">
+            <img src="images/social/project_3@3x.png" alt="Social Media Project 3" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Advertisement Post</h3>
@@ -346,7 +346,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/project_4@3x.png" alt="Social Media Project 4">
+            <img src="images/social/project_4@3x.png" alt="Social Media Project 4" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Congratulations Post</h3>
@@ -355,7 +355,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/project_5@3x.png" alt="Social Media Project 5">
+            <img src="images/social/project_5@3x.png" alt="Social Media Project 5" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Event Advertisement Post</h3>
@@ -364,7 +364,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/Project_6@3x.png" alt="Social Media Project 6">
+            <img src="images/social/Project_6@3x.png" alt="Social Media Project 6" loading="lazy">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Congratulations Post</h3>
@@ -1170,8 +1170,8 @@
   </a>
 
   <!-- EmailJS Script -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
   
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
