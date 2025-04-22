@@ -757,18 +757,30 @@
             </div>
             <div class="pricing-price annual" style="display: none;">
               <span class="currency">₹</span>
+              <span class="original-price">60000</span>
               <span class="amount">48000</span>
               <span class="period">/yr</span>
             </div>
             <p class="pricing-description">Perfect for small businesses just getting started.</p>
           </div>
-          <div class="pricing-features">
+          <div class="pricing-features monthly">
             <ul>
               <li><i class="fas fa-check"></i> Responsive Website (5 pages)</li>
               <li><i class="fas fa-check"></i> Basic SEO Setup</li>
               <li><i class="fas fa-check"></i> Social Media Profile Setup</li>
               <li><i class="fas fa-check"></i> 1 Month of Support</li>
               <li><i class="fas fa-check"></i> Content Management System</li>
+              <li class="feature-disabled"><i class="fas fa-times"></i> E-commerce Functionality</li>
+            </ul>
+          </div>
+          <div class="pricing-features annual" style="display: none;">
+            <ul>
+              <li><i class="fas fa-check"></i> <strong>Enhanced Website (7 pages)</strong></li>
+              <li><i class="fas fa-check"></i> <strong>Advanced SEO Setup</strong></li>
+              <li><i class="fas fa-check"></i> Social Media Profile Setup</li>
+              <li><i class="fas fa-check"></i> <strong>3 Months of Support</strong></li>
+              <li><i class="fas fa-check"></i> Content Management System</li>
+              <li><i class="fas fa-check"></i> <strong>Additional SEO Reports</strong></li>
               <li class="feature-disabled"><i class="fas fa-times"></i> E-commerce Functionality</li>
             </ul>
           </div>
@@ -787,12 +799,13 @@
             </div>
             <div class="pricing-price annual" style="display: none;">
               <span class="currency">₹</span>
+              <span class="original-price">300000</span>
               <span class="amount">240000</span>
               <span class="period">/yr</span>
             </div>
             <p class="pricing-description">Comprehensive solution for growing businesses.</p>
           </div>
-          <div class="pricing-features">
+          <div class="pricing-features monthly">
             <ul>
               <li><i class="fas fa-check"></i> Custom Website (up to 10 pages)</li>
               <li><i class="fas fa-check"></i> Advanced SEO Implementation</li>
@@ -801,6 +814,18 @@
               <li><i class="fas fa-check"></i> 3 Months of Support</li>
               <li><i class="fas fa-check"></i> Analytics Dashboard</li>
               <li><i class="fas fa-check"></i> Basic E-commerce (up to 25 products)</li>
+            </ul>
+          </div>
+          <div class="pricing-features annual" style="display: none;">
+            <ul>
+              <li><i class="fas fa-check"></i> <strong>Premium Website (up to 15 pages)</strong></li>
+              <li><i class="fas fa-check"></i> <strong>Premium SEO Implementation</strong></li>
+              <li><i class="fas fa-check"></i> <strong>Advanced Social Media Strategy</strong></li>
+              <li><i class="fas fa-check"></i> <strong>Enhanced Content Creation (8 posts)</strong></li>
+              <li><i class="fas fa-check"></i> <strong>6 Months of Priority Support</strong></li>
+              <li><i class="fas fa-check"></i> <strong>Advanced Analytics Dashboard with Monthly Reports</strong></li>
+              <li><i class="fas fa-check"></i> <strong>Enhanced E-commerce (up to 50 products)</strong></li>
+              <li><i class="fas fa-check"></i> <strong>Quarterly Performance Reviews</strong></li>
             </ul>
           </div>
           <div class="pricing-action">
@@ -841,8 +866,10 @@
             <thead>
               <tr>
                 <th>Feature</th>
-                <th>Starter</th>
-                <th>Professional</th>
+                <th>Starter Monthly</th>
+                <th>Starter Annual</th>
+                <th>Professional Monthly</th>
+                <th>Professional Annual</th>
                 <th>Enterprise</th>
               </tr>
             </thead>
@@ -850,13 +877,17 @@
               <tr>
                 <td>Web Pages</td>
                 <td>Up to 5</td>
+                <td><strong>Up to 7</strong></td>
                 <td>Up to 10</td>
+                <td><strong>Up to 15</strong></td>
                 <td>Unlimited</td>
               </tr>
               <tr>
                 <td>SEO Optimization</td>
                 <td>Basic</td>
+                <td><strong>Advanced</strong></td>
                 <td>Advanced</td>
+                <td><strong>Premium</strong></td>
                 <td>Premium</td>
               </tr>
               <tr>
@@ -864,36 +895,56 @@
                 <td><i class="fas fa-check"></i></td>
                 <td><i class="fas fa-check"></i></td>
                 <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-check"></i></td>
               </tr>
               <tr>
                 <td>Social Media Setup</td>
                 <td>Profile Setup Only</td>
+                <td>Profile Setup Only</td>
                 <td>Strategy + 5 Posts</td>
+                <td><strong>Strategy + 8 Posts</strong></td>
                 <td>Full Management</td>
               </tr>
               <tr>
                 <td>Support Period</td>
                 <td>1 Month</td>
+                <td><strong>3 Months</strong></td>
                 <td>3 Months</td>
+                <td><strong>6 Months</strong></td>
                 <td>12 Months</td>
+              </tr>
+              <tr>
+                <td>SEO Reports</td>
+                <td>Basic Monthly</td>
+                <td><strong>Advanced Monthly</strong></td>
+                <td>Advanced Monthly</td>
+                <td><strong>Weekly Reports</strong></td>
+                <td>Custom Schedule</td>
               </tr>
               <tr>
                 <td>E-commerce</td>
                 <td><i class="fas fa-times"></i></td>
+                <td><i class="fas fa-times"></i></td>
                 <td>Basic (25 products)</td>
+                <td><strong>Enhanced (50 products)</strong></td>
                 <td>Advanced (Unlimited)</td>
               </tr>
               <tr>
-                <td>Revisions</td>
-                <td>2</td>
-                <td>5</td>
-                <td>Unlimited</td>
+                <td>Analytics</td>
+                <td>Basic</td>
+                <td>Basic</td>
+                <td>Standard Dashboard</td>
+                <td><strong>Advanced with Reports</strong></td>
+                <td>Custom Analytics</td>
               </tr>
               <tr>
-                <td>Dedicated Manager</td>
+                <td>Performance Reviews</td>
                 <td><i class="fas fa-times"></i></td>
                 <td><i class="fas fa-times"></i></td>
-                <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-times"></i></td>
+                <td><strong>Quarterly</strong></td>
+                <td>Monthly</td>
               </tr>
             </tbody>
           </table>

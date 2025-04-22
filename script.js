@@ -117,18 +117,88 @@ document.addEventListener('DOMContentLoaded', function() {
   // Pricing Toggle (Monthly/Annual)
   const pricingToggle = document.getElementById('pricingToggle');
   if(pricingToggle) {
+    const monthlyText = document.querySelector('.pricing-toggle-text:first-child');
+    const annualText = document.querySelector('.pricing-toggle-text:last-child');
+    
+    // Set initial active state
+    monthlyText.classList.add('active');
+    
     pricingToggle.addEventListener('change', function() {
       const monthlyPrices = document.querySelectorAll('.pricing-price.monthly');
       const annualPrices = document.querySelectorAll('.pricing-price.annual');
+      const monthlyFeatures = document.querySelectorAll('.pricing-features.monthly');
+      const annualFeatures = document.querySelectorAll('.pricing-features.annual');
+      
+      // For comparison table columns
+      const starterMonthlyCol = document.querySelectorAll('.comparison-table tr th:nth-child(2), .comparison-table tr td:nth-child(2)');
+      const starterAnnualCol = document.querySelectorAll('.comparison-table tr th:nth-child(3), .comparison-table tr td:nth-child(3)');
+      const proMonthlyCol = document.querySelectorAll('.comparison-table tr th:nth-child(4), .comparison-table tr td:nth-child(4)');
+      const proAnnualCol = document.querySelectorAll('.comparison-table tr th:nth-child(5), .comparison-table tr td:nth-child(5)');
       
       if(this.checked) {
-        // Show annual prices
+        // Show annual prices and features
         monthlyPrices.forEach(price => price.style.display = 'none');
-        annualPrices.forEach(price => price.style.display = 'block');
+        annualPrices.forEach(price => price.style.display = 'flex');
+        
+        monthlyFeatures.forEach(features => features.style.display = 'none');
+        annualFeatures.forEach(features => features.style.display = 'block');
+        
+        // Update toggle text active state
+        monthlyText.classList.remove('active');
+        annualText.classList.add('active');
+        
+        // Highlight annual columns in table and fade monthly columns
+        starterMonthlyCol.forEach(cell => {
+          cell.style.opacity = '0.5';
+          cell.style.color = '#999';
+        });
+        proMonthlyCol.forEach(cell => {
+          cell.style.opacity = '0.5';
+          cell.style.color = '#999';
+        });
+        
+        starterAnnualCol.forEach(cell => {
+          cell.style.opacity = '1';
+          cell.style.color = '';
+          cell.style.fontWeight = 'bold';
+        });
+        proAnnualCol.forEach(cell => {
+          cell.style.opacity = '1';
+          cell.style.color = '';
+          cell.style.fontWeight = 'bold';
+        });
       } else {
-        // Show monthly prices
+        // Show monthly prices and features
         annualPrices.forEach(price => price.style.display = 'none');
-        monthlyPrices.forEach(price => price.style.display = 'block');
+        monthlyPrices.forEach(price => price.style.display = 'flex');
+        
+        annualFeatures.forEach(features => features.style.display = 'none');
+        monthlyFeatures.forEach(features => features.style.display = 'block');
+        
+        // Update toggle text active state
+        annualText.classList.remove('active');
+        monthlyText.classList.add('active');
+        
+        // Highlight monthly columns in table and fade annual columns
+        starterAnnualCol.forEach(cell => {
+          cell.style.opacity = '0.5';
+          cell.style.color = '#999';
+        });
+        proAnnualCol.forEach(cell => {
+          cell.style.opacity = '0.5';
+          cell.style.color = '#999';
+        });
+        
+        starterMonthlyCol.forEach(cell => {
+          cell.style.opacity = '1';
+          cell.style.color = '';
+          cell.style.fontWeight = 'bold';
+        });
+        proMonthlyCol.forEach(cell => {
+          cell.style.opacity = '1';
+          cell.style.color = '';
+          cell.style.fontWeight = 'bold';
+        });
       }
     });
   }
