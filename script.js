@@ -1,6 +1,54 @@
+// Immediately execute this function to preload all work section images
+(function() {
+  // Array containing all work section image paths
+  const allWorkImagePaths = [
+    'images/website/1.png',
+    'images/website/2.png',
+    'images/website/3.png',
+    'images/website/4.png',
+    'images/website/5.png',
+    'images/website/6.png',
+    'images/social/Project_1@3x.png',
+    'images/social/Project_2@3x.png',
+    'images/social/project_3@3x.png',
+    'images/social/project_4@3x.png',
+    'images/social/project_5@3x.png',
+    'images/social/Project_6@3x.png'
+  ];
+
+  // Super aggressive loading strategy for ALL images
+  allWorkImagePaths.forEach(imagePath => {
+    // Create new image with highest priority
+    const img = new Image();
+    
+    // Set all high-priority attributes
+    img.importance = 'high';
+    img.fetchPriority = 'high';
+    img.loading = 'eager';
+    
+    // Start loading the image
+    img.src = imagePath;
+    
+    // Force immediate DOM attachment to prioritize loading
+    document.head ? document.head.appendChild(img) : 
+      window.addEventListener('DOMContentLoaded', () => document.head.appendChild(img));
+    
+    // Force browser to parse image immediately
+    img.decode().catch(() => {});
+    
+    // Force image to stay cached but hidden
+    setTimeout(() => {
+      // Force painting by accessing properties
+      void img.naturalWidth;
+      void img.naturalHeight;
+      img.style.cssText = 'position:absolute;opacity:0;z-index:-9999;width:1px;height:1px;';
+    }, 0);
+  });
+})();
+
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-  // Preloader - reduced from 2000ms to 1000ms
+  // Original preloader timing (restored)
   setTimeout(function() {
     const preloader = document.querySelector('.preloader');
     preloader.classList.add('hide');
@@ -8,6 +56,56 @@ document.addEventListener('DOMContentLoaded', function() {
       preloader.style.display = 'none';
     }, 300);
   }, 1000);
+  
+  // Special handling for work section images only
+  const workImages = document.querySelectorAll('.work-image img');
+  workImages.forEach(img => {
+    img.style.cssText = 'display:block !important; opacity:1 !important; visibility:visible !important;';
+    
+    // Force a repaint to make sure the image shows immediately
+    void img.offsetWidth;
+    void img.offsetHeight;
+  });
+  
+  // Optimized lazy loading for non-work images with decreased delay
+  if ('loading' in HTMLImageElement.prototype) {
+    // Use native lazy loading but with smaller thresholds
+    const nonWorkImages = document.querySelectorAll('img:not(.work-image img):not([loading])');
+    nonWorkImages.forEach(img => {
+      // Use eager loading for images that are likely to be visible soon
+      const rect = img.getBoundingClientRect();
+      const isNearViewport = rect.top <= window.innerHeight + 500; // 500px threshold instead of default
+      
+      if (isNearViewport) {
+        img.loading = 'eager'; // Load immediately for near-viewport images
+      } else {
+        img.loading = 'lazy'; // Use lazy loading for others
+      }
+    });
+  } else {
+    // Enhanced fallback for browsers that don't support native lazy loading
+    const lazyImages = document.querySelectorAll('img:not(.work-image img)');
+    
+    if ('IntersectionObserver' in window) {
+      // Use a more aggressive root margin to load images earlier
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src || img.src;
+            observer.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '300px 0px', // Load images when they're 300px from viewport instead of default
+        threshold: 0.01 // Trigger with just 1% visibility
+      });
+      
+      lazyImages.forEach(img => {
+        imageObserver.observe(img);
+      });
+    }
+  }
 
   // Initialize EmailJS
   if (window.emailjs) {
@@ -118,16 +216,10 @@ document.addEventListener('DOMContentLoaded', function() {
       workItems.forEach(item => {
         if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
           item.style.display = 'block';
-          setTimeout(() => {
-            item.style.opacity = '1';
-            item.style.transform = 'scale(1)';
-          }, 50); // Reduced from 100ms to 50ms for faster response
+          item.style.opacity = '1';
+          item.style.transform = 'scale(1)';
         } else {
-          item.style.opacity = '0';
-          item.style.transform = 'scale(0.8)';
-          setTimeout(() => {
-            item.style.display = 'none';
-          }, 250); // Reduced from 300ms to 250ms for faster response
+          item.style.display = 'none';
         }
       });
     });
@@ -526,15 +618,4 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }, 100);
-  
-  // Lazy load images that don't already have the loading="lazy" attribute
-  if ('loading' in HTMLImageElement.prototype) {
-    const images = document.querySelectorAll('img:not([loading])');
-    images.forEach(img => {
-      img.loading = 'lazy';
-    });
-  } else {
-    // Fallback for browsers that don't support native lazy loading
-    // Load a lazy loading library dynamically if needed
-  }
 });

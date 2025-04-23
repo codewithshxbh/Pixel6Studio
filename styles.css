@@ -961,16 +961,18 @@ body:hover .cursor, body:hover .cursor-follower {
   position: relative;
   overflow: hidden;
   aspect-ratio: 4/3;
-  background-color: #e1e1e1; /* Added greyish background color */
+  background-color: transparent; /* Remove the background color that was showing during loading */
+  /* Remove the shimmer animation background */
 }
 
 .work-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform var(--transition-normal);
-  will-change: transform; /* Optimization for smoother animations */
-  transform: translateZ(0); /* Hardware acceleration */
+  transform: translateZ(0); /* Keep hardware acceleration */
+  backface-visibility: hidden; /* Prevents flickering */
+  opacity: 1 !important; /* Force images to be visible immediately */
+  transition: none !important; /* Remove all transitions */
 }
 
 .work-overlay {

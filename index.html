@@ -5,6 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PixelSix Studio</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
+  
+  <!-- Critical preload for ALL work section images with highest priority -->
+  <link rel="preload" as="image" href="images/website/1.png" fetchpriority="high" importance="high">
+  <link rel="preload" as="image" href="images/website/2.png" fetchpriority="high" importance="high">
+  <link rel="preload" as="image" href="images/website/3.png" fetchpriority="high" importance="high">
+  <link rel="preload" as="image" href="images/website/4.png" fetchpriority="high" importance="high">
+  <link rel="preload" as="image" href="images/website/5.png" fetchpriority="high" importance="high">
+  <link rel="preload" as="image" href="images/website/6.png" fetchpriority="high" importance="high">
+  <link rel="preload" as="image" href="images/social/Project_1@3x.png" fetchpriority="high" importance="high">
+  <link rel="preload" as="image" href="images/social/Project_2@3x.png" fetchpriority="high" importance="high">
+  <link rel="preload" as="image" href="images/social/project_3@3x.png" fetchpriority="high" importance="high">
+  <link rel="preload" as="image" href="images/social/project_4@3x.png" fetchpriority="high" importance="high">
+  <link rel="preload" as="image" href="images/social/project_5@3x.png" fetchpriority="high" importance="high">
+  <link rel="preload" as="image" href="images/social/Project_6@3x.png" fetchpriority="high" importance="high">
+  
+  <!-- Force critical work images to be immediately available with special treatment -->
+  <style>
+    /* Pre-cache all work section images to force immediate loading */
+    body::before {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      z-index: -1;
+      content: 
+        url('images/website/1.png') 
+        url('images/website/2.png')
+        url('images/website/3.png')
+        url('images/website/4.png')
+        url('images/website/5.png')
+        url('images/website/6.png')
+        url('images/social/Project_1@3x.png')
+        url('images/social/Project_2@3x.png')
+        url('images/social/project_3@3x.png')
+        url('images/social/project_4@3x.png')
+        url('images/social/project_5@3x.png')
+        url('images/social/Project_6@3x.png');
+    }
+    
+
+    .work-image img {
+      content: attr(src);
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateZ(0) !important;
+      backface-visibility: hidden !important;
+      -webkit-perspective: 1000 !important;
+      perspective: 1000 !important;
+      will-change: transform !important;
+    }
+    
+    /* Disable all transitions and animations for work images */
+    .work-image img {
+      transition: none !important;
+      animation: none !important;
+    }
+    
+    /* Add special image rendering properties for better performance */
+    .work-image {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+  </style>
+  
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
@@ -264,7 +329,7 @@
       <div class="work-grid">
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/1.png" alt="Website Project 1" loading="lazy">
+            <img src="images/website/1.png" alt="Website Project 1" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">Tech Agency</h3>
@@ -273,7 +338,7 @@
         </div>
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/2.png" alt="Website Project 2" loading="lazy">
+            <img src="images/website/2.png" alt="Website Project 2" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">Startup Landing Page</h3>
@@ -282,7 +347,7 @@
         </div>
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/3.png" alt="Website Project 3" loading="lazy">
+            <img src="images/website/3.png" alt="Website Project 3" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">Child Essentials E-commerce</h3>
@@ -291,7 +356,7 @@
         </div>
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/4.png" alt="Website Project 4" loading="lazy">
+            <img src="images/website/4.png" alt="Website Project 4" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">Furniture Website</h3>
@@ -300,7 +365,7 @@
         </div>
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/5.png" alt="Website Project 5" loading="lazy">
+            <img src="images/website/5.png" alt="Website Project 5" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">Sports E-commerce</h3>
@@ -309,7 +374,7 @@
         </div>
         <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/6.png" alt="Website Project 6" loading="lazy">
+            <img src="images/website/6.png" alt="Website Project 6" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
               <h3 class="work-title">Modern Dashboard</h3>
@@ -318,7 +383,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/Project_1@3x.png" alt="Social Media Project 1" loading="lazy">
+            <img src="images/social/Project_1@3x.png" alt="Social Media Project 1" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Welcome Post</h3>
@@ -327,7 +392,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/Project_2@3x.png" alt="Social Media Project 2" loading="lazy">
+            <img src="images/social/Project_2@3x.png" alt="Social Media Project 2" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Introduction Post</h3>
@@ -336,7 +401,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/project_3@3x.png" alt="Social Media Project 3" loading="lazy">
+            <img src="images/social/project_3@3x.png" alt="Social Media Project 3" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Advertisement Post</h3>
@@ -345,7 +410,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/project_4@3x.png" alt="Social Media Project 4" loading="lazy">
+            <img src="images/social/project_4@3x.png" alt="Social Media Project 4" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Congratulations Post</h3>
@@ -354,7 +419,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/project_5@3x.png" alt="Social Media Project 5" loading="lazy">
+            <img src="images/social/project_5@3x.png" alt="Social Media Project 5" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Event Advertisement Post</h3>
@@ -363,7 +428,7 @@
         </div>
         <div class="work-item" data-category="social">
           <div class="work-image">
-            <img src="images/social/Project_6@3x.png" alt="Social Media Project 6" loading="lazy">
+            <img src="images/social/Project_6@3x.png" alt="Social Media Project 6" fetchpriority="high">
             <div class="work-overlay">
               <div class="work-category">Social Media Content</div>
               <h3 class="work-title">Congratulations Post</h3>
