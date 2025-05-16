@@ -150,7 +150,7 @@
                 </table>
                 
                 <footer>
-                    <p>© 2025 PixelSix Studio. This sitemap is designed to be used by search engines and related services.</p>
+                    <p>© 2023 PixelSix Studio. This sitemap is designed to be used by search engines and related services.</p>
                     <p>
                         <a href="https://pixelsixstudio.live" style="color: #6c63ff; text-decoration: none;">Return to Homepage</a>
                     </p>

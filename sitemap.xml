@@ -15,7 +15,8 @@
     <image:image>
       <image:loc>https://pixelsixstudio.live/images/og-image.jpg</image:loc>
       <image:title>PixelSix Studio - Web Development and Social Media Agency</image:title>
-    </image:image>  </url>
+    </image:image>
+  </url>
   <url>
     <loc>https://pixelsixstudio.live/index.html</loc>
     <lastmod>2025-05-16</lastmod>
@@ -33,11 +34,16 @@
     <lastmod>2025-05-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
-  </url>
-  <url>
+  </url>  <url>
     <loc>https://pixelsixstudio.live/policies/PixelSix_Terms_of_Service.pdf</loc>
     <lastmod>2025-05-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://pixelsixstudio.live/contact.html</loc>
+    <lastmod>2025-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
