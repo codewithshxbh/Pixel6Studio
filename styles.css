@@ -2621,6 +2621,23 @@ input:checked + .slider:before {
   font-size: var(--font-size-sm);
 }
 
+/* Footer links in bottom bar */
+.footer-links-bottom {
+  font-size: 0.875rem;
+  margin: 0.5rem 0;
+}
+
+.footer-links-bottom a {
+  color: var(--color-text-lighter);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links-bottom a:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
 /* ===== BACK TO TOP ===== */
 .back-to-top {
   position: fixed;

@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /policies/
+
+# Block access to specific directories
+Disallow: /private/
+Disallow: /.htaccess
+Disallow: /*.json$
+
+# Sitemap
+Sitemap: https://pixelsixstudio.live/sitemap.xml
