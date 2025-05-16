@@ -1,0 +1,26 @@
+# Proper MIME types for sitemap files
+AddType application/xml .xml
+AddType application/xml .xsl
+AddType application/xslt+xml .xsl
+
+# Force the sitemap.xml to be interpreted as XML with stylesheet
+<Files "sitemap.xml">
+    Header set Content-Type "application/xml; charset=utf-8"
+</Files>
+
+# Force the sitemap.xsl to be interpreted as XSL
+<Files "sitemap.xsl">
+    Header set Content-Type "application/xslt+xml; charset=utf-8"
+</Files>
+
+# Ensure XML files are not cached to prevent stale sitemap data
+<FilesMatch "\.(xml|xsl)$">
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+</FilesMatch>
+
+# Enable CORS for XML/XSL files if needed
+<FilesMatch "\.(xml|xsl)$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>

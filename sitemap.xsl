@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" 
+<xsl:stylesheet version="1.0" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
-    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-
-    <xsl:output method="html" encoding="UTF-8" indent="yes" />
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">    <xsl:output method="html" encoding="UTF-8" indent="yes" media-type="text/html" />
     
     <xsl:template match="/">
         <html>
             <head>
                 <title>XML Sitemap - PixelSix Studio</title>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <style>
                     body {
@@ -104,10 +103,9 @@
             <body>
                 <header>
                     <h1>PixelSix Studio - XML Sitemap</h1>
-                    <div class="subtitle">
-                        This sitemap contains <xsl:value-of select="count(sitemap:urlset/sitemap:url)" /> URLs.
+                    <div class="subtitle">                        This sitemap contains <xsl:value-of select="count(sitemap:urlset/sitemap:url)" /> URLs.
                         <br />
-                        This sitemap was generated on <xsl:value-of select="format-date(current-date(), '[MNn] [D], [Y]')" />.
+                        This sitemap was generated for PixelSix Studio.
                     </div>
                 </header>
                 
