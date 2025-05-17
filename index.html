@@ -229,6 +229,8 @@
   </script>
   
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="promo-styles.css">
+  <link rel="stylesheet" href="form-styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 </head>
@@ -277,6 +279,17 @@
       </div>
     </div>
   </header>
+
+  <!-- Special Promotion Banner -->
+  <div class="promo-banner">
+    <div class="container">
+      <div class="promo-banner-content">
+        <div class="promo-icon"><i class="fas fa-gift"></i></div>
+        <p><strong>Special Offer:</strong> Apply for <span class="highlight-text">FREE Web Services</span> for Your Business! Only 10 spots available. <a href="#contact" class="promo-link" onclick="event.preventDefault(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth'}); setTimeout(scrollToPromo, 1000);">Apply Now <i class="fas fa-arrow-right"></i></a></p>
+        <button class="promo-close" aria-label="Close promotion banner"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+  </div>
 
   <!-- Mobile Menu -->
   <div class="mobile-menu">
@@ -1128,6 +1141,38 @@
         </div>
       </div>
       
+      <!-- Special Promotion Section -->
+      <div class="special-promo-section" data-aos="fade-up">
+        <div class="special-promo-content">
+          <div class="special-promo-badge">Limited Time</div>
+          <div class="special-promo-icon">
+            <i class="fas fa-gift"></i>
+          </div>
+          <h3 class="special-promo-title">Free Web Services for Top 10 Customers!</h3>
+          <p class="special-promo-description">We're offering completely free web development services to our top 10 most promising clients. Apply now to see if your business qualifies for this exclusive opportunity!</p>
+          <div class="special-promo-features">
+            <div class="feature-item">
+              <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+              <div class="feature-text">Custom Website Design</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+              <div class="feature-text">Responsive Development</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+              <div class="feature-text">Basic SEO Setup</div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+              <div class="feature-text">1 Month Free Maintenance</div>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn-primary btn-lg">Apply Now</a>
+          <p class="special-promo-terms">*Terms and conditions apply.</p>
+        </div>
+      </div>
+      
       <!-- Goal-Based Bundles Section -->
       <div class="section-header" style="margin-top: 80px;">
         <h2 class="section-title">Goal-Based Bundles</h2>
@@ -1367,7 +1412,16 @@
                   <input type="checkbox" id="service-4" name="services[]" value="Digital Marketing">
                   <label for="service-4">Digital Marketing</label>
                 </div>
+                <div class="checkbox-item checkbox-item-featured">
+                  <input type="checkbox" id="service-promo" name="services[]" value="Free Web Services Promotion">
+                  <label for="service-promo">Apply for Free Web Services Promotion</label>
+                </div>
               </div>
+            </div>
+            <div class="form-group promo-info" id="promoInfoSection" style="display: none;">
+              <label for="business-description">Business Description</label>
+              <textarea id="business-description" name="business-description" placeholder="Tell us about your business idea, we will get back to you with the complete details and improvisations if required..."></textarea>
+              <p class="form-hint">Give us a brief of your business idea so that we can think upon it for the required budget and time and get back to you with appropriate details and improvisations within 24 hours.</p>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Send Message</button>
           </form>
