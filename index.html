@@ -31,16 +31,15 @@
   <meta property="twitter:description" content="We craft stunning websites and captivating social media content that elevate your brand and drive measurable results. Top-rated agency in Greater Noida, India.">
   <meta property="twitter:image" content="https://pixelsixstudio.live/images/og-image.jpg">
   <meta property="twitter:image:alt" content="PixelSix Studio website and social media services showcase">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
   
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  
-  <!-- Critical preload for ALL work section images with highest priority -->
-  <link rel="preload" as="image" href="images/website/1.png" fetchpriority="high" importance="high">
-  <link rel="preload" as="image" href="images/website/2.png" fetchpriority="high" importance="high">
-  <link rel="preload" as="image" href="images/website/3.png" fetchpriority="high" importance="high">
-  <link rel="preload" as="image" href="images/website/4.png" fetchpriority="high" importance="high">
-  <link rel="preload" as="image" href="images/website/5.png" fetchpriority="high" importance="high">
-  <link rel="preload" as="image" href="images/website/6.png" fetchpriority="high" importance="high">
+  <!-- Critical preload for social media images and videos -->
+  <link rel="preload" as="video" href="videos/furniture.mp4" fetchpriority="high">
+  <link rel="preload" as="video" href="videos/BloodBank.mp4" fetchpriority="high">
+  <link rel="preload" as="video" href="videos/quiz1.mp4" fetchpriority="high">
+  <link rel="preload" as="video" href="videos/medicine.mp4" fetchpriority="high">
+  <link rel="preload" as="video" href="videos/NGO.mp4" fetchpriority="high">
+  <link rel="preload" as="video" href="videos/NGO (2).mp4" fetchpriority="high">
   <link rel="preload" as="image" href="images/social/Project_1@3x.png" fetchpriority="high" importance="high">
   <link rel="preload" as="image" href="images/social/Project_2@3x.png" fetchpriority="high" importance="high">
   <link rel="preload" as="image" href="images/social/project_3@3x.png" fetchpriority="high" importance="high">
@@ -48,22 +47,15 @@
   <link rel="preload" as="image" href="images/social/project_5@3x.png" fetchpriority="high" importance="high">
   <link rel="preload" as="image" href="images/social/Project_6@3x.png" fetchpriority="high" importance="high">
   
-  <!-- Force critical work images to be immediately available with special treatment -->
-  <style>
-    /* Pre-cache all work section images to force immediate loading */
+  <!-- Force critical media content to be immediately available -->
+  <style>    /* Pre-cache social media images to force immediate loading */
     body::before {
       position: absolute;
       width: 0;
       height: 0;
       overflow: hidden;
       z-index: -1;
-      content: 
-        url('images/website/1.png') 
-        url('images/website/2.png')
-        url('images/website/3.png')
-        url('images/website/4.png')
-        url('images/website/5.png')
-        url('images/website/6.png')
+      content:
         url('images/social/Project_1@3x.png')
         url('images/social/Project_2@3x.png')
         url('images/social/project_3@3x.png')
@@ -71,9 +63,23 @@
         url('images/social/project_5@3x.png')
         url('images/social/Project_6@3x.png');
     }
+      /* Work item containers - ensure proper aspect ratio */
+    .work-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+    }
     
-
-    .work-image img {
+    .work-image {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/2;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+      .work-image img {
       content: attr(src);
       display: block !important;
       opacity: 1 !important;
@@ -84,14 +90,31 @@
       perspective: 1000 !important;
       will-change: transform !important;
     }
+      /* Apply same high-priority styles to videos */    
+    .work-image video {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateZ(0) !important;
+      backface-visibility: hidden !important;
+      -webkit-perspective: 1000 !important;
+      perspective: 1000 !important;
+      will-change: transform !important;
+      object-fit: contain !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      width: auto !important;
+      height: auto !important;
+    }
     
-    /* Disable all transitions and animations for work images */
-    .work-image img {
+    /* Disable all transitions and animations for work media */
+    .work-image img,
+    .work-image video {
       transition: none !important;
       animation: none !important;
     }
     
-    /* Add special image rendering properties for better performance */
+    /* Add special rendering properties for better performance */
     .work-image {
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
@@ -496,59 +519,52 @@
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="web">Web Development</button>
         <button class="filter-btn" data-filter="social">Social Media Content</button>
-      </div>
-      <div class="work-grid">
-        <div class="work-item" data-category="web">
+      </div>      <div class="work-grid">        <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/1.png" alt="Tech Agency responsive website design - PixelSix Studio portfolio" fetchpriority="high" width="360" height="240" loading="eager">
+            <video src="videos/furniture.mp4" width="360" height="240" autoplay loop muted playsinline></video>
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Tech Agency</h3>
+              <h3 class="work-title">Freelancer Portfolio</h3>
             </div>
           </div>
-        </div>
-        <div class="work-item" data-category="web">
+        </div>        <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/2.png" alt="Modern startup landing page with advanced UI/UX - PixelSix Studio" fetchpriority="high" width="360" height="240" loading="eager">
+            <video src="videos/BloodBank.mp4" width="360" height="240" autoplay loop muted playsinline></video>
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Startup Landing Page</h3>
+              <h3 class="work-title">Bloodbank Startup</h3>
             </div>
           </div>
-        </div>
-        <div class="work-item" data-category="web">
+        </div>        <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/3.png" alt="Child Essentials E-commerce website with product showcase - PixelSix Studio" fetchpriority="high" width="360" height="240" loading="eager">
+            <video src="videos/quiz1.mp4" width="360" height="240" autoplay loop muted playsinline></video>
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Child Essentials E-commerce</h3>
+              <h3 class="work-title">Quiz Web-App</h3>
             </div>
           </div>
-        </div>
-        <div class="work-item" data-category="web">
+        </div>        <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/4.png" alt="Modern furniture e-commerce website design by PixelSix Studio" fetchpriority="high" width="360" height="240" loading="eager">
+            <video src="videos/medicine.mp4" width="360" height="240" autoplay loop muted playsinline></video>
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Furniture Website</h3>
+              <h3 class="work-title">Medicines</h3>
             </div>
           </div>
-        </div>
-        <div class="work-item" data-category="web">
+        </div>        <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/5.png" alt="Sports equipment e-commerce website with online shopping experience" fetchpriority="high" width="360" height="240" loading="eager">
+            <video src="videos/NGO.mp4" width="360" height="240" autoplay loop muted playsinline></video>
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Sports E-commerce</h3>
+              <h3 class="work-title">NGO Product</h3>
             </div>
           </div>
-        </div>
-        <div class="work-item" data-category="web">
+        </div>        <div class="work-item" data-category="web">
           <div class="work-image">
-            <img src="images/website/6.png" alt="Admin dashboard UI design with data visualization - PixelSix Studio" fetchpriority="high" width="360" height="240" loading="eager">
+            <video src="videos/NGO (2).mp4" width="360" height="240" autoplay loop muted playsinline></video>
             <div class="work-overlay">
               <div class="work-category">Web Development</div>
-              <h3 class="work-title">Modern Dashboard</h3>
+              <h3 class="work-title">NGO Landing Page</h3>
             </div>
           </div>
         </div>

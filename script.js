@@ -1,13 +1,7 @@
 // Immediately execute this function to preload all work section images
 (function() {
-  // Array containing all work section image paths
+  // Array containing social media image paths (web project images replaced with videos)
   const allWorkImagePaths = [
-    'images/website/1.png',
-    'images/website/2.png',
-    'images/website/3.png',
-    'images/website/4.png',
-    'images/website/5.png',
-    'images/website/6.png',
     'images/social/Project_1@3x.png',
     'images/social/Project_2@3x.png',
     'images/social/project_3@3x.png',
@@ -183,8 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
       preloader.style.display = 'none';
     }, 300);
   }, 1000);
-  
-  // Special handling for work section images only
+    // Special handling for work section images and videos
   const workImages = document.querySelectorAll('.work-image img');
   workImages.forEach(img => {
     img.style.cssText = 'display:block !important; opacity:1 !important; visibility:visible !important;';
@@ -192,6 +185,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Force a repaint to make sure the image shows immediately
     void img.offsetWidth;
     void img.offsetHeight;
+  });
+  // Handle work section videos
+  const workVideos = document.querySelectorAll('.work-image video');
+  workVideos.forEach(video => {
+    // Set critical styling properties - use contain instead of cover to prevent zooming
+    video.style.cssText = 'display:block !important; opacity:1 !important; visibility:visible !important; object-fit:contain !important; width:100% !important; height:100% !important;';
+    
+    // Force a repaint to make sure the video shows immediately
+    void video.offsetWidth;
+    void video.offsetHeight;
+    
+    // Ensure videos play properly
+    video.play().catch(err => console.log('Video autoplay prevented:', err));
   });
   
   // Optimized lazy loading for non-work images with decreased delay
@@ -461,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function() {
     prevButton.addEventListener('click', prevSlide);
     
     // Auto slide
-    let slideInterval = setInterval(nextSlide, 5000);
+    let slideInterval = setInterval(nextSlide, 1950);
     
     // Pause on hover - use event delegation for better performance
     testimonialTrack.addEventListener('mouseenter', () => {
@@ -469,7 +475,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     testimonialTrack.addEventListener('mouseleave', () => {
-      slideInterval = setInterval(nextSlide, 5000);
+      slideInterval = setInterval(nextSlide, 1950);
     });
   }
 
