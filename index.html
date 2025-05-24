@@ -53,8 +53,7 @@
   <link rel="preload" as="image" href="images/social/project_5@3x.png" fetchpriority="high" importance="high">
   <link rel="preload" as="image" href="images/social/Project_6@3x.png" fetchpriority="high" importance="high">
   
-  <!-- Force critical media content to be immediately available -->
-  <style>    /* Pre-cache social media images to force immediate loading */
+  <!-- Force critical media content to be immediately available -->  <style>    /* Pre-cache social media images for force immediate loading */
     body::before {
       position: absolute;
       width: 0;
@@ -68,6 +67,44 @@
         url('images/social/project_4@3x.png')
         url('images/social/project_5@3x.png')
         url('images/social/Project_6@3x.png');
+    }
+      /* Critical promo banner styles for immediate display */
+    .promo-banner {
+      background: linear-gradient(135deg, #7c3aed, #5b21b6);
+      color: white;
+      padding: 1rem 0;
+      position: fixed;
+      top: 65px;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      background-size: 200% 200%;
+      transform: translateY(0) !important; /* Force immediate visibility */
+      border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+      animation: pulseGlow 2s infinite ease-in-out, gradientMove 10s ease infinite;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+    
+    /* Force hero section padding adjustment immediately to prevent layout shift */
+    .hero {
+      padding-top: 140px !important;
+    }
+    
+    /* Pulse glow animation for promo banner */
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+      50% { box-shadow: 0 4px 15px 0px rgba(124, 58, 237, 0.5), 0 2px 8px 0px rgba(124, 58, 237, 0.4); }
+      100% { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+    }
+    
+    /* Gradient animation for promo banner */
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
       /* Work item containers - ensure proper aspect ratio */
     .work-item {

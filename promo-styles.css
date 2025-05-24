@@ -12,9 +12,11 @@
   z-index: 99;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   background-size: 200% 200%;
-  transition: all 0.5s ease-out; /* Increased transition time for smoother animation */
-  transform: translateY(0); /* Default position */
+  transition: all 0.3s ease-out; /* Reduced transition time for faster appearance */
+  transform: translateY(0) !important; /* Force visible position with !important */
   border-bottom: 3px solid rgba(255, 255, 255, 0.2); /* Added border for visual separation */
+  animation: pulseGlow 2s infinite ease-in-out, gradientMove 10s ease infinite; /* Apply animation by default */
+  display: block !important; /* Ensure banner is always displayed */
 }
 
 .promo-banner-visible {

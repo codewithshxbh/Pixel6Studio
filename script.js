@@ -100,13 +100,21 @@
   });
 })();
 
-// Wait for DOM to be fully loaded
+// Immediately initialize the promo banner for instant visibility
+// Define global variables to be used both immediately and after DOM is loaded
+const promoBanner = document.querySelector('.promo-banner');
+const promoCloseBtn = document.querySelector('.promo-close');
+const heroSection = document.querySelector('.hero');
+
+// Set initial state for promo banner to be visible immediately
+if (promoBanner && heroSection) {
+  // Prepare the hero section for banner appearance
+  heroSection.style.paddingTop = '140px';
+  heroSection.classList.add('promo-ready', 'promo-active');
+}
+
+// Wait for DOM to be fully loaded for other functionality
 document.addEventListener('DOMContentLoaded', function() {
-  // Promotional Banner functionality
-  const promoBanner = document.querySelector('.promo-banner');
-  const promoCloseBtn = document.querySelector('.promo-close');
-  const heroSection = document.querySelector('.hero');
-  
   // Function to scroll to and highlight the promo checkbox
   window.scrollToPromo = function() {
     const checkbox = document.getElementById('service-promo');
@@ -134,43 +142,19 @@ document.addEventListener('DOMContentLoaded', function() {
         promoContainer.classList.remove('promo-highlight');
       }, 3000);
     }, 800);
-  };
-  
-  if (promoBanner && promoCloseBtn) {
-    // Always show banner on page refresh (no localStorage check)
-    promoBanner.style.display = 'block';
-    
-    // Initially hide banner
-    promoBanner.style.transform = 'translateY(-100%)';
-    
-    // Make sure hero has the correct initial padding - this prevents the sudden jump
+  };    if (promoBanner && promoCloseBtn) {
+    // Banner is already visible through CSS - this is only for event handling
+    // No need to set the banner visibility here as it's now controlled by CSS
     if (heroSection) {
-      // Set padding immediately to prevent jumps in layout
-      heroSection.style.paddingTop = '140px'; 
-      // Prepare the hero section for banner appearance
-      heroSection.classList.add('promo-ready');
+      heroSection.classList.add('promo-active');
     }
-    
-    // Show after a short delay with improved animation
-    setTimeout(() => {
-      // Slide down animation
-      promoBanner.style.transform = 'translateY(0)';
-      // Apply a class to trigger pulse and gradient animations
-      promoBanner.classList.add('promo-banner-visible');
-      
-      // Add class to hero section to properly adjust spacing
-      if (heroSection) {
-        heroSection.classList.add('promo-active');
-      }
-    }, 1000); // 1 second delay
-    
-    // Add click event to close button
+      // Add click event to close button
     promoCloseBtn.addEventListener('click', () => {
       // Remove animation class first
       promoBanner.classList.remove('promo-banner-visible');
       
-      // Slide up animation
-      promoBanner.style.transform = 'translateY(-100%)';
+      // Slide up animation - using !important to override inline styles
+      promoBanner.style.cssText = 'transform: translateY(-100%) !important';
       
       // Reset hero padding when banner is closed
       if (heroSection) {

@@ -1,6 +1,24 @@
 // Ultra-fast preloading script
 // This file should be included before other scripts for fastest loading
 (function() {
+  // Force critical CSS to be applied immediately for the promotional banner
+  document.addEventListener('DOMContentLoaded', () => {
+    const promoBanner = document.querySelector('.promo-banner');
+    const heroSection = document.querySelector('.hero');
+    
+    if (promoBanner && heroSection) {
+      // Force banner to be visible immediately
+      promoBanner.style.cssText = 'transform: translateY(0) !important; display: block !important; visibility: visible !important; opacity: 1 !important;';
+      
+      // Ensure hero has the correct padding to prevent layout shifts
+      heroSection.style.paddingTop = '140px';
+      heroSection.classList.add('promo-active');
+      
+      // Force a repaint to ensure styles are applied immediately
+      void promoBanner.offsetHeight;
+    }
+  }, { once: true });
+
   // Preload critical resources immediately
   const criticalResources = [
     'videos/furniture.mp4',
