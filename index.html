@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Performance monitoring script -->
+  <script src="performance.js" async></script>
+  
+  <!-- Ultra-fast preloader for minimal lazy loading -->
+  <script src="preloader.js"></script>
+  
   <title>PixelSix Studio | Best Web Development & Social Media Agency</title>
   <meta name="description" content="Award-winning web development & social media agency in Greater Noida, India. PixelSix Studio creates high-converting websites and engaging social content that elevate your brand and drive measurable results. 2+ years of digital excellence.">
   <meta name="keywords" content="web development Greater Noida, website design India, social media marketing agency, digital marketing India, brand identity design, mobile optimization, web applications, SEO services Greater Noida, UI/UX design, e-commerce websites">
@@ -89,8 +95,7 @@
       -webkit-perspective: 1000 !important;
       perspective: 1000 !important;
       will-change: transform !important;
-    }
-      /* Apply same high-priority styles to videos */    
+    }      /* Apply same high-priority styles to videos with instant appearance */    
     .work-image video {
       display: block !important;
       opacity: 1 !important;
@@ -99,12 +104,19 @@
       backface-visibility: hidden !important;
       -webkit-perspective: 1000 !important;
       perspective: 1000 !important;
-      will-change: transform !important;
+      will-change: transform, opacity !important;
       object-fit: contain !important;
       max-width: 100% !important;
       max-height: 100% !important;
       width: auto !important;
       height: auto !important;
+      animation: videoFadeIn 0.15s ease-in !important; /* Reduced animation time for faster appearance */
+    }
+    
+    /* Faster animation for almost instant appearance */
+    @keyframes videoFadeIn {
+      from { opacity: 0.5; }
+      to { opacity: 1; }
     }
     
     /* Disable all transitions and animations for work media */
@@ -1507,7 +1519,6 @@
       </div>
     </div>
   </footer>
-
   <!-- Back to Top Button -->
   <a href="#" class="back-to-top">
     <i class="fas fa-chevron-up"></i>
@@ -1516,6 +1527,24 @@
   <!-- EmailJS Script -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
   
+  <!-- Main script with optimized lazy loading -->
   <script src="script.js" defer></script>
+  
+  <!-- Performance metrics collection -->
+  <script>
+    // Record key performance metrics
+    window.addEventListener('load', function() {
+      // Wait for a moment to ensure all resources are loaded
+      setTimeout(function() {
+        if (window.performance && window.performance.timing) {
+          const timing = window.performance.timing;
+          const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
+          const domReadyTime = timing.domComplete - timing.domLoading;
+          console.log('Page load time:', pageLoadTime + 'ms');
+          console.log('DOM ready time:', domReadyTime + 'ms');
+        }
+      }, 0);
+    });
+  </script>
 </body>
 </html>

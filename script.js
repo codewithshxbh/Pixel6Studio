@@ -1,6 +1,6 @@
-// Immediately execute this function to preload all work section images
+// Immediately execute this function to load everything upfront with minimal lazy loading
 (function() {
-  // Array containing social media image paths (web project images replaced with videos)
+  // Array containing social media image paths and video paths to preload
   const allWorkImagePaths = [
     'images/social/Project_1@3x.png',
     'images/social/Project_2@3x.png',
@@ -9,34 +9,94 @@
     'images/social/project_5@3x.png',
     'images/social/Project_6@3x.png'
   ];
+  
+  const videoPathsToPreload = [
+    'videos/furniture.mp4',
+    'videos/BloodBank.mp4',
+    'videos/quiz1.mp4',
+    'videos/medicine.mp4',
+    'videos/NGO.mp4',
+    'videos/NGO (2).mp4'
+  ];
 
-  // Super aggressive loading strategy for ALL images
+  // Near-instant loading for ALL images
   allWorkImagePaths.forEach(imagePath => {
-    // Create new image with highest priority
+    // Create new image with highest priority and load immediately
     const img = new Image();
+    img.src = imagePath; // Set src first to start loading ASAP
     
-    // Set all high-priority attributes
+    // Force highest priority
     img.importance = 'high';
     img.fetchPriority = 'high';
     img.loading = 'eager';
     
-    // Start loading the image
-    img.src = imagePath;
-    
-    // Force immediate DOM attachment to prioritize loading
-    document.head ? document.head.appendChild(img) : 
-      window.addEventListener('DOMContentLoaded', () => document.head.appendChild(img));
-    
-    // Force browser to parse image immediately
-    img.decode().catch(() => {});
-    
-    // Force image to stay cached but hidden
-    setTimeout(() => {
-      // Force painting by accessing properties
-      void img.naturalWidth;
-      void img.naturalHeight;
+    // Force image to be in memory cache
+    if (document.body) {
+      document.body.appendChild(img);
       img.style.cssText = 'position:absolute;opacity:0;z-index:-9999;width:1px;height:1px;';
-    }, 0);
+    } else {
+      // If document.body isn't ready yet, add event listener
+      window.addEventListener('DOMContentLoaded', () => {
+        document.body.appendChild(img);
+        img.style.cssText = 'position:absolute;opacity:0;z-index:-9999;width:1px;height:1px;';
+      }, { once: true });
+    }
+  });
+  
+  // Load all videos immediately with HTML5 video element
+  videoPathsToPreload.forEach(videoPath => {
+    // Directly add video elements to the page at load time
+    const video = document.createElement('video');
+    video.muted = true;
+    video.preload = 'auto';
+    video.src = videoPath;
+    video.load(); // Force loading to start immediately
+    
+    // Hide but keep in DOM to ensure it's loaded
+    video.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;top:0;left:0;z-index:-9999;';
+    
+    if (document.body) {
+      document.body.appendChild(video);
+    } else {
+      document.addEventListener('DOMContentLoaded', () => document.body.appendChild(video), { once: true });
+    }
+    
+    // Also use fetch for double loading approach
+    fetch(videoPath, { 
+      method: 'GET', 
+      cache: 'force-cache',
+      priority: 'high',
+      mode: 'no-cors'
+    }).catch(() => {}); // Ignore errors, this is just preloading
+  });
+  
+  // Preconnect to all external resources immediately
+  [
+    'https://fonts.googleapis.com',
+    'https://fonts.gstatic.com',
+    'https://cdnjs.cloudflare.com',
+    'https://randomuser.me',
+    'https://xsgames.co',
+    'https://images.unsplash.com'
+  ].forEach(url => {
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = url;
+    link.crossOrigin = 'anonymous';
+    
+    const dns = document.createElement('link');
+    dns.rel = 'dns-prefetch';
+    dns.href = url;
+    
+    if (document.head) {
+      document.head.appendChild(link);
+      document.head.appendChild(dns);
+    } else {
+      window.addEventListener('DOMContentLoaded', () => {
+        document.head.appendChild(link);
+        document.head.appendChild(dns);
+      }, { once: true });
+    }
   });
 })();
 
@@ -168,16 +228,15 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-
-  // Original preloader timing (restored)
+  // Much faster preloader timing for quicker page display
   setTimeout(function() {
     const preloader = document.querySelector('.preloader');
     preloader.classList.add('hide');
     setTimeout(() => {
       preloader.style.display = 'none';
-    }, 300);
-  }, 1000);
-    // Special handling for work section images and videos
+    }, 150); // Reduced hiding time from 300ms to 150ms
+  }, 500); // Reduced waiting time from 1000ms to 500ms
+  // Special handling for work section images and videos
   const workImages = document.querySelectorAll('.work-image img');
   workImages.forEach(img => {
     img.style.cssText = 'display:block !important; opacity:1 !important; visibility:visible !important;';
@@ -186,8 +245,11 @@ document.addEventListener('DOMContentLoaded', function() {
     void img.offsetWidth;
     void img.offsetHeight;
   });
-  // Handle work section videos
+  
+  // Immediate loading for all videos with minimal lazy loading fallback
   const workVideos = document.querySelectorAll('.work-image video');
+  
+  // Process all videos immediately 
   workVideos.forEach(video => {
     // Set critical styling properties - use contain instead of cover to prevent zooming
     video.style.cssText = 'display:block !important; opacity:1 !important; visibility:visible !important; object-fit:contain !important; width:100% !important; height:100% !important;';
@@ -196,23 +258,49 @@ document.addEventListener('DOMContentLoaded', function() {
     void video.offsetWidth;
     void video.offsetHeight;
     
-    // Ensure videos play properly
-    video.play().catch(err => console.log('Video autoplay prevented:', err));
+    // Always set to highest loading priority
+    video.setAttribute('preload', 'auto');
+    video.setAttribute('fetchpriority', 'high');
+    video.muted = true; // Ensure it can autoplay
+    video.load(); // Force loading
+    
+    // Play all videos immediately
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // If autoplay fails, try again on first user interaction
+        const tryPlayOnce = () => {
+          video.play().catch(() => {});
+        };
+        
+        // Try to play on any user interaction
+        ['click', 'touchstart', 'scroll'].forEach(event => {
+          window.addEventListener(event, tryPlayOnce, { once: true, passive: true });
+        });
+      });
+    }
   });
   
-  // Optimized lazy loading for non-work images with decreased delay
+  // Ultra-fast minimal lazy loading - loads almost everything quickly but still uses lazy loading
   if ('loading' in HTMLImageElement.prototype) {
-    // Use native lazy loading but with smaller thresholds
+    // Use native lazy loading with extremely aggressive thresholds for nearly instant loading
     const nonWorkImages = document.querySelectorAll('img:not(.work-image img):not([loading])');
     nonWorkImages.forEach(img => {
-      // Use eager loading for images that are likely to be visible soon
+      // Use eager loading for almost all images except those very far down the page
       const rect = img.getBoundingClientRect();
-      const isNearViewport = rect.top <= window.innerHeight + 500; // 500px threshold instead of default
+      const isExtremeFarDown = rect.top > window.innerHeight * 3; // Only true lazy load for images 3x viewport height away
       
-      if (isNearViewport) {
-        img.loading = 'eager'; // Load immediately for near-viewport images
+      if (!isExtremeFarDown) {
+        img.loading = 'eager'; // Load immediately for most images
+        img.fetchPriority = 'high'; // Add fetch priority hint
       } else {
-        img.loading = 'lazy'; // Use lazy loading for others
+        img.loading = 'lazy'; // Minimal lazy loading for very distant images
+        
+        // Immediately switch to eager loading with any scroll
+        window.addEventListener('scroll', function quickLoad() {
+          img.loading = 'eager';
+          window.removeEventListener('scroll', quickLoad);
+        }, { passive: true, once: true });
       }
     });
   } else {
@@ -220,22 +308,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const lazyImages = document.querySelectorAll('img:not(.work-image img)');
     
     if ('IntersectionObserver' in window) {
-      // Use a more aggressive root margin to load images earlier
+      // Use an extremely aggressive root margin to load images far before they're visible
       const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src || img.src;
-            observer.unobserve(img);
+          // Load images immediately whether they're intersecting or not
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
           }
+          observer.unobserve(img);
         });
       }, {
-        rootMargin: '300px 0px', // Load images when they're 300px from viewport instead of default
-        threshold: 0.01 // Trigger with just 1% visibility
+        rootMargin: '2000px 0px', // Enormous margin to trigger loading extremely early
+        threshold: 0 // Trigger with zero visibility - load as early as possible
       });
-      
+        // Load all images immediately for faster display
       lazyImages.forEach(img => {
+        // Start observation
         imageObserver.observe(img);
+        
+        // But also trigger loading after a very short delay regardless of viewport
+        setTimeout(() => {
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+          }
+          imageObserver.unobserve(img);
+        }, 100);
       });
     }
   }
