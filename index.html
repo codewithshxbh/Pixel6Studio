@@ -3,12 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Performance monitoring script -->
-  <script src="performance.js" async></script>
-  
-  <!-- Ultra-fast preloader for minimal lazy loading -->
-  <script src="preloader.js"></script>
-  
   <title>PixelSix Studio | Best Web Development & Social Media Agency</title>
   <meta name="description" content="Award-winning web development & social media agency in Greater Noida, India. PixelSix Studio creates high-converting websites and engaging social content that elevate your brand and drive measurable results. 2+ years of digital excellence.">
   <meta name="keywords" content="web development Greater Noida, website design India, social media marketing agency, digital marketing India, brand identity design, mobile optimization, web applications, SEO services Greater Noida, UI/UX design, e-commerce websites">
@@ -52,6 +46,80 @@
   <link rel="preload" as="image" href="images/social/project_4@3x.png" fetchpriority="high" importance="high">
   <link rel="preload" as="image" href="images/social/project_5@3x.png" fetchpriority="high" importance="high">
   <link rel="preload" as="image" href="images/social/Project_6@3x.png" fetchpriority="high" importance="high">
+  
+  <!-- Force critical media content to be immediately available -->
+  <style>    /* Pre-cache social media images to force immediate loading */
+    body::before {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      z-index: -1;
+      content:
+        url('images/social/Project_1@3x.png')
+        url('images/social/Project_2@3x.png')
+        url('images/social/project_3@3x.png')
+        url('images/social/project_4@3x.png')
+        url('images/social/project_5@3x.png')
+        url('images/social/Project_6@3x.png');
+    }
+      /* Work item containers - ensure proper aspect ratio */
+    .work-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    
+    .work-image {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/2;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+      .work-image img {
+      content: attr(src);
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateZ(0) !important;
+      backface-visibility: hidden !important;
+      -webkit-perspective: 1000 !important;
+      perspective: 1000 !important;
+      will-change: transform !important;
+    }
+      /* Apply same high-priority styles to videos */    
+    .work-image video {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateZ(0) !important;
+      backface-visibility: hidden !important;
+      -webkit-perspective: 1000 !important;
+      perspective: 1000 !important;
+      will-change: transform !important;
+      object-fit: contain !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      width: auto !important;
+      height: auto !important;
+    }
+    
+    /* Disable all transitions and animations for work media */
+    .work-image img,
+    .work-image video {
+      transition: none !important;
+      animation: none !important;
+    }
+    
+    /* Add special rendering properties for better performance */
+    .work-image {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+  </style>
   
   <!-- Vercel Web Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -240,7 +308,7 @@
     <div class="container">
       <div class="promo-banner-content">
         <div class="promo-icon"><i class="fas fa-gift"></i></div>
-        <p><strong>Special Offer:</strong> Apply for <span class="highlight-text">FREE* Web Services</span> for Your Business! Only 10 spots available. T&C Applied <a href="#contact" class="promo-link" onclick="event.preventDefault(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth'}); setTimeout(scrollToPromo, 1000);">Apply Now <i class="fas fa-arrow-right"></i></a></p>
+        <p><strong>Special Offer:</strong> Apply for <span class="highlight-text">FREE Web Services</span> for Your Business! Only 10 spots available. <a href="#contact" class="promo-link" onclick="event.preventDefault(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth'}); setTimeout(scrollToPromo, 1000);">Apply Now <i class="fas fa-arrow-right"></i></a></p>
         <button class="promo-close" aria-label="Close promotion banner"><i class="fas fa-times"></i></button>
       </div>
     </div>
@@ -286,6 +354,17 @@
               <i class="fas fa-chevron-right"></i>
             </a>
             <a href="#work" class="btn btn-outline btn-lg">View Our Portfolio</a>
+          </div>
+          <div class="hero-clients">
+            <div class="client-avatars">
+              <div class="client-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/44.jpg')"></div>
+              <div class="client-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg')"></div>
+              <div class="client-avatar" style="background-image: url('https://randomuser.me/api/portraits/women/68.jpg')"></div>
+              <div class="client-avatar" style="background-image: url('https://randomuser.me/api/portraits/men/75.jpg')"></div>
+            </div>
+            <div class="client-text">
+              <span>10+</span> satisfied clients worldwide
+            </div>
           </div>
         </div>
         <div class="hero-image">
@@ -1086,7 +1165,7 @@
             <i class="fas fa-gift"></i>
           </div>
           <h3 class="special-promo-title">Free Web Services for Top 10 Customers!</h3>
-          <p class="special-promo-description">We're offering completely free web development services (Landing Page) to our top 10 most promising clients. Apply now to see if your business qualifies for this exclusive opportunity!</p>
+          <p class="special-promo-description">We're offering completely free web development services to our top 10 most promising clients. Apply now to see if your business qualifies for this exclusive opportunity!</p>
           <div class="special-promo-features">
             <div class="feature-item">
               <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
@@ -1428,6 +1507,7 @@
       </div>
     </div>
   </footer>
+
   <!-- Back to Top Button -->
   <a href="#" class="back-to-top">
     <i class="fas fa-chevron-up"></i>
@@ -1436,24 +1516,6 @@
   <!-- EmailJS Script -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" defer></script>
   
-  <!-- Main script with optimized lazy loading -->
   <script src="script.js" defer></script>
-  
-  <!-- Performance metrics collection -->
-  <script>
-    // Record key performance metrics
-    window.addEventListener('load', function() {
-      // Wait for a moment to ensure all resources are loaded
-      setTimeout(function() {
-        if (window.performance && window.performance.timing) {
-          const timing = window.performance.timing;
-          const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
-          const domReadyTime = timing.domComplete - timing.domLoading;
-          console.log('Page load time:', pageLoadTime + 'ms');
-          console.log('DOM ready time:', domReadyTime + 'ms');
-        }
-      }, 0);
-    });
-  </script>
 </body>
 </html>

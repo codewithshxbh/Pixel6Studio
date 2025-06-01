@@ -2521,7 +2521,7 @@ input:checked + .slider:before {
   .pricing-card.featured:hover {
     transform: translateY(-10px);
   }
-  
+
   .comparison-table-wrapper {
     margin: 0 -1rem;
     border-radius: 0;
@@ -2736,7 +2736,7 @@ input:checked + .slider:before {
 
 .footer-grid {
   display: grid;
-  grid-template-columns:  2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: var(--spacing-2xl);
 }
 
@@ -2868,119 +2868,208 @@ input:checked + .slider:before {
   transform: translateY(-5px);
 }
 
-/* Pre-cache social media images for force immediate loading */
-body::before {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  z-index: -1;
-  content:
-    url('images/social/Project_1@3x.png')
-    url('images/social/Project_2@3x.png')
-    url('images/social/project_3@3x.png')
-    url('images/social/project_4@3x.png')
-    url('images/social/project_5@3x.png')
-    url('images/social/Project_6@3x.png');
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  :root {
+    --container-padding: 1.5rem;
+  }
+  
+  .hero-title {
+    font-size: var(--font-size-5xl);
+  }
 }
 
-/* Critical promo banner styles for immediate display */
-.promo-banner {
-  background: linear-gradient(135deg, #7c3aed, #5b21b6);
-  color: white;
-  padding: 1rem 0;
-  position: fixed;
-  top: 65px;
-  left: 0;
-  right: 0;
-  z-index: 99;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  background-size: 200% 200%;
-  transform: translateY(0) !important; /* Force immediate visibility */
-  border-bottom: 3px solid rgba(255, 255, 255, 0.2);
-  animation: pulseGlow 2s infinite ease-in-out, gradientMove 10s ease infinite;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+@media (max-width: 992px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+  }
+  
+  .hero-image {
+    order: -1;
+  }
+  
+  .hero-text {
+    text-align: center;
+    margin: 0 auto;
+  }
+  
+  .hero-buttons, .hero-clients {
+    justify-content: center;
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+  }
+  
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+  }
+  
+  .timeline-item {
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+  
+  .timeline-item:nth-child(odd) {
+    flex-direction: column;
+  }
+  
+  .timeline-number {
+    position: relative;
+    transform: none;
+    left: 0;
+    margin: 0 auto;
+  }
+  
+  .timeline-content {
+    width: 100%;
+  }
+  
+  .process-timeline::before {
+    left: 50%;
+    height: calc(100% - 100px);
+    top: 50px;
+  }
 }
 
-/* Force hero section padding adjustment immediately to prevent layout shift */
-.hero {
-  padding-top: 140px !important;
+@media (max-width: 768px) {
+  :root {
+    --container-padding: 1rem;
+  }
+  
+  .nav {
+    display: none;
+  }
+  
+  .menu-toggle {
+    display: flex;
+  }
+  
+  .menu-toggle.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-toggle.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+  
+  .hero-title {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+  }
+  
+  .section-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var (--spacing-xl);
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    text-align: center;
+  }
+  
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .pricing-card.featured {
+    transform: scale(1);
+  }
+  
+  .pricing-card.featured:hover {
+    transform: translateY(-10px);
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial-card {
+    min-height: 350px; /* Slightly increase minimum height on tablets */
+  }
+  
+  .testimonial-text {
+    min-height: 100px; /* Increase text area minimum height on tablets */
+  }
 }
 
-/* Pulse glow animation for promo banner */
-@keyframes pulseGlow {
-  0% { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
-  50% { box-shadow: 0 4px 15px 0px rgba(124, 58, 237, 0.5), 0 2px 8px 0px rgba(124, 58, 237, 0.4); }
-  100% { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .hero-description {
+    font-size: var(--font-size-md);
+  }
+  
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .section-description {
+    font-size: var(--font-size-md);
+  }
+  
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .floating-card {
+    display: none;
+  }
+  
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .testimonial-card {
+    min-height: 380px; /* Further increase on mobile */
+  }
+  
+  .testimonial-text {
+    min-height: 120px; /* Further increase text area on mobile */
+    -webkit-line-clamp: 5; /* Allow more lines on mobile */
+  }
 }
 
-/* Gradient animation for promo banner */
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Work item containers - ensure proper aspect ratio */
-.work-item {
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-.work-image {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 3/2;
-  background-color: #f0f0f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-}
-
-.work-image img {
-  content: attr(src);
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: translateZ(0) !important;
-  backface-visibility: hidden !important;
-  -webkit-perspective: 1000 !important;
-  perspective: 1000 !important;
-  will-change: transform !important;
-}
-
-/* Apply same high-priority styles to videos with instant appearance */
-.work-image video {
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transform: translateZ(0) !important;
-  backface-visibility: hidden !important;
-  -webkit-perspective: 1000 !important;
-  perspective: 1000 !important;
-  will-change: transform, opacity !important;
-  object-fit: contain !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
-  width: auto !important;
-  height: auto !important;
-  animation: videoFadeIn 0.15s ease-in !important; /* Reduced animation time for faster appearance */
-}
-
-/* Faster animation for almost instant appearance */
-@keyframes videoFadeIn {
-  from { opacity: 0.5; }
-  to { opacity: 1; }
-}
-
-/* Disable all transitions and animations for work media */
-.work-image img,
-.work-image video {
-  transition: none !important;
-  animation: none !important;
+/* Add additional media query for even smaller screens */
+@media (max-width: 380px) {
+  .header .container {
+    height: 60px; /* Further height reduction for very small screens */
+  }
+  
+  .logo {
+    font-size: var(--font-size-lg);
+  }
+  
+  .header-actions .btn-primary {
+    padding: 0.4rem 0.8rem;
+    font-size: var(--font-size-xs);
+  }
 }

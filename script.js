@@ -1,6 +1,6 @@
-// Immediately execute this function to load everything upfront with minimal lazy loading
+// Immediately execute this function to preload all work section images
 (function() {
-  // Array containing social media image paths and video paths to preload
+  // Array containing social media image paths (web project images replaced with videos)
   const allWorkImagePaths = [
     'images/social/Project_1@3x.png',
     'images/social/Project_2@3x.png',
@@ -9,112 +9,44 @@
     'images/social/project_5@3x.png',
     'images/social/Project_6@3x.png'
   ];
-  
-  const videoPathsToPreload = [
-    'videos/furniture.mp4',
-    'videos/BloodBank.mp4',
-    'videos/quiz1.mp4',
-    'videos/medicine.mp4',
-    'videos/NGO.mp4',
-    'videos/NGO (2).mp4'
-  ];
 
-  // Near-instant loading for ALL images
+  // Super aggressive loading strategy for ALL images
   allWorkImagePaths.forEach(imagePath => {
-    // Create new image with highest priority and load immediately
+    // Create new image with highest priority
     const img = new Image();
-    img.src = imagePath; // Set src first to start loading ASAP
     
-    // Force highest priority
+    // Set all high-priority attributes
     img.importance = 'high';
     img.fetchPriority = 'high';
     img.loading = 'eager';
     
-    // Force image to be in memory cache
-    if (document.body) {
-      document.body.appendChild(img);
+    // Start loading the image
+    img.src = imagePath;
+    
+    // Force immediate DOM attachment to prioritize loading
+    document.head ? document.head.appendChild(img) : 
+      window.addEventListener('DOMContentLoaded', () => document.head.appendChild(img));
+    
+    // Force browser to parse image immediately
+    img.decode().catch(() => {});
+    
+    // Force image to stay cached but hidden
+    setTimeout(() => {
+      // Force painting by accessing properties
+      void img.naturalWidth;
+      void img.naturalHeight;
       img.style.cssText = 'position:absolute;opacity:0;z-index:-9999;width:1px;height:1px;';
-    } else {
-      // If document.body isn't ready yet, add event listener
-      window.addEventListener('DOMContentLoaded', () => {
-        document.body.appendChild(img);
-        img.style.cssText = 'position:absolute;opacity:0;z-index:-9999;width:1px;height:1px;';
-      }, { once: true });
-    }
-  });
-  
-  // Load all videos immediately with HTML5 video element
-  videoPathsToPreload.forEach(videoPath => {
-    // Directly add video elements to the page at load time
-    const video = document.createElement('video');
-    video.muted = true;
-    video.preload = 'auto';
-    video.src = videoPath;
-    video.load(); // Force loading to start immediately
-    
-    // Hide but keep in DOM to ensure it's loaded
-    video.style.cssText = 'position:fixed;width:1px;height:1px;opacity:0;top:0;left:0;z-index:-9999;';
-    
-    if (document.body) {
-      document.body.appendChild(video);
-    } else {
-      document.addEventListener('DOMContentLoaded', () => document.body.appendChild(video), { once: true });
-    }
-    
-    // Also use fetch for double loading approach
-    fetch(videoPath, { 
-      method: 'GET', 
-      cache: 'force-cache',
-      priority: 'high',
-      mode: 'no-cors'
-    }).catch(() => {}); // Ignore errors, this is just preloading
-  });
-  
-  // Preconnect to all external resources immediately
-  [
-    'https://fonts.googleapis.com',
-    'https://fonts.gstatic.com',
-    'https://cdnjs.cloudflare.com',
-    'https://randomuser.me',
-    'https://xsgames.co',
-    'https://images.unsplash.com'
-  ].forEach(url => {
-    const link = document.createElement('link');
-    link.rel = 'preconnect';
-    link.href = url;
-    link.crossOrigin = 'anonymous';
-    
-    const dns = document.createElement('link');
-    dns.rel = 'dns-prefetch';
-    dns.href = url;
-    
-    if (document.head) {
-      document.head.appendChild(link);
-      document.head.appendChild(dns);
-    } else {
-      window.addEventListener('DOMContentLoaded', () => {
-        document.head.appendChild(link);
-        document.head.appendChild(dns);
-      }, { once: true });
-    }
+    }, 0);
   });
 })();
 
-// Immediately initialize the promo banner for instant visibility
-// Define global variables to be used both immediately and after DOM is loaded
-const promoBanner = document.querySelector('.promo-banner');
-const promoCloseBtn = document.querySelector('.promo-close');
-const heroSection = document.querySelector('.hero');
-
-// Set initial state for promo banner to be visible immediately
-if (promoBanner && heroSection) {
-  // Prepare the hero section for banner appearance
-  heroSection.style.paddingTop = '140px';
-  heroSection.classList.add('promo-ready', 'promo-active');
-}
-
-// Wait for DOM to be fully loaded for other functionality
+// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+  // Promotional Banner functionality
+  const promoBanner = document.querySelector('.promo-banner');
+  const promoCloseBtn = document.querySelector('.promo-close');
+  const heroSection = document.querySelector('.hero');
+  
   // Function to scroll to and highlight the promo checkbox
   window.scrollToPromo = function() {
     const checkbox = document.getElementById('service-promo');
@@ -142,19 +74,43 @@ document.addEventListener('DOMContentLoaded', function() {
         promoContainer.classList.remove('promo-highlight');
       }, 3000);
     }, 800);
-  };    if (promoBanner && promoCloseBtn) {
-    // Banner is already visible through CSS - this is only for event handling
-    // No need to set the banner visibility here as it's now controlled by CSS
+  };
+  
+  if (promoBanner && promoCloseBtn) {
+    // Always show banner on page refresh (no localStorage check)
+    promoBanner.style.display = 'block';
+    
+    // Initially hide banner
+    promoBanner.style.transform = 'translateY(-100%)';
+    
+    // Make sure hero has the correct initial padding - this prevents the sudden jump
     if (heroSection) {
-      heroSection.classList.add('promo-active');
+      // Set padding immediately to prevent jumps in layout
+      heroSection.style.paddingTop = '140px'; 
+      // Prepare the hero section for banner appearance
+      heroSection.classList.add('promo-ready');
     }
-      // Add click event to close button
+    
+    // Show after a short delay with improved animation
+    setTimeout(() => {
+      // Slide down animation
+      promoBanner.style.transform = 'translateY(0)';
+      // Apply a class to trigger pulse and gradient animations
+      promoBanner.classList.add('promo-banner-visible');
+      
+      // Add class to hero section to properly adjust spacing
+      if (heroSection) {
+        heroSection.classList.add('promo-active');
+      }
+    }, 1000); // 1 second delay
+    
+    // Add click event to close button
     promoCloseBtn.addEventListener('click', () => {
       // Remove animation class first
       promoBanner.classList.remove('promo-banner-visible');
       
-      // Slide up animation - using !important to override inline styles
-      promoBanner.style.cssText = 'transform: translateY(-100%) !important';
+      // Slide up animation
+      promoBanner.style.transform = 'translateY(-100%)';
       
       // Reset hero padding when banner is closed
       if (heroSection) {
@@ -212,15 +168,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-  // Much faster preloader timing for quicker page display
+
+  // Original preloader timing (restored)
   setTimeout(function() {
     const preloader = document.querySelector('.preloader');
     preloader.classList.add('hide');
     setTimeout(() => {
       preloader.style.display = 'none';
-    }, 150); // Reduced hiding time from 300ms to 150ms
-  }, 500); // Reduced waiting time from 1000ms to 500ms
-  // Special handling for work section images and videos
+    }, 300);
+  }, 1000);
+    // Special handling for work section images and videos
   const workImages = document.querySelectorAll('.work-image img');
   workImages.forEach(img => {
     img.style.cssText = 'display:block !important; opacity:1 !important; visibility:visible !important;';
@@ -229,11 +186,8 @@ document.addEventListener('DOMContentLoaded', function() {
     void img.offsetWidth;
     void img.offsetHeight;
   });
-  
-  // Immediate loading for all videos with minimal lazy loading fallback
+  // Handle work section videos
   const workVideos = document.querySelectorAll('.work-image video');
-  
-  // Process all videos immediately 
   workVideos.forEach(video => {
     // Set critical styling properties - use contain instead of cover to prevent zooming
     video.style.cssText = 'display:block !important; opacity:1 !important; visibility:visible !important; object-fit:contain !important; width:100% !important; height:100% !important;';
@@ -242,49 +196,23 @@ document.addEventListener('DOMContentLoaded', function() {
     void video.offsetWidth;
     void video.offsetHeight;
     
-    // Always set to highest loading priority
-    video.setAttribute('preload', 'auto');
-    video.setAttribute('fetchpriority', 'high');
-    video.muted = true; // Ensure it can autoplay
-    video.load(); // Force loading
-    
-    // Play all videos immediately
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // If autoplay fails, try again on first user interaction
-        const tryPlayOnce = () => {
-          video.play().catch(() => {});
-        };
-        
-        // Try to play on any user interaction
-        ['click', 'touchstart', 'scroll'].forEach(event => {
-          window.addEventListener(event, tryPlayOnce, { once: true, passive: true });
-        });
-      });
-    }
+    // Ensure videos play properly
+    video.play().catch(err => console.log('Video autoplay prevented:', err));
   });
   
-  // Ultra-fast minimal lazy loading - loads almost everything quickly but still uses lazy loading
+  // Optimized lazy loading for non-work images with decreased delay
   if ('loading' in HTMLImageElement.prototype) {
-    // Use native lazy loading with extremely aggressive thresholds for nearly instant loading
+    // Use native lazy loading but with smaller thresholds
     const nonWorkImages = document.querySelectorAll('img:not(.work-image img):not([loading])');
     nonWorkImages.forEach(img => {
-      // Use eager loading for almost all images except those very far down the page
+      // Use eager loading for images that are likely to be visible soon
       const rect = img.getBoundingClientRect();
-      const isExtremeFarDown = rect.top > window.innerHeight * 3; // Only true lazy load for images 3x viewport height away
+      const isNearViewport = rect.top <= window.innerHeight + 500; // 500px threshold instead of default
       
-      if (!isExtremeFarDown) {
-        img.loading = 'eager'; // Load immediately for most images
-        img.fetchPriority = 'high'; // Add fetch priority hint
+      if (isNearViewport) {
+        img.loading = 'eager'; // Load immediately for near-viewport images
       } else {
-        img.loading = 'lazy'; // Minimal lazy loading for very distant images
-        
-        // Immediately switch to eager loading with any scroll
-        window.addEventListener('scroll', function quickLoad() {
-          img.loading = 'eager';
-          window.removeEventListener('scroll', quickLoad);
-        }, { passive: true, once: true });
+        img.loading = 'lazy'; // Use lazy loading for others
       }
     });
   } else {
@@ -292,34 +220,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const lazyImages = document.querySelectorAll('img:not(.work-image img)');
     
     if ('IntersectionObserver' in window) {
-      // Use an extremely aggressive root margin to load images far before they're visible
+      // Use a more aggressive root margin to load images earlier
       const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-          // Load images immediately whether they're intersecting or not
-          const img = entry.target;
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.classList.add('loaded');
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src || img.src;
+            observer.unobserve(img);
           }
-          observer.unobserve(img);
         });
       }, {
-        rootMargin: '2000px 0px', // Enormous margin to trigger loading extremely early
-        threshold: 0 // Trigger with zero visibility - load as early as possible
+        rootMargin: '300px 0px', // Load images when they're 300px from viewport instead of default
+        threshold: 0.01 // Trigger with just 1% visibility
       });
-        // Load all images immediately for faster display
+      
       lazyImages.forEach(img => {
-        // Start observation
         imageObserver.observe(img);
-        
-        // But also trigger loading after a very short delay regardless of viewport
-        setTimeout(() => {
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.classList.add('loaded');
-          }
-          imageObserver.unobserve(img);
-        }, 100);
       });
     }
   }
