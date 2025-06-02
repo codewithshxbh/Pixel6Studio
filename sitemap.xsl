@@ -14,59 +14,59 @@
                     body {
                         font-family: 'Poppins', Arial, sans-serif;
                         line-height: 1.5;
-                        color: #333;
+                        color: #f8fafc;
                         max-width: 1200px;
                         margin: 0 auto;
                         padding: 20px;
-                        background-color: #f8f9fa;
+                        background-color: #151a21;
                     }
                     
                     header {
                         text-align: center;
                         padding: 20px 0;
                         margin-bottom: 30px;
-                        border-bottom: 1px solid #e9ecef;
+                        border-bottom: 1px solid #323945;
                     }
                     
                     h1 {
                         font-size: 28px;
-                        color: #6c63ff;
+                        color: #a25aff;
                         margin-bottom: 10px;
                     }
                     
                     .subtitle {
                         font-size: 16px;
-                        color: #6c757d;
+                        color: #a4b0c4;
                     }
                     
                     table {
                         width: 100%;
                         border-collapse: collapse;
                         margin-top: 20px;
-                        background-color: #fff;
-                        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                        background-color: #252a33;
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
                         border-radius: 6px;
                         overflow: hidden;
                     }
                     
                     th {
-                        background-color: #6c63ff;
-                        color: white;
+                        background-color: #7937c9;
+                        color: #f8fafc;
                         padding: 15px;
                         text-align: left;
                     }
                     
                     td {
                         padding: 15px;
-                        border-top: 1px solid #e9ecef;
+                        border-top: 1px solid #323945;
                     }
                     
                     tr:hover {
-                        background-color: #f1f1ff;
+                        background-color: #1e242c;
                     }
                     
                     .url {
-                        color: #6c63ff;
+                        color: #b88aff;
                         text-decoration: none;
                         font-weight: 500;
                     }
@@ -76,19 +76,19 @@
                     }
                     
                     .priority-high {
-                        background-color: #dcf5dc;
+                        background-color: #1e3a30;
                     }
                     
                     .priority-medium {
-                        background-color: #fdf7dc;
+                        background-color: #3a331e;
                     }
                     
                     footer {
                         margin-top: 30px;
                         text-align: center;
                         font-size: 14px;
-                        color: #6c757d;
-                        border-top: 1px solid #e9ecef;
+                        color: #a4b0c4;
+                        border-top: 1px solid #323945;
                         padding-top: 20px;
                     }
                     
@@ -150,7 +150,7 @@
                 <footer>
                     <p>© 2023 PixelSix Studio. This sitemap is designed to be used by search engines and related services.</p>
                     <p>
-                        <a href="https://pixelsixstudio.live" style="color: #6c63ff; text-decoration: none;">Return to Homepage</a>
+                        <a href="https://pixelsixstudio.live" style="color: #a25aff; text-decoration: none;">Return to Homepage</a>
                     </p>
                 </footer>
             </body>

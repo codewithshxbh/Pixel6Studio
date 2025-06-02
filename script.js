@@ -42,132 +42,7 @@
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-  // Promotional Banner functionality
-  const promoBanner = document.querySelector('.promo-banner');
-  const promoCloseBtn = document.querySelector('.promo-close');
   const heroSection = document.querySelector('.hero');
-  
-  // Function to scroll to and highlight the promo checkbox
-  window.scrollToPromo = function() {
-    const checkbox = document.getElementById('service-promo');
-    const promoContainer = document.querySelector('.checkbox-item-featured');
-    
-    // Wait for the scroll to complete, then highlight the checkbox
-    setTimeout(() => {
-      checkbox.checked = true;
-      
-      // Show the promo info section
-      if (promoInfoSection) {
-        promoInfoSection.style.display = 'block';
-        setTimeout(() => {
-          promoInfoSection.style.transition = 'opacity 0.3s ease, max-height 0.5s ease';
-          promoInfoSection.style.opacity = '1';
-          promoInfoSection.style.maxHeight = '300px';
-        }, 10);
-      }
-      
-      // Add highlight effect to the promo container
-      promoContainer.classList.add('promo-highlight');
-      
-      // Remove highlight effect after animation completes
-      setTimeout(() => {
-        promoContainer.classList.remove('promo-highlight');
-      }, 3000);
-    }, 800);
-  };
-  
-  if (promoBanner && promoCloseBtn) {
-    // Always show banner on page refresh (no localStorage check)
-    promoBanner.style.display = 'block';
-    
-    // Initially hide banner
-    promoBanner.style.transform = 'translateY(-100%)';
-    
-    // Make sure hero has the correct initial padding - this prevents the sudden jump
-    if (heroSection) {
-      // Set padding immediately to prevent jumps in layout
-      heroSection.style.paddingTop = '140px'; 
-      // Prepare the hero section for banner appearance
-      heroSection.classList.add('promo-ready');
-    }
-    
-    // Show after a short delay with improved animation
-    setTimeout(() => {
-      // Slide down animation
-      promoBanner.style.transform = 'translateY(0)';
-      // Apply a class to trigger pulse and gradient animations
-      promoBanner.classList.add('promo-banner-visible');
-      
-      // Add class to hero section to properly adjust spacing
-      if (heroSection) {
-        heroSection.classList.add('promo-active');
-      }
-    }, 1000); // 1 second delay
-    
-    // Add click event to close button
-    promoCloseBtn.addEventListener('click', () => {
-      // Remove animation class first
-      promoBanner.classList.remove('promo-banner-visible');
-      
-      // Slide up animation
-      promoBanner.style.transform = 'translateY(-100%)';
-      
-      // Reset hero padding when banner is closed
-      if (heroSection) {
-        heroSection.classList.remove('promo-active');
-        heroSection.style.paddingTop = '110px'; // Back to original padding
-      }
-      
-      // Remove completely after animation
-      setTimeout(() => {
-        promoBanner.style.display = 'none';
-      }, 500); // Increased timeout for smoother transition
-    });
-  }
-  
-  // Free Services Promotion form logic
-  const promoCheckbox = document.getElementById('service-promo');
-  const promoInfoSection = document.getElementById('promoInfoSection');
-  
-  if (promoCheckbox && promoInfoSection) {
-    // Add character counter for business description
-    const businessDescription = document.getElementById('business-description');
-    const characterCounter = document.createElement('div');
-    characterCounter.className = 'char-counter';
-    characterCounter.textContent = '0/50 characters (minimum)';
-    promoInfoSection.insertBefore(characterCounter, document.querySelector('.form-hint'));
-    
-    // Update character count on input
-    if (businessDescription) {
-      businessDescription.addEventListener('input', function() {
-        const count = this.value.trim().length;
-        const meetsMinimum = count >= 50;
-        characterCounter.textContent = `${count}/50 characters ${meetsMinimum ? '(minimum met)' : '(minimum)'}`;
-        characterCounter.style.color = meetsMinimum ? '#4CAF50' : '#666';
-      });
-    }
-    
-    promoCheckbox.addEventListener('change', function() {
-      if (this.checked) {
-        promoInfoSection.style.display = 'block';
-        // Smooth appearance animation
-        promoInfoSection.style.opacity = '0';
-        promoInfoSection.style.maxHeight = '0';
-        setTimeout(() => {
-          promoInfoSection.style.transition = 'opacity 0.3s ease, max-height 0.5s ease';
-          promoInfoSection.style.opacity = '1';
-          promoInfoSection.style.maxHeight = '300px';
-        }, 10);
-      } else {
-        // Smooth disappearance animation
-        promoInfoSection.style.opacity = '0';
-        promoInfoSection.style.maxHeight = '0';
-        setTimeout(() => {
-          promoInfoSection.style.display = 'none';
-        }, 300);
-      }
-    });
-  }
 
   // Original preloader timing (restored)
   setTimeout(function() {
@@ -595,18 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
       
-      // Check promotional application
-      const applyingForPromo = document.getElementById('service-promo').checked;
-      if (applyingForPromo) {
-        const businessDescription = document.getElementById('business-description');
-        if (!businessDescription.value.trim()) {
-          isValid = false;
-          showFormError(businessDescription, 'Please provide your business description for the promotion');
-        } else if (businessDescription.value.trim().length < 50) {
-          isValid = false;
-          showFormError(businessDescription, 'Please provide at least 50 characters describing your business');
-        }
-      }
+      // Removed promotional application check
       
       // Email validation
       const emailField = document.getElementById('email');
@@ -634,25 +498,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Check if applying for promotion
-        const applyingForPromo = selectedServices.includes('Free Web Services Promotion');
-        const businessDescription = applyingForPromo ? document.getElementById('business-description').value : '';
-        
-        // Create a custom subject line for promotional applications
+                // Set email subject
         let emailSubject = formValues.subject;
-        if (applyingForPromo) {
-          emailSubject = 'PROMO APPLICATION: ' + emailSubject;
-        }
-        
-        // Prepare template parameters for EmailJS
+                // Prepare template parameters for EmailJS
         const templateParams = {
           from_name: formValues.name,
           from_email: formValues.email,
           subject: emailSubject,
           message: formValues.message,
           services: selectedServices.join(', '),
-          to_email: 'pixelsixstudios@gmail.com',
-          is_promo_application: applyingForPromo ? 'Yes' : 'No',
-          business_description: businessDescription
+          to_email: 'pixelsixstudios@gmail.com'
         };
         
         // Send email using EmailJS
@@ -665,15 +520,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Show success message
             const successMsg = document.createElement('div');
-            
-            // Check if this was a promotional application
-            if (templateParams.is_promo_application === 'Yes') {
-              successMsg.className = 'success-message promo-success';
-              successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Thank you for your promotion application! We will review your business details and contact you within 5 business days if selected.';
-            } else {
-              successMsg.className = 'success-message';
-              successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Thank you for your message! We will get back to you soon.';
-            }
+            successMsg.className = 'success-message';
+            successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Thank you for your message! We will get back to you soon.';
             
             contactForm.prepend(successMsg);
             
