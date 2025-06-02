@@ -1471,6 +1471,15 @@ body:hover .cursor, body:hover .cursor-follower {
   margin-top: auto;
 }
 
+/* Force all lazy-loaded images to load eagerly for better UX while maintaining SEO benefits */
+img[loading="lazy"], 
+div[loading="lazy"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
 .testimonial-avatar {
   width: 60px;
   height: 60px;
@@ -2681,6 +2690,8 @@ input:checked + .slider:before {
   margin-bottom: var(--spacing-xs);
 }
 
+}
+
 .contact-method-content p {
   color: var(--color-text-light);
 }
@@ -3191,4 +3202,13 @@ body {
                    linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px);
   background-size: 24px 24px;
   background-color: var(--color-background);
+}
+
+/* Force all lazy-loaded images to load eagerly for better UX while maintaining SEO benefits */
+img[loading="lazy"], 
+div[loading="lazy"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto;
+  will-change: transform;
+  transform: translateZ(0);
 }

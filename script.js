@@ -1,3 +1,56 @@
+// Handle lazy load images to load them eagerly
+document.addEventListener('DOMContentLoaded', function() {
+  // Convert lazy-loaded avatar images to eager loading
+  const lazyElements = document.querySelectorAll('[loading="lazy"]');
+  lazyElements.forEach(element => {
+    // Keep the lazy attribute for SEO but force eager loading
+    if (element.tagName === 'IMG') {
+      const imgSrc = element.src;
+      // Preload image
+      const preloadImg = new Image();
+      preloadImg.src = imgSrc;
+      preloadImg.fetchPriority = 'high';
+    } else if (element.style.backgroundImage) {
+      // For background images (like avatars)
+      const bgImgUrl = element.style.backgroundImage.match(/url\(['"]?([^'"]+)['"]?\)/);
+      if (bgImgUrl && bgImgUrl[1]) {
+        // Preload background image
+        const preloadImg = new Image();
+        preloadImg.src = bgImgUrl[1];
+        preloadImg.fetchPriority = 'high';
+      }
+    }
+  });
+});
+
+// Preload all card content (testimonials, service cards, etc.)
+document.addEventListener('DOMContentLoaded', function() {
+  // Force eager loading of testimonial cards
+  const testimonialCards = document.querySelectorAll('.testimonial-card');
+  testimonialCards.forEach(card => {
+    // Add a class to force eager loading
+    card.classList.add('preloaded');
+  });
+  
+  // Force eager loading of service cards
+  const serviceCards = document.querySelectorAll('.service-card');
+  serviceCards.forEach(card => {
+    card.classList.add('preloaded');
+  });
+  
+  // Force eager loading of work items
+  const workItems = document.querySelectorAll('.work-item');
+  workItems.forEach(item => {
+    item.classList.add('preloaded');
+  });
+  
+  // Force eager loading of pricing cards
+  const pricingCards = document.querySelectorAll('.pricing-card');
+  pricingCards.forEach(card => {
+    card.classList.add('preloaded');
+  });
+});
+
 // Immediately execute this function to preload all work section images
 (function() {
   // Array containing social media image paths (web project images replaced with videos)
@@ -559,58 +612,53 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set current year in footer
   document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-  // Optimized AOS-like scroll animations using IntersectionObserver
+  // Modified AOS-like animations to load eagerly without waiting for scroll
   const animatedElements = document.querySelectorAll('[data-aos]');
   
-  const scrollAnimationObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const delay = el.getAttribute('data-aos-delay') || 0;
-        
-        setTimeout(() => {
-          el.classList.add('aos-animate');
-        }, delay);
-        
-        // Unobserve after animation to improve performance
-        scrollAnimationObserver.unobserve(el);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -10% 0px' });
-  
+  // Apply animations immediately for eager loading
   animatedElements.forEach(el => {
     el.classList.add('aos-init');
-    scrollAnimationObserver.observe(el);
+    const delay = parseInt(el.getAttribute('data-aos-delay') || 0);
+    
+    // Stagger animations slightly for visual appeal but load all eagerly
+    setTimeout(() => {
+      el.classList.add('aos-animate');
+    }, Math.min(delay, 300)); // Cap delays at 300ms for faster initial loading
   });
 
-  // Add CSS for AOS animations using a single style element
+  // Add CSS for AOS animations using a single style element but make animations faster for eager loading
   if (!document.getElementById('aos-styles')) {
     const style = document.createElement('style');
     style.id = 'aos-styles';
     style.textContent = `
       [data-aos] {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
+        opacity: 1; /* Start with opacity 1 for eager loading */
+        transition: opacity 0.3s ease, transform 0.3s ease;
         will-change: opacity, transform;
       }
       
       [data-aos].aos-animate {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) !important;
       }
       
       [data-aos="fade-right"] {
-        transform: translateX(-30px);
+        transform: translateX(0); /* Start at final position for eager loading */
       }
       
       [data-aos="fade-left"] {
-        transform: translateX(30px);
+        transform: translateX(0); /* Start at final position for eager loading */
       }
       
       [data-aos="fade-right"].aos-animate,
       [data-aos="fade-left"].aos-animate {
         transform: translateX(0);
+      }
+
+      /* Force immediate rendering */
+      .testimonial-slide, .service-card, .work-item, .team-member, .pricing-card {
+        visibility: visible !important;
+        opacity: 1 !important;
       }
     `;
     document.head.appendChild(style);
