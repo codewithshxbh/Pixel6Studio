@@ -571,12 +571,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reset form
             contactForm.reset();
             
-            // Show success message
+            // Show success message as a popup above the form
             const successMsg = document.createElement('div');
-            successMsg.className = 'success-message';
+            successMsg.className = 'success-message popup';
             successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Thank you for your message! We will get back to you soon.';
             
-            contactForm.prepend(successMsg);
+            // Insert at the beginning of the form container
+            const contactFormContainer = contactForm.closest('.contact-form-container');
+            contactFormContainer.insertBefore(successMsg, contactFormContainer.firstChild);
             
             // Reset button
             submitButton.textContent = originalButtonText;
@@ -590,15 +592,23 @@ document.addEventListener('DOMContentLoaded', function() {
           .catch(function(error) {
             console.error('Email sending failed:', error);
             
-            // Show error message
+            // Show error message as a popup above the form
             const errorMsg = document.createElement('div');
-            errorMsg.className = 'error-message';
+            errorMsg.className = 'error-message popup';
             errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Sorry, there was a problem sending your message. Please try again or contact us directly via email.';
-            contactForm.prepend(errorMsg);
+            
+            // Insert at the beginning of the form container
+            const contactFormContainer = contactForm.closest('.contact-form-container');
+            contactFormContainer.insertBefore(errorMsg, contactFormContainer.firstChild);
             
             // Reset button
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
+            
+            // Remove error message after 5 seconds
+            setTimeout(() => {
+              errorMsg.remove();
+            }, 5000);
             
             // Remove error message after 5 seconds
             setTimeout(() => {
